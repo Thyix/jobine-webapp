@@ -6,7 +6,7 @@ import Fonts from './Fonts';
 export const theme = createMuiTheme({
   palette: {
     primary: {
-      main: Colors.primary,
+      main: Colors.primaryBackground,
     },
     secondary: {
       main: Colors.secondary,

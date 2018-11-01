@@ -1,5 +1,6 @@
 // @flow
 
 export default {
-  // insert images
+  background: require('../assets/images/Background.svg'),
+  logo: require('../assets/images/Logo.svg'),
 };
