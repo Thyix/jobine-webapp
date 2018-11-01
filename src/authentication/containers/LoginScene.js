@@ -6,16 +6,14 @@ import styled from 'styled-components';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import Settings from '@material-ui/icons/Settings';
-import ArrowBack from '@material-ui/icons/ArrowBack';
 import { withNamespaces } from 'react-i18next';
 import { Images, Colors, Fonts, Medias, Metrics } from '../../main/themes';
 
 const Background = styled.div`
-  background: url(${Images.background}) no-repeat center center fixed !important;
-  background-size: stretch;
-  height: 100%;
-  width: 100%;
+  background: url(${Images.background});
+  background-size: cover !important;
+  height: 100% !important;
+  width: 100% !important;
   background-color: ${Colors.primaryBackground};
   ${Medias.xs} {
     display: none !important;
@@ -27,9 +25,9 @@ const Background = styled.div`
 
 const StyledContainer = styled.div`
   display: flex !important;
-  height: 100% !important;
+  height: 100%;
   width: 100%;
-  position:fixed;
+  position: fixed;
 
   ${Medias.xs} {
     justify-content: center;
