@@ -7,14 +7,14 @@ import i18n from './main/i18n';
 import Dashboard from './dashboard/containers/Dashboard';
 import configureStore from './main/reducers/configureStore';
 import { theme } from './main/themes/MaterialUITheme';
-import wazoTheme from './main/themes';
+import jobineTheme from './main/themes';
 
 const store = configureStore();
 
 function App() {
   return (
     <MuiThemeProvider theme={theme}>
-      <ThemeProvider theme={wazoTheme}>
+      <ThemeProvider theme={jobineTheme}>
         <Provider store={store}>
           <I18nextProvider i18n={i18n}>
             <Dashboard/>

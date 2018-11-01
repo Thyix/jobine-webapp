@@ -5,6 +5,8 @@ import { withRouter } from 'react-router';
 import styled from 'styled-components';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import ArrowBack from '@material-ui/icons/ArrowBack';
+import AccountCircle from '@material-ui/icons/AccountCircle';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { withNamespaces } from 'react-i18next';
 import { Images, Colors, Fonts, Medias, Metrics } from '../../main/themes';
@@ -55,7 +57,7 @@ const StyledLoginZone = styled.div`
 `;
 
 const StyledLoginForm = styled.form`
-  display: flex;
+  display: flex !important;
   flex-direction: column;
   padding: ${Metrics.spacing.huge}px;
   text-align: center;
@@ -68,6 +70,19 @@ const StyledTextField = styled(TextField)`
 const LoginButton = styled(Button)`
   margin-top: ${Metrics.spacing.large}px !important;
   border-radius: 20px !important; 
+  padding-vertical: ${Metrics.spacing.small}px !important;
+`;
+
+const StyledSignupZone = styled.div`
+  align-self: center !important;
+  padding-bottom: 100px !important;
+`;
+
+const SignupButton = styled(Button)`
+  margin-top: ${Metrics.spacing.large}px !important;
+  border-radius:50px !important;
+  width: 175px !important;
+  height: 50px !important;
   padding-vertical: ${Metrics.spacing.small}px !important;
 `;
 
@@ -89,7 +104,7 @@ type Props = {
 type State = {
   username: string,
   password: string,
-  signIn: boolean,
+  signUp: boolean,
 };
 
 export class Login extends React.Component<Props, State> {
@@ -101,7 +116,6 @@ export class Login extends React.Component<Props, State> {
   };
 
   render() {
-    const { t } = this.props;
 
     return (
       <StyledContainer>
@@ -113,7 +127,7 @@ export class Login extends React.Component<Props, State> {
               <React.Fragment>
                 <StyledTextField
                   id="domainTextField"
-                  label={t('domainConfiguration')}
+                  label={'Votre nom'}
                   type="text"
                   value={this.props.host || ''}
                 />
@@ -146,12 +160,36 @@ export class Login extends React.Component<Props, State> {
                 onClick={() => this.setState({ })}
                 variant="contained"
               >
-                {'Se connecter'}
+                {this.state.signIn ? 'Créer un compte' : 'Se connecter'}
               </LoginButton>
 
-            {!this.state.showDomain && <ForgotPassword id="forgotPasswordPrompt">{'Mot de passe oublié'} ?</ForgotPassword>}
+            {!this.state.signIn && <ForgotPassword id="forgotPasswordPrompt">{'Mot de passe oublié'} ?</ForgotPassword>}
           </StyledLoginForm>
+        <StyledSignupZone>
+          {this.state.signIn ? 
+            <SignupButton
+            aria-label="Retour"
+            color="primary"
+            onClick={() => this.setState({ signIn: false })}
+            variant="fab"
+            >
+              <ArrowBack/>Retour
+            </SignupButton>
+          :
+            <React.Fragment>
+            <SignupButton
+              aria-label="S'enregistrer"
+              color="primary"
+              onClick={() => this.setState({ signIn: true })}
+              variant="fab"
+            >
+              <AccountCircle/>Créer un compte
+            </SignupButton>
+          </React.Fragment>
+          }
+        </StyledSignupZone>
         </StyledLoginZone>
+
 
         <Background />
 
