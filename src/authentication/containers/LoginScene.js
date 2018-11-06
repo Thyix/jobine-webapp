@@ -134,6 +134,10 @@ export class Login extends React.Component<Props, State> {
     signIn: false,
     messageOpened: false,
   };
+  
+  componentWillUnmount() {
+    console.log('component will unmout');
+  }
 
   performLogin = async () => {
     try {
@@ -146,13 +150,13 @@ export class Login extends React.Component<Props, State> {
   };
 
   closeMessage = () => {
-      //this.setState({ messageOpened: false });
+      this.setState({ messageOpened: false });
   }
 
   render() {
     return (
       <StyledContainer>
-        {this.state.messageOpened && <LoginFailedDialog closeDialog={this.closeMessage}/>}
+        <LoginFailedDialog opened={this.state.messageOpened} closeDialog={this.closeMessage}/>
         <StyledLoginZone>
           <StyledLoginForm>
             <JobineLogo alt={'Jobine logo'} src={Images.logo} />

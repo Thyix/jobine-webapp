@@ -10,6 +10,7 @@ import { Metrics } from '../../main/themes';
 
 type Props = {
   closeDialog: Function,
+  opened: boolean,
 }
 
 function Transition(props) {
@@ -34,7 +35,7 @@ class LoginFailedDialog extends React.Component<Props> {
     return (
       <div>
         <Dialog
-          open={this.state.open}
+          open={this.props.opened}
           onClose={this.handleClose}
           TransitionComponent={Transition}
           keepMounted

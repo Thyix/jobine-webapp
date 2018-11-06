@@ -48,6 +48,7 @@ class NavigationBar extends React.Component<Props, State> {
   goToDashboard = () => this.props.history.push('/');
 
   render() {
+    console.log('am i rendering this');
     return (
       <StyledAppBar position="static">
         <StyledToolbar>
