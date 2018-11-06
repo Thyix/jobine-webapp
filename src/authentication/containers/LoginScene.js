@@ -104,6 +104,10 @@ type Props = {
 type State = {
   username: string,
   password: string,
+  name: string,
+  email: string,
+  newPassword: string,
+  confirmPassword: string,
   signUp: boolean,
 };
 
@@ -112,11 +116,15 @@ export class Login extends React.Component<Props, State> {
   state = {
     username: '',
     password: '',
+    name: '',
+    email: '',
+    newPassword: '',
+    confirmPassword: '',
     signIn: false,
   };
 
   render() {
-
+    console.log('new password', this.state.newPassword);
     return (
       <StyledContainer>
         <StyledLoginZone>
@@ -126,10 +134,43 @@ export class Login extends React.Component<Props, State> {
             {this.state.signIn ?
               <React.Fragment>
                 <StyledTextField
-                  id="domainTextField"
-                  label={'Votre nom'}
+                  id="fullNameTextField"
+                  label={'Nom complet'}
+                  onChange={(event) => this.setState({ name: event.target.value })}
                   type="text"
-                  value={this.props.host || ''}
+                  value={this.state.name}
+                />
+
+                <StyledTextField
+                  id="newUsernameTextField"
+                  label={'Nom d\'utilisateur'}
+                  onChange={(event) => this.setState({ username: event.target.value })}
+                  type="text"
+                  value={this.state.username}
+                />
+
+                <StyledTextField
+                  id="newEmailTextField"
+                  label={'Email'}
+                  onChange={(event) => this.setState({ email: event.target.value })}
+                  type="text"
+                  value={this.state.email}
+                />
+
+                <StyledTextField
+                  id="newPasswordTextField"
+                  label={'Mot de passe'}
+                  onChange={(event) => this.setState({ newPassword: event.target.value })}
+                  type="password"
+                  value={this.state.newPassword}
+                />
+                
+                <StyledTextField
+                  id="confirmPasswordTextField"
+                  label={'Confirmer le mot de passe'}
+                  onChange={(event) => this.setState({ confirmPassword: event.target.value })}
+                  type="password"
+                  value={this.state.confirmPassword}
                 />
               </React.Fragment>
               :
@@ -156,6 +197,7 @@ export class Login extends React.Component<Props, State> {
             }
               <LoginButton
                 color="primary"
+                disabled={this.state.signIn ? ((this.state.newPassword !== this.state.confirmPassword) || this.state.newPassword.length === 0): false}
                 id="goToDomainButton"
                 onClick={() => this.setState({ })}
                 variant="contained"
