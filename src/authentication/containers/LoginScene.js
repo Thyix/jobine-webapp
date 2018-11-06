@@ -12,7 +12,9 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { withNamespaces } from 'react-i18next';
 import { login } from '../actions/authenticationActions';
+import LoginFailedDialog from '../components/LoginFailedDialog';
 import { Images, Colors, Fonts, Medias, Metrics } from '../../main/themes';
+import { isAuthenticated, hasFailed } from '../selectors/authenticationSelectors';
 
 const Background = styled.div`
   background: url(${Images.background});
@@ -103,6 +105,7 @@ type Props = {
     login: (username: string, password: string) => Promise<void>,
   },
   authenticated: boolean,
+  failed: boolean,
   authenticating: boolean,
   t: Function,
 };
@@ -116,6 +119,7 @@ type State = {
   newPassword: string,
   confirmPassword: string,
   signUp: boolean,
+  openedDialog: boolean,
 };
 
 export class Login extends React.Component<Props, State> {
@@ -129,12 +133,14 @@ export class Login extends React.Component<Props, State> {
     newPassword: '',
     confirmPassword: '',
     signIn: false,
+    openedDialog: false,
   };
 
   performLogin = async () => {
     try {
       await this.props.actions.login(this.state.username, this.state.password);
       this.props.history.replace('/');
+      console.log('failed ', this.props.failed);
     } catch (e) {
       console.log('le login a chié');
     }
@@ -144,6 +150,7 @@ export class Login extends React.Component<Props, State> {
     console.log('new password', this.state.newPassword);
     return (
       <StyledContainer>
+        {this.props.failed && <LoginFailedDialog/>}
         <StyledLoginZone>
           <StyledLoginForm>
             <JobineLogo alt={'Jobine logo'} src={Images.logo} />
@@ -260,6 +267,8 @@ export class Login extends React.Component<Props, State> {
 
 function mapStateToProps(state) {
   return {
+    authenticated: isAuthenticated(state),
+    failed: hasFailed(state),
   };
 }
 

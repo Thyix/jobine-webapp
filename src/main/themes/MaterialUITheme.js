@@ -9,7 +9,7 @@ export const theme = createMuiTheme({
       main: Colors.primaryBackground,
     },
     secondary: {
-      main: Colors.secondary,
+      main: Colors.primary,
     },
     error: {
       main: Colors.error,

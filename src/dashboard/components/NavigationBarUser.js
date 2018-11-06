@@ -75,6 +75,9 @@ class NavigationBarUser extends React.Component<Props, State> {
               <Button>
                 Aller au profil
               </Button> <br/>
+              <Button>
+                Préférences
+              </Button> <br/>
               <LogoutButton />
             </div>
           </Popover>

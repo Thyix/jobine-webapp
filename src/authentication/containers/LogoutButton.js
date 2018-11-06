@@ -13,7 +13,7 @@ type Props = {
 const LogoutButton = (props: Props) => {
   return (
     <Button onClick={() => props.actions.logout()}>
-      Déconnexion
+      Se Déconnecter
     </Button>
   );
 };
