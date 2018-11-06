@@ -1,4 +1,4 @@
-// random colors
+// Jobine colors
 
 const Colors = {
   primary: '#1B1464',

@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography/Typography';
 import Popover from '@material-ui/core/Popover';
-import { Avatar } from '@material-ui/core';
+import { Avatar, Button } from '@material-ui/core';
 import LogoutButton from '../../authentication/containers/LogoutButton';
 import { Metrics } from '../../main/themes';
 
@@ -71,7 +71,10 @@ class NavigationBarUser extends React.Component<Props, State> {
               horizontal: 'center',
             }}
           >
-            <div style={{ padding: Metrics.spacing.medium }}>
+            <div style={{ padding: Metrics.spacing.medium, flexDirection:'row' }}>
+              <Button>
+                Aller au profil
+              </Button> <br/>
               <LogoutButton />
             </div>
           </Popover>

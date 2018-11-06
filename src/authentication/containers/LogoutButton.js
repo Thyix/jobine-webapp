@@ -1,4 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { logout } from '../actions/authenticationActions';
+import { bindActionCreators } from 'redux';
 import { Button } from '@material-ui/core';
 
 type Props = {
@@ -9,11 +12,24 @@ type Props = {
 
 const LogoutButton = (props: Props) => {
   return (
-    <Button onClick={() => props.actions.logout()} size="small" variant="contained">
+    <Button onClick={() => props.actions.logout()}>
       Déconnexion
     </Button>
   );
 };
 
+function mapStateToProps() {
+  return {};
+}
 
-export default LogoutButton;
+function mapDispatchToProps(dispatch: Function) {
+  return {
+    actions: bindActionCreators({
+      logout,
+    }, dispatch),
+  };
+}
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(LogoutButton);

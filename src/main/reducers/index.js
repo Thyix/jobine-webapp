@@ -1,12 +1,14 @@
 // @flow
 
 import { combineReducers } from 'redux';
+import authentication from '../../authentication/reducers/authenticationReducers';
 
 const appReducer = combineReducers({
-
+  authentication,
 });
 
 type State = {
+  authentication:any,
 };
 
 type Action = {

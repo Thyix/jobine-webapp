@@ -3,9 +3,11 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import NavigationBar from '../components/NavigationBar';
 import LoginScene from '../../authentication/containers/LoginScene';
+import { isAuthenticated } from  '../../authentication/selectors/authenticationSelectors'; 
 import { Colors } from '../../main/themes';
 
 type Props = {
@@ -30,6 +32,7 @@ const StyledContainer = styled.div`
 `;
 
 export const Dashboard = ({ authenticated }: Props) => {
+  console.log('receive props');
   return (
     <BrowserRouter>
       {!authenticated ?
@@ -50,4 +53,10 @@ export const Dashboard = ({ authenticated }: Props) => {
   );
 };
 
-export default Dashboard;
+const mapStateToProps = (state: any) => {
+  return {
+    authenticated: isAuthenticated(state),
+  };
+};
+
+export default connect(mapStateToProps)(Dashboard);

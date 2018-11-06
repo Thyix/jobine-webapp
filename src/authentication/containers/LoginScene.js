@@ -3,12 +3,15 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import styled from 'styled-components';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { withNamespaces } from 'react-i18next';
+import { login } from '../actions/authenticationActions';
 import { Images, Colors, Fonts, Medias, Metrics } from '../../main/themes';
 
 const Background = styled.div`
@@ -96,6 +99,9 @@ type Props = {
     push: Function,
     replace: Function,
   },
+  actions: {
+    login: (username: string, password: string) => Promise<void>,
+  },
   authenticated: boolean,
   authenticating: boolean,
   t: Function,
@@ -104,6 +110,7 @@ type Props = {
 type State = {
   username: string,
   password: string,
+  newUsername: string,
   name: string,
   email: string,
   newPassword: string,
@@ -116,11 +123,21 @@ export class Login extends React.Component<Props, State> {
   state = {
     username: '',
     password: '',
+    newUsername: '',
     name: '',
     email: '',
     newPassword: '',
     confirmPassword: '',
     signIn: false,
+  };
+
+  performLogin = async () => {
+    try {
+      await this.props.actions.login(this.state.username, this.state.password);
+      this.props.history.replace('/');
+    } catch (e) {
+      console.log('le login a chié');
+    }
   };
 
   render() {
@@ -144,9 +161,9 @@ export class Login extends React.Component<Props, State> {
                 <StyledTextField
                   id="newUsernameTextField"
                   label={'Nom d\'utilisateur'}
-                  onChange={(event) => this.setState({ username: event.target.value })}
+                  onChange={(event) => this.setState({ newUsername: event.target.value })}
                   type="text"
-                  value={this.state.username}
+                  value={this.state.newUsername}
                 />
 
                 <StyledTextField
@@ -199,7 +216,7 @@ export class Login extends React.Component<Props, State> {
                 color="primary"
                 disabled={this.state.signIn ? ((this.state.newPassword !== this.state.confirmPassword) || this.state.newPassword.length === 0): false}
                 id="goToDomainButton"
-                onClick={() => this.setState({ })}
+                onClick={this.performLogin}
                 variant="contained"
               >
                 {this.state.signIn ? 'Créer un compte' : 'Se connecter'}
@@ -240,4 +257,17 @@ export class Login extends React.Component<Props, State> {
   }
 
 }
-export default withRouter(withNamespaces('authentication')(Login));
+
+function mapStateToProps(state) {
+  return {
+  };
+}
+
+function mapDispatchToProps(dispatch: Function) {
+  return {
+    actions: bindActionCreators({
+      login,
+    }, dispatch),
+  };
+}
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(withNamespaces('authentication')(Login)));
