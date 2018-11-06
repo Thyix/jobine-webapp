@@ -9,7 +9,6 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import { withNamespaces } from 'react-i18next';
 import { login } from '../actions/authenticationActions';
 import LoginFailedDialog from '../components/LoginFailedDialog';
@@ -119,7 +118,7 @@ type State = {
   newPassword: string,
   confirmPassword: string,
   signUp: boolean,
-  openedDialog: boolean,
+  messageOpened: boolean,
 };
 
 export class Login extends React.Component<Props, State> {
@@ -133,24 +132,27 @@ export class Login extends React.Component<Props, State> {
     newPassword: '',
     confirmPassword: '',
     signIn: false,
-    openedDialog: false,
+    messageOpened: false,
   };
 
   performLogin = async () => {
     try {
       await this.props.actions.login(this.state.username, this.state.password);
       this.props.history.replace('/');
-      console.log('failed ', this.props.failed);
+      this.props.failed && this.setState({ messageOpened: true });
     } catch (e) {
       console.log('le login a chié');
     }
   };
 
+  closeMessage = () => {
+      //this.setState({ messageOpened: false });
+  }
+
   render() {
-    console.log('new password', this.state.newPassword);
     return (
       <StyledContainer>
-        {this.props.failed && <LoginFailedDialog/>}
+        {this.state.messageOpened && <LoginFailedDialog closeDialog={this.closeMessage}/>}
         <StyledLoginZone>
           <StyledLoginForm>
             <JobineLogo alt={'Jobine logo'} src={Images.logo} />
@@ -162,6 +164,7 @@ export class Login extends React.Component<Props, State> {
                   label={'Nom complet'}
                   onChange={(event) => this.setState({ name: event.target.value })}
                   type="text"
+                  autoComplete="full-name"
                   value={this.state.name}
                 />
 
@@ -170,6 +173,7 @@ export class Login extends React.Component<Props, State> {
                   label={'Nom d\'utilisateur'}
                   onChange={(event) => this.setState({ newUsername: event.target.value })}
                   type="text"
+                  autoComplete="new-username"
                   value={this.state.newUsername}
                 />
 
@@ -177,11 +181,13 @@ export class Login extends React.Component<Props, State> {
                   id="newEmailTextField"
                   label={'Email'}
                   onChange={(event) => this.setState({ email: event.target.value })}
+                  autoComplete="email"
                   type="text"
                   value={this.state.email}
                 />
 
                 <StyledTextField
+                  autoComplete="new-password"
                   id="newPasswordTextField"
                   label={'Mot de passe'}
                   onChange={(event) => this.setState({ newPassword: event.target.value })}
@@ -190,6 +196,7 @@ export class Login extends React.Component<Props, State> {
                 />
                 
                 <StyledTextField
+                  autoComplete="confirm-password"
                   id="confirmPasswordTextField"
                   label={'Confirmer le mot de passe'}
                   onChange={(event) => this.setState({ confirmPassword: event.target.value })}

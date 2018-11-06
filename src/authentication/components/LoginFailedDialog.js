@@ -5,9 +5,18 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { Colors, Metrics } from '../../main/themes';
+import { Slide } from '@material-ui/core';
+import { Metrics } from '../../main/themes';
 
-class LoginFailedDialog extends React.Component {
+type Props = {
+  closeDialog: Function,
+}
+
+function Transition(props) {
+  return <Slide direction="up" {...props} />;
+}
+
+class LoginFailedDialog extends React.Component<Props> {
   state = {
     open: true,
   };
@@ -18,6 +27,7 @@ class LoginFailedDialog extends React.Component {
 
   handleClose = () => {
     this.setState({ open: false });
+    this.props.closeDialog();
   };
 
   render() {
@@ -26,13 +36,15 @@ class LoginFailedDialog extends React.Component {
         <Dialog
           open={this.state.open}
           onClose={this.handleClose}
+          TransitionComponent={Transition}
+          keepMounted
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
-          <DialogTitle color="secondary" style={{fontSize: Metrics.spacing.huge}}>{"Mot de passe incorrect"}</DialogTitle>
+          <DialogTitle color="secondary" style={{ fontSize: Metrics.spacing.huge }}>{"Mot de passe incorrect"}</DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              Votre nom d'utilisateur ou votre mot de passe n'a pas fonctionné. Veuillez réessayer avec des identifiants différents.
+              La combinaison de votre nom d'utilisateur et de votre mot de passe n'a pas fonctionnée. Veuillez réessayer avec des identifiants valides.
             </DialogContentText>
           </DialogContent>
           <DialogActions>

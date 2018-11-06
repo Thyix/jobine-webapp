@@ -1,14 +1,12 @@
 // @flow
 
 import React from 'react';
-import Grid from '@material-ui/core/Grid';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import NavigationBar from '../components/NavigationBar';
 import LoginScene from '../../authentication/containers/LoginScene';
 import { isAuthenticated } from  '../../authentication/selectors/authenticationSelectors'; 
-import { Colors } from '../../main/themes';
 
 type Props = {
   authenticated: boolean,
@@ -32,7 +30,6 @@ const StyledContainer = styled.div`
 `;
 
 export const Dashboard = ({ authenticated }: Props) => {
-  console.log('receive props');
   return (
     <BrowserRouter>
       {!authenticated ?
