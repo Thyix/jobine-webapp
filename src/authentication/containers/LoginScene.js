@@ -121,6 +121,8 @@ type State = {
   messageOpened: boolean,
 };
 
+let mounted = false;
+
 export class Login extends React.Component<Props, State> {
 
   state = {
@@ -134,8 +136,13 @@ export class Login extends React.Component<Props, State> {
     signIn: false,
     messageOpened: false,
   };
+
+  componentDidMount() {
+    mounted = true;
+  }
   
   componentWillUnmount() {
+    mounted = false;
     console.log('component will unmout');
   }
 
@@ -143,14 +150,18 @@ export class Login extends React.Component<Props, State> {
     try {
       await this.props.actions.login(this.state.username, this.state.password);
       this.props.history.replace('/');
-      this.props.failed && this.setState({ messageOpened: true });
+      if (mounted) {
+        this.props.failed && this.setState({ messageOpened: true });
+      }
     } catch (e) {
       console.log('le login a chié');
     }
   };
 
   closeMessage = () => {
-      this.setState({ messageOpened: false });
+      if (mounted) {
+        this.setState({ messageOpened: false });
+      }
   }
 
   render() {
@@ -166,7 +177,7 @@ export class Login extends React.Component<Props, State> {
                 <StyledTextField
                   id="fullNameTextField"
                   label={'Nom complet'}
-                  onChange={(event) => this.setState({ name: event.target.value })}
+                  onChange={(event) => mounted && this.setState({ name: event.target.value })}
                   type="text"
                   autoComplete="full-name"
                   value={this.state.name}
@@ -175,7 +186,7 @@ export class Login extends React.Component<Props, State> {
                 <StyledTextField
                   id="newUsernameTextField"
                   label={'Nom d\'utilisateur'}
-                  onChange={(event) => this.setState({ newUsername: event.target.value })}
+                  onChange={(event) => mounted && this.setState({ newUsername: event.target.value })}
                   type="text"
                   autoComplete="new-username"
                   value={this.state.newUsername}
@@ -184,7 +195,7 @@ export class Login extends React.Component<Props, State> {
                 <StyledTextField
                   id="newEmailTextField"
                   label={'Email'}
-                  onChange={(event) => this.setState({ email: event.target.value })}
+                  onChange={(event) => mounted && this.setState({ email: event.target.value })}
                   autoComplete="email"
                   type="text"
                   value={this.state.email}
@@ -194,7 +205,7 @@ export class Login extends React.Component<Props, State> {
                   autoComplete="new-password"
                   id="newPasswordTextField"
                   label={'Mot de passe'}
-                  onChange={(event) => this.setState({ newPassword: event.target.value })}
+                  onChange={(event) => mounted && this.setState({ newPassword: event.target.value })}
                   type="password"
                   value={this.state.newPassword}
                 />
@@ -203,7 +214,7 @@ export class Login extends React.Component<Props, State> {
                   autoComplete="confirm-password"
                   id="confirmPasswordTextField"
                   label={'Confirmer le mot de passe'}
-                  onChange={(event) => this.setState({ confirmPassword: event.target.value })}
+                  onChange={(event) => mounted && this.setState({ confirmPassword: event.target.value })}
                   type="password"
                   value={this.state.confirmPassword}
                 />
@@ -214,7 +225,7 @@ export class Login extends React.Component<Props, State> {
                   autoComplete="username"
                   id="usernameTextField"
                   label={'Nom d\'utilisateur'}
-                  onChange={(event) => this.setState({ username: event.target.value })}
+                  onChange={(event) => mounted && this.setState({ username: event.target.value })}
                   type="text"
                   value={this.state.username}
                 />
@@ -223,7 +234,7 @@ export class Login extends React.Component<Props, State> {
                   autoComplete="current-password"
                   id="passwordTextField"
                   label={'Mot de passe'}
-                  onChange={(event) => this.setState({ password: event.target.value })}
+                  onChange={(event) => mounted && this.setState({ password: event.target.value })}
                   type="password"
                   value={this.state.password}
                 />
@@ -247,7 +258,7 @@ export class Login extends React.Component<Props, State> {
             <SignupButton
             aria-label="Retour"
             color="primary"
-            onClick={() => this.setState({ signIn: false })}
+            onClick={() => mounted && this.setState({ signIn: false })}
             variant="fab"
             >
               <ArrowBack/>Retour
@@ -257,7 +268,7 @@ export class Login extends React.Component<Props, State> {
             <SignupButton
               aria-label="S'enregistrer"
               color="primary"
-              onClick={() => this.setState({ signIn: true })}
+              onClick={() => mounted && this.setState({ signIn: true })}
               variant="fab"
             >
               <AccountCircle/>Créer un compte
