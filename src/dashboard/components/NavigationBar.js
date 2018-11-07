@@ -5,12 +5,12 @@ import { withRouter } from 'react-router';
 import { AppBar, Toolbar } from '@material-ui/core';
 import styled from 'styled-components';
 import NavigationBarUser from './NavigationBarUser';
-import { Images, Colors } from '../../main/themes';
+import { Images, Colors, Metrics} from '../../main/themes';
 
 const StyledAppBar = styled(AppBar)`
   height: 6em;
   justify-content: center;
-  background-color: ${Colors.secondary} !important;
+  background-color: ${Colors.backgroundLight} !important;
   position: relative !important;
 `;
 
@@ -54,7 +54,7 @@ class NavigationBar extends React.Component<Props, State> {
         <StyledToolbar>
           <StyledDiv>
             <StyledLogoContainer>
-              <StyledLogo src={Images.logo} />
+              <StyledLogo style={{ marginTop: Metrics.spacing.small, marginLeft: Metrics.spacing.medium }} src={Images.logo} />
             </StyledLogoContainer>
           </StyledDiv>
 
