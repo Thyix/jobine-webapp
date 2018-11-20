@@ -12,7 +12,6 @@ const Container = styled(Grid)`
   width: 100% !important;
   height: 100% !important;
   flex-grow: 1 !important;
-  height: 100%;
   align-self: stretch !important;
   ${Medias.xs} {
     flex-direction: column-reverse !important;

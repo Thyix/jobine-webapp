@@ -2,6 +2,10 @@
 
 import React from 'react';
 import styled from 'styled-components';
+import { withRouter } from 'react-router';
+import SearchField from './search/components/SearchField';
+import { Metrics } from '../../main/themes';
+import Scenes from '../../main/navigation/Scenes';
 
 const SidebarContainer = styled.div`
   flex-direction: column;
@@ -10,18 +14,65 @@ const SidebarContainer = styled.div`
   height: 100%px !important;
 `;
 
+const PaddedContainer = styled.div`
+  padding: ${Metrics.spacing.medium}px !important;
+`;
 
-class Sidebar extends React.Component<> {
+type Props = {
+  history: {
+    push: Function,
+    location: {
+      pathname: string,
+    },
+  },
+  query: string,
+}
+
+
+
+class Sidebar extends React.Component<Props> {
+
+  goToSearch = () => {
+    const isInSearchScene = this.props.history.location.pathname.includes(Scenes.Search);
+    if (!isInSearchScene) {
+      this.props.history.push(Scenes.Search);
+    }
+  }
 
   render() {
 console.log('sidebar');
     return (
       <SidebarContainer>
-        Voici un sidebar
+        <PaddedContainer>
+        <SearchField 
+            onFocus={this.goToSearch}
+            onQueryChanged={(query: string) => {} /*this.props.actions.updateQuery(query)*/}
+            onSearch={(query: string) => {} /*this.props.actions.search(query)*/}
+            query={this.props.query}
+          />
+        </PaddedContainer>
+
+        <PaddedContainer>
+          This is going to be the recent conversations<br/>
+          -<br/>
+          -<br/>
+          -<br/>
+          -<br/>
+          -<br/> 
+        </PaddedContainer>
+
+        <PaddedContainer>
+          This is going to be contacts<br/>
+          -<br/>
+          -<br/>
+          -<br/>
+          -<br/>
+          -<br/> 
+        </PaddedContainer>
       </SidebarContainer>
     );
   }
 
 }
 
-export default Sidebar;
+export default withRouter(Sidebar);
