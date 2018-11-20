@@ -143,7 +143,6 @@ export class Login extends React.Component<Props, State> {
   
   componentWillUnmount() {
     mounted = false;
-    console.log('component will unmout');
   }
 
   performLogin = async () => {
@@ -154,7 +153,6 @@ export class Login extends React.Component<Props, State> {
         this.props.failed && this.setState({ messageOpened: true });
       }
     } catch (e) {
-      console.log('le login a chié');
     }
   };
 

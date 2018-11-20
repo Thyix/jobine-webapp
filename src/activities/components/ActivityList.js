@@ -13,7 +13,8 @@ const ActivityList = ({ dailyActivities }: Props) => {
     <React.Fragment>
       {Object.keys(dailyActivities)
         .map(() => 
-          <ActivityListSection 
+          <ActivityListSection
+            key={Math.random()}
             activities={dailyActivities}
           />
         )}
