@@ -65,6 +65,7 @@ export const Dashboard = ({ authenticated }: Props) => {
 
               <Switch>
                 <Route component={Activities} exact path={Scenes.Dashboard} />
+                <Route component={Activities} />
               </Switch>
             </StyledContent>
           </StyledContainer>

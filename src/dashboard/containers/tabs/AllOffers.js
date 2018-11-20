@@ -3,6 +3,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Grid from '@material-ui/core/Grid';
+//import ActivityList from '../../activities/components/ActivityList';
 import { Metrics, Medias } from '../../../main/themes';
 import ActivityList from '../../../activities/components/ActivityList';
 
@@ -48,7 +49,7 @@ type Props = {
 
 type State = {}
 
-export class Recents extends React.Component<Props, State> {
+export class Answers extends React.Component<Props, State> {
 
   state = {}
   render() {
@@ -58,7 +59,7 @@ export class Recents extends React.Component<Props, State> {
 
           <CallHistoryContainer>
             <Grid container style={{backgroundColor: 'white'}}>
-              <ActivityList dailyActivities={'Activités récentes'}/>
+              <ActivityList dailyActivities={'toutes les activites'}/>
             </Grid>
           </CallHistoryContainer>
 
@@ -68,4 +69,4 @@ export class Recents extends React.Component<Props, State> {
   }
 
 }
-export default Recents;
+export default Answers;

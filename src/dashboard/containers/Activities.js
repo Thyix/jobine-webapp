@@ -6,6 +6,7 @@ import { Tabs, Tab } from '@material-ui/core';
 import { Colors } from '../../main/themes';
 import Recents from './tabs/Recents';
 import Answers from './tabs/Answers';
+import AllOffers from './tabs/AllOffers';
 
 type Props = {};
 
@@ -57,6 +58,7 @@ class Activities extends React.Component<Props, State> {
         <TabContent>
           {this.state.value === 0 && <Recents/>}
           {this.state.value === 1 && <Answers/>}
+          {this.state.value === 2 && <AllOffers/>}
         </TabContent>
         <div />
       </RootContainer>

@@ -8,7 +8,7 @@ const SidebarContainer = styled.div`
   flex-direction: column;
   flex: 1 !important;
   position: relative !important;
-  height: 100% !important;
+  height: 100%px !important;
 `;
 
 
