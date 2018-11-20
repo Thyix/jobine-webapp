@@ -52,7 +52,7 @@ class NavigationBar extends React.Component<Props, State> {
       <StyledAppBar position="static">
         <StyledToolbar>
           <StyledDiv>
-            <StyledLogoContainer>
+            <StyledLogoContainer onClick={() => this.props.history.push('/')}>
               <StyledLogo style={{ marginTop: Metrics.spacing.small, marginLeft: Metrics.spacing.medium }} src={Images.logo} />
             </StyledLogoContainer>
           </StyledDiv>
