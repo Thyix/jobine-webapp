@@ -17,12 +17,12 @@ type State = {
 const RootContainer = styled.div`
   overflow: auto;
   display: flex;
-  height: 100% !important;
+  height: 100%;
   flex-direction: column;
 `;
 
 const TabContent = styled.div`
-  height: 100%;
+  height: 705px !important;
   overflow: auto;
 `;
 

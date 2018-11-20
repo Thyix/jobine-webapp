@@ -4,7 +4,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Grid from '@material-ui/core/Grid';
 import ActivityList from '../../../activities/components/ActivityList';
-import { Metrics, Medias, Colors } from '../../../main/themes';
+import { Medias } from '../../../main/themes';
 import SendMessage from '../../../offers/containers/SendMessage';
 
 const Container = styled(Grid)`
@@ -38,28 +38,6 @@ const ChatContentContainer = styled.div`
   overflow-y: scroll !important;
 `;
 
-const ContactArea = styled.div`
-  min-width: 335px !important;
-  height: 100% !important;
-  display: block;
-  background-color: ${Colors.primaryBackground};
-  z-index: 100 !important;
-  ${Medias.xs} {
-    width: 100% !important;
-    border-bottom: 1px solid ${Colors.primary};
-  }
-  ${Medias.md} {
-    width: 335px !important;
-    max-width: 335px !important;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.16), 0 2px 4px rgba(0, 0, 0, 0.23);
-  }
-`;
-
-const CallHistoryContainer = styled.div`
-  flex-grow: 1 !important;
-  max-height: 100% !important;
-  overflow-y: scroll !important;
-`;
 type Props = {
 }
 
@@ -75,7 +53,7 @@ export class Answers extends React.Component<Props, State> {
 
           <ChatContentContainer>
             <Grid container style={{backgroundColor: 'white'}}>
-            <ActivityList dailyActivities={'Réponsesssssd'}/>
+            <ActivityList dailyActivities={'Réponsessssssss'}/>
             <SendMessage />
             </Grid>
           </ChatContentContainer>

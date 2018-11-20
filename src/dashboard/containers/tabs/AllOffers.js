@@ -3,8 +3,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Grid from '@material-ui/core/Grid';
-//import ActivityList from '../../activities/components/ActivityList';
-import { Metrics, Medias } from '../../../main/themes';
+import { Medias } from '../../../main/themes';
 import ActivityList from '../../../activities/components/ActivityList';
 
 const Container = styled(Grid)`
@@ -37,13 +36,6 @@ const CallHistoryContainer = styled.div`
   overflow-y: scroll !important;
 `;
 
-const Spinner = styled.div`
-  display: flex !important;
-  flex-grow: 1 !important;
-  justify-content: center !important;
-  padding-top: ${Metrics.spacing.huge}px !important;
-`;
-
 type Props = {
 }
 
@@ -59,7 +51,7 @@ export class Answers extends React.Component<Props, State> {
 
           <CallHistoryContainer>
             <Grid container style={{backgroundColor: 'white'}}>
-              <ActivityList dailyActivities={'toutes les activites'}/>
+              <ActivityList dailyActivities={'Activitiesssssssss'}/>
             </Grid>
           </CallHistoryContainer>
 

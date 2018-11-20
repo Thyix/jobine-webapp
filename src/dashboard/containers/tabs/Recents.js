@@ -36,13 +36,6 @@ const CallHistoryContainer = styled.div`
   overflow-y: scroll !important;
 `;
 
-const Spinner = styled.div`
-  display: flex !important;
-  flex-grow: 1 !important;
-  justify-content: center !important;
-  padding-top: ${Metrics.spacing.huge}px !important;
-`;
-
 type Props = {
 }
 
@@ -57,8 +50,8 @@ export class Recents extends React.Component<Props, State> {
         <MainArea>
 
           <CallHistoryContainer>
-            <Grid container style={{backgroundColor: 'white'}}>
-              <ActivityList dailyActivities={'Activités récentes'}/>
+            <Grid container style={{ backgroundColor: 'white', height: '100%' }}>
+              <ActivityList dailyActivities={'Recentsssssss'}/>
             </Grid>
           </CallHistoryContainer>
 

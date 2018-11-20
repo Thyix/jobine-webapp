@@ -2,11 +2,10 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import { Metrics } from '../../main/themes';
 
 const SidebarContainer = styled.div`
   flex-direction: column;
-  flex: 1 !important;
+  flex: 1;
   position: relative !important;
   height: 100%px !important;
 `;
