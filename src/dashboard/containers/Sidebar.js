@@ -40,7 +40,6 @@ class Sidebar extends React.Component<Props> {
   }
 
   render() {
-console.log('sidebar');
     return (
       <SidebarContainer>
         <PaddedContainer>

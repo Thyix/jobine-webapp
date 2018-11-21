@@ -8,7 +8,6 @@ type Props = {
 };
 
 const ActivityList = ({ dailyActivities }: Props) => {
-  console.log('activityList', dailyActivities);
   return (
     <React.Fragment>
       {Object.keys(dailyActivities)

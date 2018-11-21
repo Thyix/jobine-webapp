@@ -21,6 +21,7 @@ export default function reducer(state: any = initialState, action: any) {
     }
 
     case LOGIN_SUCCESS: {
+      console.log('session:', action.session);
       return { ...state, authenticated: true, authenticating: false, failed: false, session: action.session };
     }
 

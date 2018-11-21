@@ -10,19 +10,13 @@ export const LOGOUT = 'authentication/LOGOUT';
 
 export function login(identifier: string, password: string) {
   return async (dispatch: Function, getState: any) => {
-    //try {
       dispatch({ type: LOGIN_REQUEST });
       const loggedUser = await AuthenticationLogin(identifier, password);
-      console.log('logged user', loggedUser);
       if (loggedUser) {
-        dispatch({ type: LOGIN_SUCCESS });
+        dispatch({ type: LOGIN_SUCCESS, session: loggedUser });
       } else {
         dispatch({ type: LOGIN_FAILURE });
       }
-    //} catch (e) {
-      //dispatch({ type: LOGIN_FAILURE });
-      //throw e;
-    //}
   };
 }
 

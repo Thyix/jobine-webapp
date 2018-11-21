@@ -46,8 +46,6 @@ class Activities extends React.Component<Props, State> {
   };
 
   render() {
-    console.log('okokook');
-
     return (
       <RootContainer id="higher-activities">
         <StyledTabs indicatorColor="primary" onChange={this.handleChange} value={this.state.value}>
