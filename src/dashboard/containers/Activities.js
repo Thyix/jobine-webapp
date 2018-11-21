@@ -22,7 +22,7 @@ const RootContainer = styled.div`
 `;
 
 const TabContent = styled.div`
-  height: 675px !important;
+  height: 705px !important;
   overflow: auto;
 `;
 
