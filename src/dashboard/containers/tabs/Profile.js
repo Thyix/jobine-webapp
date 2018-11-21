@@ -3,8 +3,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import Grid from '@material-ui/core/Grid';
+import { connect } from 'react-redux'; 
 import { Medias } from '../../../main/themes';
-import ActivityList from '../../../activities/components/ActivityList';
+import { getSession } from '../../../authentication/selectors/authenticationSelectors';
+import Profile from '../../../authentication/domain/Profile';
+import { Avatar } from '@material-ui/core';
 
 const Container = styled(Grid)`
   display: flex !important;
@@ -21,6 +24,12 @@ const Container = styled(Grid)`
   }
 `;
 
+const StyledAvatar = styled(Avatar)`
+width: 40px !important;
+height: 40px !important;
+align-items: center !important;
+`;
+
 const MainArea = styled.div`
   display: flex !important;
   height: 100% !important;
@@ -30,18 +39,14 @@ const MainArea = styled.div`
   flex-grow: 1 !important;
 `;
 
-const CallHistoryContainer = styled.div`
-  flex-grow: 1 !important;
-  max-height: 100% !important;
-  overflow-y: scroll !important;
-`;
 
 type Props = {
+  session: Profile,
 }
 
 type State = {}
 
-export class Answers extends React.Component<Props, State> {
+export class ProfileItem extends React.Component<Props, State> {
 
   state = {}
   render() {
@@ -49,11 +54,9 @@ export class Answers extends React.Component<Props, State> {
       <Container>
         <MainArea>
 
-          <CallHistoryContainer>
-            <Grid container style={{backgroundColor: 'white'}}>
-              <ActivityList dailyActivities={'Activitiesssssssss'}/>
+            <Grid container style={{ height: '725px', backgroundColor: 'white'}}>
+                <StyledAvatar src={this.props.session.imgUser}/>
             </Grid>
-          </CallHistoryContainer>
 
         </MainArea>
       </Container>
@@ -61,4 +64,11 @@ export class Answers extends React.Component<Props, State> {
   }
 
 }
-export default Answers;
+
+const mapStateToProps = (state: any) => {
+  return {
+    session: getSession(state),
+  };
+};
+
+export default connect(mapStateToProps)(ProfileItem);

@@ -6,6 +6,7 @@ import { withNamespaces } from 'react-i18next';
 import Grid from '@material-ui/core/Grid';
 import TitledDivider from '../../main/components/TitledDivider';
 import { Metrics } from '../../main/themes';
+import { Typography } from '@material-ui/core';
 
 const StyledTitledDivider = styled(TitledDivider)`
   margin-top: ${Metrics.spacing.medium}px;
@@ -18,10 +19,10 @@ type Props = {
 export const ActivityListSection = ({ activities }: Props) => {
   return (
     <React.Fragment>
-      <Grid item xs={12}>
+      <Grid item xs={12} style={{marginLeft:'15px', marginRight:'15px'}}>
         <StyledTitledDivider id="sectionTitle" title={'this is my activity section'} />
       </Grid>
-        {activities}
+        <Typography style={{marginLeft: '25px'}}>{activities}</Typography>
     </React.Fragment>
   );
 };

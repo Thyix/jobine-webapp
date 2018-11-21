@@ -3,7 +3,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Grid from '@material-ui/core/Grid';
-import { Metrics, Medias } from '../../../main/themes';
+import { Medias } from '../../../main/themes';
 import ActivityList from '../../../activities/components/ActivityList';
 
 const Container = styled(Grid)`

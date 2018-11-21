@@ -9,7 +9,7 @@ type Props = {
 
 const ActivityList = ({ dailyActivities }: Props) => {
   return (
-    <React.Fragment>
+    <React.Fragment >
       {Object.keys(dailyActivities)
         .map(() => 
           <ActivityListSection

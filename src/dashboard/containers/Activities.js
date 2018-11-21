@@ -6,7 +6,7 @@ import { Tabs, Tab } from '@material-ui/core';
 import { Colors } from '../../main/themes';
 import Recents from './tabs/Recents';
 import Answers from './tabs/Answers';
-import AllOffers from './tabs/AllOffers';
+import ProfileItem from './tabs/Profile';
 
 type Props = {};
 
@@ -22,7 +22,7 @@ const RootContainer = styled.div`
 `;
 
 const TabContent = styled.div`
-  height: 705px !important;
+  height: 675px !important;
   overflow: auto;
 `;
 
@@ -49,14 +49,14 @@ class Activities extends React.Component<Props, State> {
     return (
       <RootContainer id="higher-activities">
         <StyledTabs indicatorColor="primary" onChange={this.handleChange} value={this.state.value}>
-          <Tab label="Afficher les offres" />
-          <Tab label="Voir les réponses" />
-          <Tab label="Une tab de plus" />
+          <Tab label="Offres en cours" />
+          <Tab label="Messagerie" />
+          <Tab label="Mon Profil" />
         </StyledTabs>
         <TabContent>
           {this.state.value === 0 && <Recents/>}
           {this.state.value === 1 && <Answers/>}
-          {this.state.value === 2 && <AllOffers/>}
+          {this.state.value === 2 && <ProfileItem/>}
         </TabContent>
         <div />
       </RootContainer>
