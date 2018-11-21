@@ -104,6 +104,7 @@ type Props = {
     login: (username: string, password: string) => Promise<void>,
   },
   authenticated: boolean,
+  session: Profile,
   failed: boolean,
   authenticating: boolean,
   t: Function,

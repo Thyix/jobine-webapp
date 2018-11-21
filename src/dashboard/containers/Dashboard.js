@@ -10,7 +10,7 @@ import Activities from './Activities';
 import Scenes from '../../main/navigation/Scenes';
 import SearchResults from '../../search/containers/SearchResults';
 import LoginScene from '../../authentication/containers/LoginScene';
-import { isAuthenticated } from  '../../authentication/selectors/authenticationSelectors'; 
+import { isAuthenticated, getSession } from  '../../authentication/selectors/authenticationSelectors'; 
 import Sidebar from './Sidebar';
 import { Colors } from '../../main/themes';
 
@@ -46,7 +46,7 @@ const StyledSidebarContainer = styled(Grid)`
   box-shadow: 2px 0 3px rgba(0,0,0,0.12);
   min-width: 315px !important;
 `;
-export const Dashboard = ({ authenticated }: Props) => {
+export const Dashboard = ({ authenticated, session }: Props) => {
   return (
     <BrowserRouter>
       {!authenticated ?

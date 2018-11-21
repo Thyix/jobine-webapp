@@ -2,15 +2,17 @@
 
 import React from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography/Typography';
 import Popover from '@material-ui/core/Popover';
 import { Avatar, Button } from '@material-ui/core';
 import LogoutButton from '../../authentication/containers/LogoutButton';
 import { Metrics } from '../../main/themes';
+import { getSession } from '../../authentication/selectors/authenticationSelectors';
 
 type Props = {
-  session: Session,
+  session: Profile,
   status: string,
 };
 
@@ -50,11 +52,11 @@ class NavigationBarUser extends React.Component<Props, State> {
       <div>
         <Grid container spacing={16}>
           <Grid item>
-            <Avatar alt="Unknown contact avatar">#</Avatar>
+            <Avatar alt="Unknown contact avatar" src={this.props.session.imgUser}>#</Avatar>
           </Grid>
 
           <UserInfo item onClick={this.handleClick}>
-            <Typography>{`William Garneau`}</Typography>
+            <Typography>{this.props.session.nameUser}</Typography>
             <Typography>{'En ligne'}</Typography>
           </UserInfo>
           <Popover
@@ -88,4 +90,10 @@ class NavigationBarUser extends React.Component<Props, State> {
 
 }
 
-export default NavigationBarUser;
+function mapStateToProps(state) {
+  return {
+    session: getSession(state),
+  };
+}
+
+export default connect(mapStateToProps)(NavigationBarUser);
