@@ -47,7 +47,6 @@ class NavigationBarUser extends React.Component<Props, State> {
   render() {
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
-    console.log(this.props.session);
     const imgLink = this.props.session.imgUser === '' ? 'https://krourke.org/img/md_avatar_stormtrooper.svg' : this.props.session.imgUser;
 
     return (

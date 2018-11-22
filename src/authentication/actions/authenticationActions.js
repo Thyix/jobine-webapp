@@ -28,7 +28,6 @@ export function signup(username: string, job: string, email: string, password: s
   return async (dispatch: Function, getState: any) => {
     dispatch({ type: SIGNUP_REQUEST });
     const isSignedUp = await AuthenticationSignup(username, job, email, password);
-    console.log('signed up user', isSignedUp);
     if (isSignedUp) {
       dispatch({ type: SIGNUP_SUCCESS, session: isSignedUp });
     } else {

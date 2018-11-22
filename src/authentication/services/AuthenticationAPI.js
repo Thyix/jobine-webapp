@@ -9,7 +9,6 @@ export async function AuthenticationLogin(identifier: string, password: string):
   await fetch("http://70.48.63.175:8080/JobineDB/webresources/entities.user")
     .then((resp) => resp.json()) // Transform the data into json
     .then(function(data) {
-      console.log('data', data);
       attempt = data.filter(d => d["emailUser"] === identifier && d["pwdUser"] === password);
   });
   attempt.length > 0 ? attempt = Profile.parse(attempt[0]) : attempt = null;
@@ -22,7 +21,6 @@ export async function CheckEmailAvailability(email: string): Promise<any> {
     .then((resp) => resp.json()) // Transform the data into json
     .then(function(data) {
       attempt = data.filter(d => d["emailUser"] === email);
-      console.log(attempt);
   });
   if (attempt.length > 0) {
     return false;
@@ -34,7 +32,6 @@ export async function CheckEmailAvailability(email: string): Promise<any> {
 
 export async function AuthenticationSignup(username: string, job: string, email: string, password: string): Promise<any> {
   const available = await CheckEmailAvailability(email);
-  console.log('is available', available);
   if (!available) return null;
   let data = JSON.stringify({
       dateUser: moment(),
@@ -46,7 +43,6 @@ export async function AuthenticationSignup(username: string, job: string, email:
       nameUser: username, 
       pwdUser: password });
   const newProfile = Profile.parseNew(moment(), '', email, '1', '1', '', job, username, password);
-  console.log(newProfile);
   let request = new Request("http://70.48.63.175:8080/JobineDB/webresources/entities.user", {
     method: 'POST', 
     mode: 'cors', 

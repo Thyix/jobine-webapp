@@ -167,7 +167,6 @@ export class Login extends React.Component<Props, State> {
         }
         (this.props.failed || this.props.failedSignup) && this.setState({ messageOpened: true})
       }
-      console.log('failed: ', this.props.failed, 'failed signup: ', this.props.failedSignup);
     } catch (e) {
     }
   };

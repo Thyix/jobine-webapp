@@ -4,10 +4,10 @@ import React from 'react';
 import styled from 'styled-components';
 import Grid from '@material-ui/core/Grid';
 import { connect } from 'react-redux'; 
-import { Medias } from '../../../main/themes';
 import { getSession } from '../../../authentication/selectors/authenticationSelectors';
 import Profile from '../../../authentication/domain/Profile';
 import { Avatar } from '@material-ui/core';
+import { Medias, Metrics } from '../../../main/themes';
 
 const Container = styled(Grid)`
   display: flex !important;
@@ -25,9 +25,10 @@ const Container = styled(Grid)`
 `;
 
 const StyledAvatar = styled(Avatar)`
-width: 40px !important;
-height: 40px !important;
+width: 100px !important;
+height: 100px !important;
 align-items: center !important;
+margin-top: ${Metrics.spacing.small}px !important;
 `;
 
 const MainArea = styled.div`
@@ -54,8 +55,8 @@ export class ProfileItem extends React.Component<Props, State> {
       <Container>
         <MainArea>
 
-            <Grid container style={{ height: '725px', backgroundColor: 'white'}}>
-                <StyledAvatar src={this.props.session.imgUser ? this.props.session.imgUser : ''}/>
+            <Grid container style={{ height: '725px', backgroundColor: 'white', alignContent: 'center', justifyContent:'center'}}>
+                <StyledAvatar src={this.props.session.imgUser ? this.props.session.imgUser : 'https://krourke.org/img/md_avatar_stormtrooper.svg'}/>
             </Grid>
 
         </MainArea>
