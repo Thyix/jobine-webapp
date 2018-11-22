@@ -48,4 +48,18 @@ Profile.parse = (plain: any): Profile => {
   });
 };
 
+Profile.parseNew = (date: string, description: string, email: string, id: string, idType: string, img: string, job: string, name: string, password: string): Profile => {
+  return new Profile({
+    dateUser: date,
+    descriptionUser: description,
+    emailUser: email,
+    idUser: id, 
+    idUserType: idType, 
+    imgUser: img,
+    jobUser: job, 
+    nameUser: name,
+    pwdUser: password,
+  });
+};
+
 export default Profile;

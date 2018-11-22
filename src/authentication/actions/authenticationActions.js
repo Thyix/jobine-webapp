@@ -1,6 +1,7 @@
 // @flow
 
 import { AuthenticationLogin, AuthenticationSignup } from '../services/AuthenticationAPI';
+import { consolidateStreamedStyles } from 'styled-components';
 
 export const LOGIN_REQUEST = 'authentication/LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'authentication/LOGIN_SUCCESS';
@@ -27,9 +28,9 @@ export function signup(username: string, job: string, email: string, password: s
   return async (dispatch: Function, getState: any) => {
     dispatch({ type: SIGNUP_REQUEST });
     const isSignedUp = await AuthenticationSignup(username, job, email, password);
-    console.log('is signed up', isSignedUp);
+    console.log('signed up user', isSignedUp);
     if (isSignedUp) {
-      dispatch({ type: SIGNUP_SUCCESS });
+      dispatch({ type: SIGNUP_SUCCESS, session: isSignedUp });
     } else {
       dispatch({ type: SIGNUP_FAILURE });
     }

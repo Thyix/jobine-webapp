@@ -47,12 +47,14 @@ class NavigationBarUser extends React.Component<Props, State> {
   render() {
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
+    console.log(this.props.session);
+    const imgLink = this.props.session.imgUser || 'https://krourke.org/img/md_avatar_stormtrooper.svg';
 
     return (
       <div>
         <Grid container spacing={16}>
           <Grid item>
-            <Avatar alt="Unknown contact avatar" src={this.props.session.imgUser !== undefined ? this.props.session.imgUser : ''}>#</Avatar>
+            <Avatar alt="Unknown contact avatar" src={imgLink}>#</Avatar>
           </Grid>
 
           <UserInfo item onClick={this.handleClick}>

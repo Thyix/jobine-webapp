@@ -55,7 +55,7 @@ export class ProfileItem extends React.Component<Props, State> {
         <MainArea>
 
             <Grid container style={{ height: '725px', backgroundColor: 'white'}}>
-                <StyledAvatar src={this.props.session.imgUser}/>
+                <StyledAvatar src={this.props.session.imgUser ? this.props.session.imgUser : ''}/>
             </Grid>
 
         </MainArea>
