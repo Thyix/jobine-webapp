@@ -3,6 +3,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Typography from '@material-ui/core/Typography/Typography';
+import SearchIcon from '@material-ui/icons/Search';
 import { withRouter } from 'react-router';
 import { Colors, Fonts, Metrics } from '../../main/themes';
 
@@ -15,6 +16,15 @@ const Spacer = styled.div`
   margin-top: ${Metrics.spacing.large}px !important;
 `;
 
+const RecentItem = styled.div`
+  display: flex;
+  align-items: center;
+  margin-left: ${Metrics.spacing.small}px;
+`;
+
+const Result = styled(Typography)`
+  margin-left: ${Metrics.spacing.small}px !important;
+`;
 
 const Results = styled.div`
   display: flex !important;
@@ -27,9 +37,9 @@ const MessagesResult = styled.div`
 `;
 
 const Title = styled(Typography)`
-  color: ${Colors.accent} !important;
+  color: ${Colors.primary} !important;
   font-weight: bold !important;
-  margin-bottom: ${Metrics.spacing.small}px; 
+  margin-bottom: ${Metrics.spacing.small}px !important; 
   ${Fonts.toCSS(Fonts.medium())}
 `;
 
@@ -59,11 +69,36 @@ export class SearchResults extends React.PureComponent<Props, State> {
         <Container>
           <Scrollable>
             <PaddedDiv>
-              Récentes recherches --
-    
+
+              <Title>Exemples de recherche</Title>   
+              <RecentItem>
+                <SearchIcon color="secondary"/>
+                <Result>Entreprise en informatique</Result>
+              </RecentItem>
+              <RecentItem>
+                <SearchIcon color="secondary"/>
+                <Result>Restauration</Result>
+              </RecentItem>
+              <RecentItem>
+                <SearchIcon color="secondary"/>
+                <Result>Pornographie</Result>
+              </RecentItem>
+              
               <Spacer />
     
-              Récentes entreprises --
+              <Title>Exemples d'entreprises</Title>
+              <RecentItem>
+                <SearchIcon color="secondary"/>
+                <Result>Creaform</Result>
+              </RecentItem>
+              <RecentItem>
+                <SearchIcon color="secondary"/>
+                <Result>Normandin</Result>
+              </RecentItem>
+              <RecentItem>
+                <SearchIcon color="secondary"/>
+                <Result>Nexapp</Result>
+              </RecentItem> 
             </PaddedDiv>
           </Scrollable>
         </Container>
