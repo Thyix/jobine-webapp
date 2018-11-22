@@ -11,7 +11,13 @@ const isAuthenticated = createSelector(authenticatedSelector, (authenticated) =>
 const authenticatingSelector = state => state.authentication.authenticating;
 const isAuthenticating = createSelector(authenticatingSelector, (authenticating) => authenticating);
 
+const signupSelector = state => state.authentication.signinup;
+const isSigningUp = createSelector(signupSelector, (signinup) => signinup);
+
+const signupFailedSelector = state => state.authentication.failedSignup;
+const hasFailedSignup = createSelector(signupFailedSelector, (failedSignup) => failedSignup);
+
 const authenticationFailed = state => state.authentication.failed;
 const hasFailed = createSelector(authenticationFailed, (failed) => failed);
 
-export { getSession, isAuthenticated, isAuthenticating, hasFailed };
+export { getSession, isAuthenticated, isAuthenticating, hasFailed, isSigningUp, hasFailedSignup };

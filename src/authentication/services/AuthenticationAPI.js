@@ -8,8 +8,27 @@ export async function AuthenticationLogin(identifier: string, password: string):
   await fetch("http://70.48.63.175:8080/JobineDB/webresources/entities.user")
     .then((resp) => resp.json()) // Transform the data into json
     .then(function(data) {
+      console.log(data);
       attempt = data.filter(d => d["emailUser"] === identifier && d["pwdUser"] === password);
   });
   attempt.length > 0 ? attempt = Profile.parse(attempt[0]) : attempt = null;
   return attempt;
+}
+
+export async function AuthenticationSignup(username: string, job: string, email: string, password: string): Promise<any> {
+  console.log('Informations. Username: ', username, 'job: ', job, 'email: ', email, 'password', password);
+  await fetch("http://70.48.63.175:8080/JobineDB/webresources/entities.user", {
+    method: 'POST', 
+    mode: 'cors', 
+    headers: new Headers({
+      'Accept': 'application/json',
+      'Content-Type': 'application/json' 
+    }),
+    body: JSON.stringify({
+      nameUser: username,
+      jobUser: job,
+      emailUser: email,
+      pwdUser: password,
+    })
+  });
 }

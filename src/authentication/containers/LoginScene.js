@@ -8,12 +8,13 @@ import { connect } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import ArrowBack from '@material-ui/icons/ArrowBack';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import { withNamespaces } from 'react-i18next';
-import { login } from '../actions/authenticationActions';
+import { login, signup } from '../actions/authenticationActions';
 import LoginFailedDialog from '../components/LoginFailedDialog';
 import { Images, Colors, Fonts, Medias, Metrics } from '../../main/themes';
-import { isAuthenticated, hasFailed } from '../selectors/authenticationSelectors';
+import { isAuthenticated, hasFailed, isAuthenticating } from '../selectors/authenticationSelectors';
 
 const Background = styled.div`
   background: url(${Images.background});
@@ -104,6 +105,7 @@ type Props = {
     login: (username: string, password: string) => Promise<void>,
   },
   authenticated: boolean,
+  authenticating: boolean,
   session: Profile,
   failed: boolean,
   authenticating: boolean,
@@ -113,7 +115,7 @@ type Props = {
 type State = {
   username: string,
   password: string,
-  newUsername: string,
+  userJob: string,
   name: string,
   email: string,
   newPassword: string,
@@ -129,7 +131,7 @@ export class Login extends React.Component<Props, State> {
   state = {
     username: '',
     password: '',
-    newUsername: '',
+    userJob: '',
     name: '',
     email: '',
     newPassword: '',
@@ -148,6 +150,9 @@ export class Login extends React.Component<Props, State> {
 
   performLogin = async () => {
     try {
+      this.state.signIn ?
+      await this.props.actions.signup(this.state.name, this.state.userJob, this.state.email, this.state.newPassword)
+      :
       await this.props.actions.login(this.state.username, this.state.password);
       this.props.history.replace('/');
       if (mounted) {
@@ -174,8 +179,8 @@ export class Login extends React.Component<Props, State> {
             {this.state.signIn ?
               <React.Fragment>
                 <StyledTextField
-                  id="fullNameTextField"
-                  label={'Nom complet'}
+                  id="fullNameField"
+                  label={"Nom complet"}
                   onChange={(event) => mounted && this.setState({ name: event.target.value })}
                   type="text"
                   autoComplete="full-name"
@@ -184,11 +189,11 @@ export class Login extends React.Component<Props, State> {
 
                 <StyledTextField
                   id="newUsernameTextField"
-                  label={'Nom d\'utilisateur'}
-                  onChange={(event) => mounted && this.setState({ newUsername: event.target.value })}
+                  label={"Domaine d'affaire"}
+                  onChange={(event) => mounted && this.setState({ userJob: event.target.value })}
                   type="text"
                   autoComplete="new-username"
-                  value={this.state.newUsername}
+                  value={this.state.userJob}
                 />
 
                 <StyledTextField
@@ -247,7 +252,11 @@ export class Login extends React.Component<Props, State> {
                 onClick={this.performLogin}
                 variant="contained"
               >
-                {this.state.signIn ? 'Créer un compte' : 'Se connecter'}
+              {this.props.authenticating ? 
+                <CircularProgress size={20} color="secondary" />
+              :
+                this.state.signIn ? 'Créer un compte' : 'Se connecter'
+              }
               </LoginButton>
 
             {!this.state.signIn && <ForgotPassword id="forgotPasswordPrompt">{'Mot de passe oublié'} ?</ForgotPassword>}
@@ -289,6 +298,7 @@ export class Login extends React.Component<Props, State> {
 function mapStateToProps(state) {
   return {
     authenticated: isAuthenticated(state),
+    authenticating: isAuthenticating(state),
     failed: hasFailed(state),
   };
 }
@@ -297,6 +307,7 @@ function mapDispatchToProps(dispatch: Function) {
   return {
     actions: bindActionCreators({
       login,
+      signup,
     }, dispatch),
   };
 }
