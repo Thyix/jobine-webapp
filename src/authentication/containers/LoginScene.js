@@ -13,8 +13,9 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import { withNamespaces } from 'react-i18next';
 import { login, signup } from '../actions/authenticationActions';
 import LoginFailedDialog from '../components/LoginFailedDialog';
+import SignupFailedDialog from '../components/SignupFailedDialog';
 import { Images, Colors, Fonts, Medias, Metrics } from '../../main/themes';
-import { isAuthenticated, hasFailed, isAuthenticating } from '../selectors/authenticationSelectors';
+import { isAuthenticated, hasFailed, isAuthenticating, hasFailedSignup } from '../selectors/authenticationSelectors';
 
 const Background = styled.div`
   background: url(${Images.background});
@@ -104,6 +105,7 @@ type Props = {
   actions: {
     login: (username: string, password: string) => Promise<void>,
   },
+  failedSignup: boolean,
   authenticated: boolean,
   authenticating: boolean,
   session: Profile,
@@ -156,7 +158,7 @@ export class Login extends React.Component<Props, State> {
       await this.props.actions.login(this.state.username, this.state.password);
       this.props.history.replace('/');
       if (mounted) {
-        this.props.failed && this.setState({ messageOpened: true });
+        (this.props.failed || this.props.failedSignup) && this.setState({ messageOpened: true });
       }
     } catch (e) {
     }
@@ -172,6 +174,7 @@ export class Login extends React.Component<Props, State> {
     return (
       <StyledContainer>
         <LoginFailedDialog opened={this.state.messageOpened} closeDialog={this.closeMessage}/>
+        <SignupFailedDialog opened={this.state.messageOpened} closeDialog={this.closeMessage}/>
         <StyledLoginZone>
           <StyledLoginForm>
             <JobineLogo alt={'Jobine logo'} src={Images.logo} />
@@ -300,6 +303,7 @@ function mapStateToProps(state) {
     authenticated: isAuthenticated(state),
     authenticating: isAuthenticating(state),
     failed: hasFailed(state),
+    failedSignup: hasFailedSignup(state),
   };
 }
 

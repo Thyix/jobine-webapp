@@ -52,7 +52,7 @@ class NavigationBarUser extends React.Component<Props, State> {
       <div>
         <Grid container spacing={16}>
           <Grid item>
-            <Avatar alt="Unknown contact avatar" src={this.props.session.imgUser}>#</Avatar>
+            <Avatar alt="Unknown contact avatar" src={this.props.session.imgUser ? this.props.session.imgUser : ''}>#</Avatar>
           </Grid>
 
           <UserInfo item onClick={this.handleClick}>

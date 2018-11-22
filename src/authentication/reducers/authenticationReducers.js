@@ -33,10 +33,10 @@ export default function reducer(state: any = initialState, action: any) {
       return { ...state, authenticated: false, authenticating: false, failed: true };
     }
     case SIGNUP_REQUEST: {
-      return { ...state, authenticated: false, signingup: true, failedSignup: false };
+      return { ...state, authenticated: false, authenticating: true, signingup: true, failedSignup: false };
     }
     case SIGNUP_SUCCESS: {
-      return { ...state, authenticated: true, signingup: false, failedSignup: false, session: action.session };
+      return { ...state, authenticated: true, authenticating: false, signingup: false, failedSignup: false, session: action.session };
     }
     case SIGNUP_FAILURE: {
       return { ...state, authenticated: false, signingup: false, failedSignup: true };
