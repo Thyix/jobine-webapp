@@ -3,9 +3,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import { withRouter } from 'react-router';
+import { connect } from 'react-redux';
 import SearchField from './search/components/SearchField';
-import { Metrics } from '../../main/themes';
+import ContactList from '../../users/containers/UsersList';
+import { getSession } from '../../authentication/selectors/authenticationSelectors';
 import Scenes from '../../main/navigation/Scenes';
+import { Metrics } from '../../main/themes';
 
 const SidebarContainer = styled.div`
   flex-direction: column;
@@ -15,7 +18,7 @@ const SidebarContainer = styled.div`
 `;
 
 const PaddedContainer = styled.div`
-  padding: ${Metrics.spacing.medium}px !important;
+  padding: ${Metrics.spacing.large}px !important;
 `;
 
 type Props = {
@@ -25,6 +28,7 @@ type Props = {
       pathname: string,
     },
   },
+  session:Profile,
   query: string,
 }
 
@@ -50,28 +54,23 @@ class Sidebar extends React.Component<Props> {
             query={this.props.query}
           />
         </PaddedContainer>
-
         <PaddedContainer>
-          This is going to be the recent conversations<br/>
-          -<br/>
-          -<br/>
-          -<br/>
-          -<br/>
-          -<br/> 
-        </PaddedContainer>
-
-        <PaddedContainer>
-          This is going to be contacts<br/>
-          -<br/>
-          -<br/>
-          -<br/>
-          -<br/>
-          -<br/> 
-        </PaddedContainer>
+          <ContactList contacts={[this.props.session]}
+          title={'Récents'}/>
+          <ContactList contacts={[this.props.session]}
+          title={'Vous pourriez connaître...'}/>
+          </PaddedContainer>
       </SidebarContainer>
     );
   }
 
 }
 
-export default withRouter(Sidebar);
+function mapStateToProps(state) {
+  return {
+    session: getSession(state),
+  };
+}
+
+
+export default connect(mapStateToProps)(withRouter(Sidebar));
