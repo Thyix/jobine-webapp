@@ -254,7 +254,7 @@ export class Login extends React.Component<Props, State> {
               >
               {this.props.authenticating ? 
                 <CircularProgress size={20} color="secondary" />
-              :
+               :
                 this.state.signIn ? 'Créer un compte' : 'Se connecter'
               }
               </LoginButton>
