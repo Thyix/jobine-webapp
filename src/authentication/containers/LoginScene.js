@@ -124,6 +124,7 @@ type State = {
   confirmPassword: string,
   signUp: boolean,
   messageOpened: boolean,
+  dialog: boolean,
 };
 
 let mounted = false;
@@ -140,6 +141,7 @@ export class Login extends React.Component<Props, State> {
     confirmPassword: '',
     signIn: false,
     messageOpened: false,
+    dialog: true,
   };
 
   componentDidMount() {
@@ -158,8 +160,14 @@ export class Login extends React.Component<Props, State> {
       await this.props.actions.login(this.state.username, this.state.password);
       this.props.history.replace('/');
       if (mounted) {
-        (this.props.failed || this.props.failedSignup) && this.setState({ messageOpened: true });
+        if (this.props.failed) {
+          this.setState({ dialog: true });
+        } else {
+          this.setState({ dialog: false });
+        }
+        (this.props.failed || this.props.failedSignup) && this.setState({ messageOpened: true})
       }
+      console.log('failed: ', this.props.failed, 'failed signup: ', this.props.failedSignup);
     } catch (e) {
     }
   };
@@ -173,8 +181,8 @@ export class Login extends React.Component<Props, State> {
   render() {
     return (
       <StyledContainer>
-        <LoginFailedDialog opened={this.state.messageOpened} closeDialog={this.closeMessage}/>
-        <SignupFailedDialog opened={this.state.messageOpened} closeDialog={this.closeMessage}/>
+        <LoginFailedDialog opened={this.state.messageOpened && this.state.dialog} closeDialog={this.closeMessage}/>
+        <SignupFailedDialog opened={this.state.messageOpened && !this.state.dialog} closeDialog={this.closeMessage}/>
         <StyledLoginZone>
           <StyledLoginForm>
             <JobineLogo alt={'Jobine logo'} src={Images.logo} />
