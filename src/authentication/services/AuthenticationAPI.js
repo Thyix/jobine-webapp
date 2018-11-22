@@ -45,7 +45,7 @@ export async function AuthenticationSignup(username: string, job: string, email:
       jobUser: job, 
       nameUser: username, 
       pwdUser: password });
-  const newProfile = Profile.parseNew(moment(), '', email, '1', '', job, username, password);
+  const newProfile = Profile.parseNew(moment(), '', email, '1', '1', '', job, username, password);
   console.log(newProfile);
   let request = new Request("http://70.48.63.175:8080/JobineDB/webresources/entities.user", {
     method: 'POST', 
