@@ -41,6 +41,7 @@ export function signup(username: string, job: string, email: string, password: s
 }
 
 export function update(newProfile:Profile) {
+  console.log(newProfile);
   return async (dispatch: Function, getState: any) => {
     dispatch({ type: UPDATE_REQUEST });
     const newUser = await UpdateUsers(newProfile);

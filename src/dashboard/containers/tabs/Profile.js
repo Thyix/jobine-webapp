@@ -2,11 +2,12 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import { Grid, TextField } from '@material-ui/core';
+import { Grid, TextField, Button, CircularProgress } from '@material-ui/core';
 import { connect } from 'react-redux'; 
 import { bindActionCreators }  from 'redux';
-import { getSession } from '../../../authentication/selectors/authenticationSelectors';
+import { getSession, isUpdating } from '../../../authentication/selectors/authenticationSelectors';
 import Profile from '../../../authentication/domain/Profile';
+import { update } from '../../../authentication/actions/authenticationActions';
 import { Avatar } from '@material-ui/core';
 import { Medias, Metrics } from '../../../main/themes';
 
@@ -47,9 +48,19 @@ const MainArea = styled.div`
   flex-grow: 1 !important;
 `;
 
+const UpdateButton = styled(Button)`
+  margin-top: ${Metrics.spacing.large}px !important;
+  border-radius: 20px !important; 
+  padding-vertical: ${Metrics.spacing.small}px !important;
+`;
+
 
 type Props = {
   session: Profile,
+  updating: boolean,
+  actions: {
+    update: (newUser: Profile) => Promise<void>,
+  },
 }
 
 type State = {
@@ -137,6 +148,31 @@ export class ProfileItem extends React.Component<Props, State> {
                   value={this.state.jobUser}
                 />
               </React.Fragment>
+
+              <UpdateButton
+                color="primary"
+                disabled={this.state.signIn ? ((this.state.newPassword !== this.state.confirmPassword) || this.state.newPassword.length === 0): false}
+                id="goToDomainButton"
+                onClick={() => this.props.actions.update(Profile.parseNew(
+                  this.props.session.dateUser,
+                  this.state.descriptionUser,
+                  this.state.emailUser,
+                  this.props.session.idUser,
+                  this.props.session.idUserType,
+                  this.state.imgUser,
+                  this.state.jobUser,
+                  this.state.nameUser,
+                  this.props.session.pwdUser
+                ))}
+                variant="contained"
+              >
+              {this.props.updating ? 
+                <CircularProgress size={20} color="secondary" />
+              :
+                'Modifier le profil'
+              }
+              </UpdateButton>
+              
             </Grid>
 
         </MainArea>
@@ -149,12 +185,14 @@ export class ProfileItem extends React.Component<Props, State> {
 const mapStateToProps = (state: any) => {
   return {
     session: getSession(state),
+    updating: isUpdating(state),
   };
 };
 
 function mapDispatchToProps(dispatch: Function) {
   return {
     actions: bindActionCreators({
+      update,
     }, dispatch),
   };
 }
