@@ -1,6 +1,7 @@
 // @flow
 
 import { AuthenticationLogin, AuthenticationSignup } from '../services/AuthenticationAPI';
+import { UpdateUsers } from '../../users/services/UsersAPI'; 
 
 export const LOGIN_REQUEST = 'authentication/LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'authentication/LOGIN_SUCCESS';
@@ -8,6 +9,7 @@ export const LOGIN_FAILURE = 'authentication/LOGIN_FAILURE';
 export const SIGNUP_REQUEST = 'authentication/SIGNUP_REQUEST';
 export const SIGNUP_SUCCESS = 'authentication/SIGNUP_SUCCESS';
 export const SIGNUP_FAILURE = 'authentication/SIGNUP_FAILURE';
+
 export const LOGOUT = 'authentication/LOGOUT';
 
 
@@ -29,6 +31,19 @@ export function signup(username: string, job: string, email: string, password: s
     const isSignedUp = await AuthenticationSignup(username, job, email, password);
     if (isSignedUp) {
       dispatch({ type: SIGNUP_SUCCESS, session: isSignedUp });
+    } else {
+      dispatch({ type: SIGNUP_FAILURE });
+    }
+  }
+}
+
+export function update(newProfile:Profile) {
+  return async (dispatch: Function, getState: any) => {
+    dispatch({ type: SIGNUP_REQUEST });
+    const newUser = await UpdateUsers(newProfile);
+    console.log('updated user', newUser);
+    if (newUser) {
+      dispatch({ type: SIGNUP_SUCCESS, session: newUser });
     } else {
       dispatch({ type: SIGNUP_FAILURE });
     }

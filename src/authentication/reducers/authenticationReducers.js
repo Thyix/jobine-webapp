@@ -4,17 +4,29 @@ import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
+
   SIGNUP_REQUEST,
   SIGNUP_SUCCESS,
   SIGNUP_FAILURE,
+
+  UPDATE_REQUEST,
+  UPDATE_SUCCESS,
+  UPDATE_FAILURE,
+
   LOGOUT,
 } from '../actions/authenticationActions';
 
 const initialState = {
   authenticated: false,
   authenticating: false,
+
   signingup: false,
   failedSignup: false,
+
+  updating: false,
+  updated: false,
+  failedUpdate: false,
+
   session: undefined,
   failed: false,
 };
@@ -32,6 +44,7 @@ export default function reducer(state: any = initialState, action: any) {
     case LOGIN_FAILURE: {
       return { ...state, authenticated: false, authenticating: false, failed: true, failedSignup: false };
     }
+
     case SIGNUP_REQUEST: {
       return { ...state, authenticated: false, authenticating: true, signingup: true, failedSignup: false };
     }
@@ -40,6 +53,16 @@ export default function reducer(state: any = initialState, action: any) {
     }
     case SIGNUP_FAILURE: {
       return { ...state, authenticated: false, authenticating: false, signingup: false, failed: false, failedSignup: true };
+    }
+
+    case UPDATE_REQUEST: {
+      return { ...state, updated: false, updating: true };
+    }
+    case UPDATE_SUCCESS: {
+      return { ...state, updated: true, updating: false, failedUpdate: false, session: action.session };
+    }
+    case UPDATE_FAILURE: {
+      return { ...state, updated: false, updating: false, failedUpdate: true };
     }
 
 
