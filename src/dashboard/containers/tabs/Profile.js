@@ -95,7 +95,6 @@ export class ProfileItem extends React.Component<Props, State> {
     mounted = false;
   }
   render() {
-    console.log(this.props.session);
     return (
       <Container>
         <MainArea>
