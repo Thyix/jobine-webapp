@@ -46,6 +46,7 @@ export class Answers extends React.Component<Props, State> {
 
   state = {}
   render() {
+    
     return (
       <Container>
         <MainArea>
