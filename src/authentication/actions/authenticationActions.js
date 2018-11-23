@@ -1,7 +1,6 @@
 // @flow
 
 import { AuthenticationLogin, AuthenticationSignup } from '../services/AuthenticationAPI';
-import { consolidateStreamedStyles } from 'styled-components';
 
 export const LOGIN_REQUEST = 'authentication/LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'authentication/LOGIN_SUCCESS';

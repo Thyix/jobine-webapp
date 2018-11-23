@@ -4,7 +4,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Grid, TextField } from '@material-ui/core';
 import { connect } from 'react-redux'; 
-import bindActionCreators from 'redux';
+import { bindActionCreators }  from 'redux';
 import { getSession } from '../../../authentication/selectors/authenticationSelectors';
 import Profile from '../../../authentication/domain/Profile';
 import { Avatar } from '@material-ui/core';
