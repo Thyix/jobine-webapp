@@ -73,7 +73,7 @@ class ContactListItem extends React.Component<Props, State> {
   }
 
   render() {
-    const { contact, onCall } = this.props;
+    const { contact } = this.props;
     const imgLink = contact.imgUser === '' ? 'https://krourke.org/img/md_avatar_stormtrooper.svg' : contact.imgUser;
     
 
