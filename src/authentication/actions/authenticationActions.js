@@ -9,6 +9,9 @@ export const LOGIN_FAILURE = 'authentication/LOGIN_FAILURE';
 export const SIGNUP_REQUEST = 'authentication/SIGNUP_REQUEST';
 export const SIGNUP_SUCCESS = 'authentication/SIGNUP_SUCCESS';
 export const SIGNUP_FAILURE = 'authentication/SIGNUP_FAILURE';
+export const UPDATE_REQUEST = 'authentication/UPDATE_REQUEST';
+export const UPDATE_SUCCESS = 'authentication/UPDATE_SUCCESS';
+export const UPDATE_FAILURE = 'authentication/UPDATE_FAILURE';
 
 export const LOGOUT = 'authentication/LOGOUT';
 
@@ -39,13 +42,13 @@ export function signup(username: string, job: string, email: string, password: s
 
 export function update(newProfile:Profile) {
   return async (dispatch: Function, getState: any) => {
-    dispatch({ type: SIGNUP_REQUEST });
+    dispatch({ type: UPDATE_REQUEST });
     const newUser = await UpdateUsers(newProfile);
     console.log('updated user', newUser);
     if (newUser) {
-      dispatch({ type: SIGNUP_SUCCESS, session: newUser });
+      dispatch({ type: UPDATE_SUCCESS, session: newUser });
     } else {
-      dispatch({ type: SIGNUP_FAILURE });
+      dispatch({ type: UPDATE_FAILURE });
     }
   }
 }
