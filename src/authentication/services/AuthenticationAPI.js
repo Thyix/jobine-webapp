@@ -59,7 +59,7 @@ export async function AuthenticationSignup(username: string, job: string, email:
 }
 
 export async function DeleteProfile(profile: Profile) {
-  var request = new Request(`http://70.48.63.175:8080/JobineDB/webresources/entities.usertype/${profile.idUser}`, {
+  var request = new Request(`http://70.48.63.175:8080/JobineDB/webresources/entities.user/${profile.idUser}`, {
     method: 'DELETE', 
     mode: 'cors', 
     headers: new Headers({
