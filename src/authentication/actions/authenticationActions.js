@@ -33,7 +33,6 @@ export function login(identifier: string, password: string) {
 export function fetchProfiles() {
   return async (dispatch: Function, getState: any) => {
     const allUsers = await FetchProfiles();
-    console.log('all users from action', allUsers);
     if (allUsers) {
       dispatch({ type: FETCH_PROFILES, profiles: allUsers });
     }
@@ -66,7 +65,6 @@ export function update(newProfile:Profile) {
 
 export function deleteProfile(user:Profile) {
   return async (dispatch: Function, getState: any) => {
-    console.log('account to destroy', user);
     await DeleteProfile(user);
     dispatch({ type: DELETE });
   }

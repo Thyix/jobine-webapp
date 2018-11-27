@@ -11,7 +11,6 @@ export function fetchMessages() {
   return async (dispatch: Function, getState: any) => {
       dispatch({ type: FETCH_OFFERS_REQUEST });
       const newOffers = await FetchOffers();
-      console.log('new offers', newOffers);
       if (newOffers) {
         dispatch({ type: FETCH_OFFERS_SUCCESS, offers: newOffers });
       } else {
