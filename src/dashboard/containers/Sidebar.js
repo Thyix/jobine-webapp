@@ -4,9 +4,11 @@ import React from 'react';
 import styled from 'styled-components';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import SearchField from './search/components/SearchField';
 import ContactList from '../../users/containers/UsersList';
-import { getSession } from '../../authentication/selectors/authenticationSelectors';
+import { fetchProfiles } from '../../authentication/actions/authenticationActions';
+import { getSession, getAllUsers } from '../../authentication/selectors/authenticationSelectors';
 import Scenes from '../../main/navigation/Scenes';
 import { Metrics } from '../../main/themes';
 
@@ -28,7 +30,11 @@ type Props = {
       pathname: string,
     },
   },
+  actions: {
+    fetchProfiles: () => Promise<void>,
+  },
   session:Profile,
+  users: Profile[],
   query: string,
 }
 
@@ -41,6 +47,10 @@ class Sidebar extends React.Component<Props> {
     if (!isInSearchScene) {
       this.props.history.push(Scenes.Search);
     }
+  }
+
+  componentWillMount() {
+    this.props.actions.fetchProfiles();
   }
 
   render() {
@@ -69,8 +79,17 @@ class Sidebar extends React.Component<Props> {
 function mapStateToProps(state) {
   return {
     session: getSession(state),
+    users: getAllUsers(state),
+  };
+}
+
+function mapDispatchToProps(dispatch: Function) {
+  return {
+    actions: bindActionCreators({
+      fetchProfiles,
+    }, dispatch),
   };
 }
 
 
-export default connect(mapStateToProps)(withRouter(Sidebar));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Sidebar));
