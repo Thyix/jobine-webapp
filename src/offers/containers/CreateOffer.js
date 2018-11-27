@@ -3,7 +3,7 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import { Grid, TextField, Button } from '@material-ui/core';
+import { Grid, TextField, Button, CardMedia } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { bindActionCreators }  from 'redux';
 import { fetchMessages } from '../actions/offersActions';
@@ -26,9 +26,9 @@ const Container = styled(Grid)`
   }
 `;
 
-const StyledAvatar = styled(Avatar)`
-width: 100px !important;
-height: 100px !important;
+const StyledImage = styled(CardMedia)`
+width: 20% !important;
+height: 15% !important;
 align-items: center !important;
 margin-top: ${Metrics.spacing.large}px !important;
 margin-bottom: ${Metrics.spacing.large}px !important;
@@ -84,12 +84,18 @@ export class ProfileItem extends React.Component<Props, State> {
         <MainArea>
 
             <Grid container style={{ height: '725px', backgroundColor: 'white', alignItems:'center', flexDirection:'column'}}>
-                <StyledAvatar/>
+                <StyledImage
+                  component="img"
+                  alt="Offer image card"
+                  height="140"
+                  image="https://blogs.ufv.ca/science/files/2018/01/job.opportunity.jpg"
+                  title="Offer image"
+                />
                 <React.Fragment>
                 <StyledTextField
                   autoComplete="username"
                   id="usernameField"
-                  label={"Nom d'utilisateur"}
+                  label={"Titre de l'offre"}
                   onChange={(event) => mounted && this.setState({ nameUser: event.target.value })}
                   type="text"
                   value={this.state.nameUser}
@@ -97,7 +103,7 @@ export class ProfileItem extends React.Component<Props, State> {
 
                 <StyledTextField
                   id="emailField"
-                  label={"Adresse mail"}
+                  label={"Description de la tâche"}
                   onChange={(event) => mounted && this.setState({ emailUser: event.target.value })}
                   type="text"
                   autoComplete="email"
@@ -106,7 +112,7 @@ export class ProfileItem extends React.Component<Props, State> {
 
                 <StyledTextField
                   id="descriptionField"
-                  label={"Description de votre profil"}
+                  label={"Domaine associé"}
                   onChange={(event) => mounted && this.setState({ descriptionUser: event.target.value })}
                   type="text"
                   autoComplete="description"
@@ -115,7 +121,7 @@ export class ProfileItem extends React.Component<Props, State> {
 
                 <StyledTextField
                   id="imgField"
-                  label={'Image du profil'}
+                  label={'Durée du mandat'}
                   onChange={(event) => mounted && this.setState({ imgUser: event.target.value })}
                   autoComplete="imgLink"
                   type="text"
@@ -125,7 +131,7 @@ export class ProfileItem extends React.Component<Props, State> {
                 <StyledTextField
                   autoComplete="jobField"
                   id="jobField"
-                  label={"Domaine d'affaire"}
+                  label={"Image représentant le mandat"}
                   onChange={(event) => mounted && this.setState({ jobUser: event.target.value })}
                   type="text"
                   value={this.state.jobUser}
