@@ -49,11 +49,12 @@ class Sidebar extends React.Component<Props> {
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.actions.fetchProfiles();
   }
 
   render() {
+    console.log('users: ', this.props.users);
     return (
       <SidebarContainer>
         <PaddedContainer>
@@ -65,9 +66,9 @@ class Sidebar extends React.Component<Props> {
           />
         </PaddedContainer>
         <PaddedContainer>
-          <ContactList contacts={[this.props.session]}
+          <ContactList contacts={this.props.users.length > 0 ? [this.props.users[0], this.props.users[1], this.props.users[2], this.props.users[3]] : [this.props.session]}
           title={'Récents'}/>
-          <ContactList contacts={[this.props.session]}
+          <ContactList contacts={this.props.users.length > 0 ? [this.props.users[4], this.props.users[5], this.props.users[6], this.props.users[7]] : [this.props.session]}
           title={'Vous pourriez connaître...'}/>
           </PaddedContainer>
       </SidebarContainer>

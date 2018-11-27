@@ -20,9 +20,10 @@ export async function FetchProfiles(): Promise<any> {
   await fetch("http://70.48.63.175:8080/JobineDB/webresources/entities.user")
     .then((resp) => resp.json()) // Transform the data into json
     .then(function(data) {
+      attempt = data;
   });
-  attempt.length > 0 ? attempt = attempt.map(a => Profile.parse[attempt[a]]) : attempt = null;
-  console.log(attempt);
+  attempt.length > 0 ? attempt.map(a => attempt[a] = Profile.parse[attempt[a]]) : attempt = null;
+  return attempt;
 }
 
 export async function CheckEmailAvailability(email: string): Promise<any> {
