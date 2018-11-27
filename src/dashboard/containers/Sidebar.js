@@ -54,7 +54,6 @@ class Sidebar extends React.Component<Props> {
   }
 
   render() {
-    console.log('users: ', this.props.users);
     return (
       <SidebarContainer>
         <PaddedContainer>
