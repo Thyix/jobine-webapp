@@ -51,12 +51,14 @@ class Activities extends React.Component<Props, State> {
         <StyledTabs indicatorColor="primary" onChange={this.handleChange} value={this.state.value}>
           <Tab label="Offres en cours" />
           <Tab label="Messagerie" />
+          <Tab label="Créer un compte" />
           <Tab label="Mon Profil" />
         </StyledTabs>
         <TabContent>
           {this.state.value === 0 && <Recents/>}
           {this.state.value === 1 && <Answers/>}
-          {this.state.value === 2 && <ProfileItem/>}
+          {this.state.value === 2 && <div/>}
+          {this.state.value === 3 && <ProfileItem/>}
         </TabContent>
         <div />
       </RootContainer>
