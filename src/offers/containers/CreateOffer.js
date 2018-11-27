@@ -6,8 +6,10 @@ import styled from 'styled-components';
 import { Grid, TextField, Button } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { bindActionCreators }  from 'redux';
+import { fetchMessages } from '../actions/offersActions';
 import { Avatar } from '@material-ui/core';
 import { Medias, Metrics } from '../../main/themes';
+import Profile from '../../dashboard/containers/tabs/Profile';
 
 const Container = styled(Grid)`
   display: flex !important;
@@ -133,7 +135,7 @@ export class ProfileItem extends React.Component<Props, State> {
               <UpdateButton
                 color="primary"
                 id="goToDomainButton"
-                onClick={() => {}}
+                onClick={() => this.props.actions.fetchMessages()}
                 variant="contained"
               >
               Ajouter une offre
@@ -150,12 +152,14 @@ export class ProfileItem extends React.Component<Props, State> {
 
 const mapStateToProps = (state: any) => {
   return {
+    session: Profile,
   };
 };
 
 function mapDispatchToProps(dispatch: Function) {
   return {
     actions: bindActionCreators({
+      fetchMessages,
     }, dispatch),
   };
 }
