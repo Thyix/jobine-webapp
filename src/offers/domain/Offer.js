@@ -1,15 +1,11 @@
 import { Record } from 'immutable';
 
 const OfferRecord = Record({
-  dateUser: undefined,
-  descriptionUser: undefined,
-  emailUser: undefined,
+  addressOffer: undefined,
+  dateOffer: undefined,
+  idOffer: undefined,
   idUser: undefined,
-  idUserType: undefined,
-  imgUser: undefined,
-  jobUser: undefined,
-  nameUser: undefined,
-  pwdUser: undefined,
+  titleOffer: undefined,
 });
 
 class Offer extends OfferRecord {

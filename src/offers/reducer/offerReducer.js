@@ -4,6 +4,8 @@ import {
   FETCH_OFFERS_REQUEST,
   FETCH_OFFERS_SUCCESS,
   FETCH_OFFERS_FAILURE,
+
+  CREATE_OFFER,
 } from '../actions/offersActions';
 
 const initialState = {
@@ -22,6 +24,9 @@ export default function reducer(state: any = initialState, action: any) {
     }
     case FETCH_OFFERS_FAILURE: {
       return { ...state, fetching: false, fetched: false };
+    }
+    case CREATE_OFFER: {
+      return { ...state, offers: [...state.offers, action.offers]}
     }
     default:
       return state;

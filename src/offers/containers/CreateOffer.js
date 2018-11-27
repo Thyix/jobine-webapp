@@ -95,9 +95,11 @@ export class ProfileItem extends React.Component<Props, State> {
                   title="Offer image"
                 />
                 <CardContent>
+                  <div style={{ flexDirection:'row'}}>
                   <Typography gutterBottom variant="h5" component="h2">
                   {this.state.titleOffer}
                   </Typography>
+                  </div>
                   <Typography component="p">
                   {this.state.descriptionOffer}
                   </Typography>
