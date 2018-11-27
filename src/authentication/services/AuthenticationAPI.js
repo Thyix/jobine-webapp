@@ -56,3 +56,10 @@ export async function AuthenticationSignup(username: string, job: string, email:
   })
   return newProfile;
 }
+
+export async function DeleteProfile(profile: Profile) {
+  await fetch(`http://70.48.63.175:8080/JobineDB/webresources/entities.user/${profile.idUser}`)
+    .then((resp) => resp.json()) // Transform the data into json
+    .then(function(data) {
+  });
+}

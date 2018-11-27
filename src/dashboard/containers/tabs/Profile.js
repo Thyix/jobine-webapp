@@ -9,7 +9,7 @@ import { getSession, isUpdating } from '../../../authentication/selectors/authen
 import Profile from '../../../authentication/domain/Profile';
 import { update } from '../../../authentication/actions/authenticationActions';
 import { Avatar } from '@material-ui/core';
-import { Medias, Metrics } from '../../../main/themes';
+import { Medias, Metrics, Colors } from '../../../main/themes';
 
 const Container = styled(Grid)`
   display: flex !important;
@@ -150,7 +150,6 @@ export class ProfileItem extends React.Component<Props, State> {
 
               <UpdateButton
                 color="primary"
-                disabled={this.state.signIn ? ((this.state.newPassword !== this.state.confirmPassword) || this.state.newPassword.length === 0): false}
                 id="goToDomainButton"
                 onClick={() => this.props.actions.update(Profile.parseNew(
                   this.props.session.dateUser,
@@ -169,6 +168,19 @@ export class ProfileItem extends React.Component<Props, State> {
                 <CircularProgress size={20} color="secondary" />
               :
                 'Modifier le profil'
+              }
+              </UpdateButton>
+
+              <UpdateButton
+                style={{ backgroundColor: Colors.error, color: Colors.secondary }}
+                id="DeleteUser"
+                onClick={() => {}}
+                variant="contained"
+              >
+              {this.props.updating ? 
+                <CircularProgress size={20} color="secondary" />
+              :
+                'Supprimer le profil'
               }
               </UpdateButton>
               

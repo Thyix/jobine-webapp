@@ -13,6 +13,8 @@ import {
   UPDATE_SUCCESS,
   UPDATE_FAILURE,
 
+  DELETE,
+
   LOGOUT,
 } from '../actions/authenticationActions';
 
@@ -64,8 +66,9 @@ export default function reducer(state: any = initialState, action: any) {
     case UPDATE_FAILURE: {
       return { ...state, updated: false, updating: false, failedUpdate: true };
     }
-
-
+    case DELETE: {
+      return { ...state, authenticated: false, authenticating: false, session: null};
+    }
 
     case LOGOUT: {
       return { ...state, authenticated: false, authenticating: false};

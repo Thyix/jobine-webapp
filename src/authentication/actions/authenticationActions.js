@@ -13,6 +13,7 @@ export const UPDATE_REQUEST = 'authentication/UPDATE_REQUEST';
 export const UPDATE_SUCCESS = 'authentication/UPDATE_SUCCESS';
 export const UPDATE_FAILURE = 'authentication/UPDATE_FAILURE';
 
+export const DELETE = 'authentication/DELETE';
 export const LOGOUT = 'authentication/LOGOUT';
 
 
@@ -49,6 +50,12 @@ export function update(newProfile:Profile) {
     } else {
       dispatch({ type: UPDATE_FAILURE });
     }
+  }
+}
+
+export function deleteProfile(user:Profile) {
+  return async (dispatch: Function, getState: any) => {
+    dispatch({ type: DELETE });
   }
 }
 
