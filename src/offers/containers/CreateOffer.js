@@ -3,11 +3,10 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import { Grid, TextField, Button, CardMedia } from '@material-ui/core';
+import { Grid, TextField, Button, CardMedia, Card, CardActionArea, CardActions, CardContent, Typography } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { bindActionCreators }  from 'redux';
 import { fetchMessages } from '../actions/offersActions';
-import { Avatar } from '@material-ui/core';
 import { Medias, Metrics } from '../../main/themes';
 import Profile from '../../dashboard/containers/tabs/Profile';
 
@@ -84,13 +83,34 @@ export class ProfileItem extends React.Component<Props, State> {
         <MainArea>
 
             <Grid container style={{ height: '725px', backgroundColor: 'white', alignItems:'center', flexDirection:'column'}}>
-                <StyledImage
+            <Card style={{marginTop: Metrics.spacing.large}}>
+              <CardActionArea>
+                <CardMedia
                   component="img"
                   alt="Offer image card"
                   height="140"
                   image="https://blogs.ufv.ca/science/files/2018/01/job.opportunity.jpg"
                   title="Offer image"
                 />
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="h2">
+                  Preview
+                  </Typography>
+                  <Typography component="p">
+                    Ceci est le preview de la description
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+              <CardActions>
+                <Button size="small" color="primary">
+                  Postuler
+                </Button>
+                <Button size="small" color="primary">
+                  En savoir plus
+                </Button>
+              </CardActions>
+            </Card>
+
                 <React.Fragment>
                 <StyledTextField
                   autoComplete="username"
