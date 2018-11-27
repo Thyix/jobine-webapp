@@ -29,6 +29,9 @@ const isUpdated = createSelector(updatedSelector, (updated) => updated);
 const updateFailed = state => state.authentatication.failedUpdate;
 const hasFailedUpdate = createSelector(updateFailed, (failedUpdate) => failedUpdate);
 
+const allUsersSelector = state => state.authentication.profiles;
+const getAllUsers = createSelector(allUsersSelector, (profiles) => profiles);
+
 export { 
   getSession, 
   isAuthenticated,
@@ -38,6 +41,6 @@ export {
   hasFailedSignup,
   isUpdated,
   isUpdating,
-  hasFailedUpdate
-
+  hasFailedUpdate,
+  getAllUsers,
 };

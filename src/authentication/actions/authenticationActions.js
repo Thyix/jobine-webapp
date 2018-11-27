@@ -1,6 +1,6 @@
 // @flow
 
-import { AuthenticationLogin, AuthenticationSignup, DeleteProfile } from '../services/AuthenticationAPI';
+import { AuthenticationLogin, AuthenticationSignup, DeleteProfile, FetchProfiles } from '../services/AuthenticationAPI';
 import { UpdateUsers } from '../../users/services/UsersAPI'; 
 
 export const LOGIN_REQUEST = 'authentication/LOGIN_REQUEST';
@@ -12,6 +12,7 @@ export const SIGNUP_FAILURE = 'authentication/SIGNUP_FAILURE';
 export const UPDATE_REQUEST = 'authentication/UPDATE_REQUEST';
 export const UPDATE_SUCCESS = 'authentication/UPDATE_SUCCESS';
 export const UPDATE_FAILURE = 'authentication/UPDATE_FAILURE';
+export const FETCH_PROFILES = 'authentication/FETCH_PROFILES';
 
 export const DELETE = 'authentication/DELETE';
 export const LOGOUT = 'authentication/LOGOUT';
@@ -27,6 +28,15 @@ export function login(identifier: string, password: string) {
         dispatch({ type: LOGIN_FAILURE });
       }
   };
+}
+
+export function fetchProfiles() {
+  return async (dispatch: Function, getState: any) => {
+    const allUsers = await FetchProfiles();
+    if (allUsers) {
+      dispatch({ type: FETCH_PROFILES, profiles: allUsers });
+    }
+  }
 }
 
 export function signup(username: string, job: string, email: string, password: string) {

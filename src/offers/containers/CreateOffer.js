@@ -97,15 +97,15 @@ export class ProfileItem extends React.Component<Props, State> {
                   Preview
                   </Typography>
                   <Typography component="p">
-                    Ceci est le preview de la description
+                    Ceci est le preview de la description de l'offre
                   </Typography>
                 </CardContent>
               </CardActionArea>
               <CardActions>
-                <Button size="small" color="primary">
+                <Button size="small" color="secondary">
                   Postuler
                 </Button>
-                <Button size="small" color="primary">
+                <Button size="small" color="secondary">
                   En savoir plus
                 </Button>
               </CardActions>

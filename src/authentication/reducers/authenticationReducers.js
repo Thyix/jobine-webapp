@@ -15,6 +15,8 @@ import {
 
   DELETE,
 
+  FETCH_PROFILES,
+
   LOGOUT,
 } from '../actions/authenticationActions';
 
@@ -28,6 +30,8 @@ const initialState = {
   updating: false,
   updated: false,
   failedUpdate: false,
+
+  profiles: [],
 
   session: undefined,
   failed: false,
@@ -65,6 +69,9 @@ export default function reducer(state: any = initialState, action: any) {
     }
     case UPDATE_FAILURE: {
       return { ...state, updated: false, updating: false, failedUpdate: true };
+    }
+    case FETCH_PROFILES: {
+      return { ...state, profiles: action.profiles };
     }
     case DELETE: {
       return { ...state, authenticated: false, authenticating: false, session: null};
