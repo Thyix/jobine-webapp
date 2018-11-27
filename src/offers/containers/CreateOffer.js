@@ -25,14 +25,6 @@ const Container = styled(Grid)`
   }
 `;
 
-const StyledImage = styled(CardMedia)`
-width: 20% !important;
-height: 15% !important;
-align-items: center !important;
-margin-top: ${Metrics.spacing.large}px !important;
-margin-bottom: ${Metrics.spacing.large}px !important;
-`;
-
 const StyledTextField = styled(TextField)`
   width: ${300}px !important;
   margin-top: ${Metrics.spacing.small}px !important;
@@ -61,6 +53,11 @@ type Props = {
 }
 
 type State = {
+  titleOffer: string,
+  descriptionOffer: string,
+  domainOffer: string,
+  daysOffer: string,
+  imgOffer: string,
 }
 
 let mounted = false;
@@ -68,6 +65,11 @@ let mounted = false;
 export class ProfileItem extends React.Component<Props, State> {
 
   state = {
+    titleOffer: "Titre de l'offre",
+    descriptionOffer: "Description de tâche",
+    domainOffer: "Domaine associé",
+    daysOffer: "Durée de l'offre",
+    imgOffer: "https://www.dentistfriend.com//uploads/praxisimages/dental-jobs-opp.png"
   }
 
   componentDidMount() {
@@ -83,21 +85,21 @@ export class ProfileItem extends React.Component<Props, State> {
         <MainArea>
 
             <Grid container style={{ height: '725px', backgroundColor: 'white', alignItems:'center', flexDirection:'column'}}>
-            <Card style={{marginTop: Metrics.spacing.large}}>
+            <Card style={{marginTop: Metrics.spacing.large, marginBottom: Metrics.spacing.medium, maxWidth:'350px'}}>
               <CardActionArea>
                 <CardMedia
                   component="img"
                   alt="Offer image card"
                   height="140"
-                  image="https://blogs.ufv.ca/science/files/2018/01/job.opportunity.jpg"
+                  image={this.state.imgOffer}
                   title="Offer image"
                 />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="h2">
-                  Preview
+                  {this.state.titleOffer}
                   </Typography>
                   <Typography component="p">
-                    Ceci est le preview de la description de l'offre
+                  {this.state.descriptionOffer}
                   </Typography>
                 </CardContent>
               </CardActionArea>
@@ -116,45 +118,45 @@ export class ProfileItem extends React.Component<Props, State> {
                   autoComplete="username"
                   id="usernameField"
                   label={"Titre de l'offre"}
-                  onChange={(event) => mounted && this.setState({ nameUser: event.target.value })}
+                  onChange={(event) => mounted && this.setState({ titleOffer: event.target.value })}
                   type="text"
-                  value={this.state.nameUser}
+                  value={this.state.titleOffer}
                 />
 
                 <StyledTextField
                   id="emailField"
                   label={"Description de la tâche"}
-                  onChange={(event) => mounted && this.setState({ emailUser: event.target.value })}
+                  onChange={(event) => mounted && this.setState({ descriptionOffer: event.target.value })}
                   type="text"
                   autoComplete="email"
-                  value={this.state.emailUser}
+                  value={this.state.descriptionOffer}
                 />
 
                 <StyledTextField
                   id="descriptionField"
                   label={"Domaine associé"}
-                  onChange={(event) => mounted && this.setState({ descriptionUser: event.target.value })}
+                  onChange={(event) => mounted && this.setState({ domainOffer: event.target.value })}
                   type="text"
                   autoComplete="description"
-                  value={this.state.descriptionUser}
+                  value={this.state.domainOffer}
                 />
 
                 <StyledTextField
                   id="imgField"
                   label={'Durée du mandat'}
-                  onChange={(event) => mounted && this.setState({ imgUser: event.target.value })}
+                  onChange={(event) => mounted && this.setState({ daysOffer: event.target.value })}
                   autoComplete="imgLink"
                   type="text"
-                  value={this.state.imgUser}
+                  value={this.state.daysOffer}
                 />
 
                 <StyledTextField
                   autoComplete="jobField"
                   id="jobField"
                   label={"Image représentant le mandat"}
-                  onChange={(event) => mounted && this.setState({ jobUser: event.target.value })}
+                  onChange={(event) => mounted && this.setState({ imgOffer: event.target.value })}
                   type="text"
-                  value={this.state.jobUser}
+                  value={this.state.imgOffer}
                 />
               </React.Fragment>
 
