@@ -9,6 +9,7 @@ export async function AuthenticationLogin(identifier: string, password: string):
   await fetch("http://70.48.63.175:8080/JobineDB/webresources/entities.user")
     .then((resp) => resp.json()) // Transform the data into json
     .then(function(data) {
+      console.log(data);
       attempt = data.filter(d => d["emailUser"] === identifier && d["pwdUser"] === password);
   });
   attempt.length > 0 ? attempt = Profile.parse(attempt[0]) : attempt = null;
@@ -58,8 +59,14 @@ export async function AuthenticationSignup(username: string, job: string, email:
 }
 
 export async function DeleteProfile(profile: Profile) {
-  await fetch(`http://70.48.63.175:8080/JobineDB/webresources/entities.user/${profile.idUser}`)
-    .then((resp) => resp.json()) // Transform the data into json
-    .then(function(data) {
+  var request = new Request(`http://70.48.63.175:8080/JobineDB/webresources/entities.usertype/${profile.idUser}`, {
+    method: 'DELETE', 
+    mode: 'cors', 
+    headers: new Headers({
+      'Accept': 'application/json',
+      'Content-Type': 'application/json' 
+    })
   });
+  fetch(request, {
+  })
 }

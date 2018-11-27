@@ -1,6 +1,6 @@
 // @flow
 
-import { AuthenticationLogin, AuthenticationSignup } from '../services/AuthenticationAPI';
+import { AuthenticationLogin, AuthenticationSignup, DeleteProfile } from '../services/AuthenticationAPI';
 import { UpdateUsers } from '../../users/services/UsersAPI'; 
 
 export const LOGIN_REQUEST = 'authentication/LOGIN_REQUEST';
@@ -55,6 +55,8 @@ export function update(newProfile:Profile) {
 
 export function deleteProfile(user:Profile) {
   return async (dispatch: Function, getState: any) => {
+    console.log('account to destroy', user);
+    await DeleteProfile(user);
     dispatch({ type: DELETE });
   }
 }

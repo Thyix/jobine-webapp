@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators }  from 'redux';
 import { getSession, isUpdating } from '../../../authentication/selectors/authenticationSelectors';
 import Profile from '../../../authentication/domain/Profile';
-import { update } from '../../../authentication/actions/authenticationActions';
+import { update, deleteProfile } from '../../../authentication/actions/authenticationActions';
 import { Avatar } from '@material-ui/core';
 import { Medias, Metrics, Colors } from '../../../main/themes';
 
@@ -174,7 +174,7 @@ export class ProfileItem extends React.Component<Props, State> {
               <UpdateButton
                 style={{ backgroundColor: Colors.error, color: Colors.secondary }}
                 id="DeleteUser"
-                onClick={() => {}}
+                onClick={() => this.props.actions.deleteProfile(this.props.session)}
                 variant="contained"
               >
               {this.props.updating ? 
@@ -204,6 +204,7 @@ function mapDispatchToProps(dispatch: Function) {
   return {
     actions: bindActionCreators({
       update,
+      deleteProfile
     }, dispatch),
   };
 }
