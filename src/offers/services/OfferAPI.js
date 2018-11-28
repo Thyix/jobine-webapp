@@ -1,8 +1,6 @@
 // @flow
 
 import Offer from '../domain/Offer';
-import Profile from '../../authentication/domain/Profile';
-import moment from 'moment';
 
 export async function FetchOffers(): Promise<any> {
   let attempt
@@ -15,11 +13,14 @@ export async function FetchOffers(): Promise<any> {
   return attempt;
 }
 
-export async function CreateOffer(newOffer: Offer, creator: Profile): Promise<any> {
+export async function CreateOffer(newOffer: Offer): Promise<any> {
   let data = JSON.stringify({
     addressOffer: newOffer.addressOffer,
-    dateOffer: moment(),
-    idUser: creator.idUser,
+    dateOffer: newOffer.dateOffer,
+    daysOffer: newOffer.daysOffer,
+    descriptionOffer: newOffer.descriptionOffer,
+    domainOffer: newOffer.domainOffer,
+    idUser: newOffer.idUser,
     titleOffer: newOffer.titleOffer,
   });
   let request = new Request("http://70.48.63.175:8080/JobineDB/webresources/entities.offer", {

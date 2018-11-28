@@ -5,11 +5,12 @@ import React from 'react';
 import styled from 'styled-components';
 import { Grid, TextField, Button, CardMedia, Card, CardActionArea, CardActions, CardContent, Typography } from '@material-ui/core';
 import { connect } from 'react-redux';
+import moment from 'moment';
 import Offer from '../domain/Offer';
 import { bindActionCreators }  from 'redux';
-import { fetchMessages, createOffer } from '../actions/offersActions';
+import { createOffer } from '../actions/offersActions';
 import { Medias, Metrics } from '../../main/themes';
-import Profile from '../../dashboard/containers/tabs/Profile';
+import Profile from '../../authentication/domain/Profile';
 
 const Container = styled(Grid)`
   display: flex !important;
@@ -58,6 +59,7 @@ type State = {
   descriptionOffer: string,
   domainOffer: string,
   daysOffer: string,
+  addressOffer: string,
   imgOffer: string,
 }
 
@@ -70,6 +72,7 @@ export class ProfileItem extends React.Component<Props, State> {
     descriptionOffer: "",
     domainOffer: "",
     daysOffer: "",
+    addressOffer: "",
     imgOffer: "https://www.dentistfriend.com//uploads/praxisimages/dental-jobs-opp.png"
   }
 
@@ -157,6 +160,15 @@ export class ProfileItem extends React.Component<Props, State> {
                   autoComplete="jobField"
                   id="jobField"
                   label={"Image représentant le mandat"}
+                  onChange={(event) => mounted && this.setState({ addressOffer: event.target.value })}
+                  type="text"
+                  value={this.state.addressOffer}
+                />
+
+                <StyledTextField
+                  autoComplete="jobField"
+                  id="jobField"
+                  label={"Image représentant le mandat"}
                   onChange={(event) => mounted && this.setState({ imgOffer: event.target.value })}
                   type="text"
                   value={this.state.imgOffer}
@@ -166,7 +178,15 @@ export class ProfileItem extends React.Component<Props, State> {
               <UpdateButton
                 color="primary"
                 id="goToDomainButton"
-                onClick={() => this.props.actions.createOffer()}
+                onClick={() => this.props.actions.createOffer(Offer.parseNew(
+                  this.state.addressOffer,
+                  moment(),
+                  this.state.daysOffer, 
+                  this.state.descriptionOffer,
+                  this.state.domainOffer,
+                  this.props.session.idUser,
+                  this.state.titleOffer),
+                  )}
                 variant="contained"
               >
               Ajouter une offre
@@ -190,7 +210,6 @@ const mapStateToProps = (state: any) => {
 function mapDispatchToProps(dispatch: Function) {
   return {
     actions: bindActionCreators({
-      fetchMessages,
       createOffer,
     }, dispatch),
   };
