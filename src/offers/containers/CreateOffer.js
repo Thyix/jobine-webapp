@@ -153,7 +153,7 @@ export class ProfileItem extends React.Component<Props, State> {
                   label={'Durée du mandat'}
                   onChange={(event) => mounted && this.setState({ daysOffer: event.target.value })}
                   autoComplete="imgLink"
-                  type="text"
+                  type="number"
                   value={this.state.daysOffer}
                 />
 
@@ -182,9 +182,10 @@ export class ProfileItem extends React.Component<Props, State> {
                 onClick={() => this.props.actions.createOffer(Offer.parseNew(
                   this.state.addressOffer,
                   moment(),
-                  this.state.daysOffer, 
+                  parseInt(this.state.daysOffer), 
                   this.state.descriptionOffer,
                   this.state.domainOffer,
+                  this.state.imgOffer,
                   this.props.session.idUser,
                   this.state.titleOffer),
                   )}

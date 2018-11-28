@@ -20,7 +20,7 @@ export async function CreateOffer(newOffer: Offer): Promise<any> {
     daysOffer: newOffer.daysOffer,
     descriptionOffer: newOffer.descriptionOffer,
     domainOffer: newOffer.domainOffer,
-    idOffer: null,
+    imgOffer: newOffer.imgOffer,
     idUser: newOffer.idUser,
     titleOffer: newOffer.titleOffer,
   });

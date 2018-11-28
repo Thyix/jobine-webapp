@@ -6,6 +6,7 @@ const OfferRecord = Record({
   daysOffer: undefined,
   descriptionOffer: undefined,
   domainOffer: undefined,
+  imgOffer: undefined,
   idOffer: undefined,
   idUser: undefined,
   titleOffer: undefined,
@@ -18,8 +19,9 @@ class Offer extends OfferRecord {
   daysOffer: number;
   descriptionOffer: string;
   domainOffer: string;
-  idOffer: string;
-  idUser: string;
+  imgOffer: string;
+  idOffer: number;
+  idUser: number;
   titleOffer: string;
 }
 
@@ -30,19 +32,21 @@ Offer.parse = (plain: any): Offer => {
     daysOffer: plain["daysOffer"],
     descriptionOffer: plain["descriptionOffer"],
     domainOffer: plain["domainOffer"],
+    imgOffer: plain["imgOffer"],
     idOffer: plain["idOffer"],
     idUser: plain["idUser"],
     titleOffer: plain["titleOffer"],
   });
 };
 
-Offer.parseNew = (address: string, date: string, days: string, description: string, domain: string, idUser: string, title:string): Offer => {
+Offer.parseNew = (address: string, date: string, days: number, description: string, domain: string, imgOffer: string, idUser: string, title:string): Offer => {
   return new Offer({
     addressOffer: address,
     dateOffer: date,
     daysOffer: days,
     descriptionOffer: description,
     domainOffer: domain,
+    imgOffer: imgOffer,
     idUser: idUser,
     titleOffer: title,
   });
