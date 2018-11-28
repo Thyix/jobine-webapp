@@ -5,6 +5,7 @@ import { FetchOffers } from '../services/OfferAPI';
 export const FETCH_OFFERS_REQUEST = 'offers/FETCH_OFFERS_REQUEST';
 export const FETCH_OFFERS_SUCCESS = 'offers/FETCH_OFFERS_SUCCESS';
 export const FETCH_OFFERS_FAILURE = 'offers/FETCH_OFFERS_FAILURE';
+export const CREATE_OFFER = 'offers/CREATE_OFFER';
 
 
 export function fetchMessages() {
@@ -17,4 +18,8 @@ export function fetchMessages() {
         dispatch({ type: FETCH_OFFERS_FAILURE });
       }
   };
+}
+
+export function createOffer(newOffer: Offer) {
+
 }

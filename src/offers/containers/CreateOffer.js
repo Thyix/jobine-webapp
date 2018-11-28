@@ -5,8 +5,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { Grid, TextField, Button, CardMedia, Card, CardActionArea, CardActions, CardContent, Typography } from '@material-ui/core';
 import { connect } from 'react-redux';
+import Offer from '../domain/Offer';
 import { bindActionCreators }  from 'redux';
-import { fetchMessages } from '../actions/offersActions';
+import { fetchMessages, createOffer } from '../actions/offersActions';
 import { Medias, Metrics } from '../../main/themes';
 import Profile from '../../dashboard/containers/tabs/Profile';
 
@@ -65,10 +66,10 @@ let mounted = false;
 export class ProfileItem extends React.Component<Props, State> {
 
   state = {
-    titleOffer: "Titre de l'offre",
-    descriptionOffer: "Description de tâche",
-    domainOffer: "Domaine associé",
-    daysOffer: "Durée de l'offre",
+    titleOffer: "",
+    descriptionOffer: "",
+    domainOffer: "",
+    daysOffer: "",
     imgOffer: "https://www.dentistfriend.com//uploads/praxisimages/dental-jobs-opp.png"
   }
 
@@ -165,7 +166,7 @@ export class ProfileItem extends React.Component<Props, State> {
               <UpdateButton
                 color="primary"
                 id="goToDomainButton"
-                onClick={() => this.props.actions.fetchMessages()}
+                onClick={() => this.props.actions.createOffer()}
                 variant="contained"
               >
               Ajouter une offre
@@ -190,6 +191,7 @@ function mapDispatchToProps(dispatch: Function) {
   return {
     actions: bindActionCreators({
       fetchMessages,
+      createOffer,
     }, dispatch),
   };
 }
