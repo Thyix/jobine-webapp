@@ -5,4 +5,6 @@ export default {
   OnGoingCall: '/call',
   Contact: '/contact',
   Search: '/search',
+  CreateOffer: '/createOffer',
+  Profile: '/profile',
 };

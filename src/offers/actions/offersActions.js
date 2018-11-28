@@ -23,5 +23,6 @@ export function fetchOffers() {
 export function createOffer(newOffer: Offer) {
   return async (dispatch: Function, getState: any) => {
     const offer = await CreateOffer(newOffer);
+    dispatch({ type: CREATE_OFFER, offers: offer })
   }
 }

@@ -69,12 +69,12 @@ let mounted = false;
 export class ProfileItem extends React.Component<Props, State> {
 
   state = {
-    titleOffer: "",
-    descriptionOffer: "",
+    titleOffer: "Preview",
+    descriptionOffer: "Veuillez remplir les informations ci-dessous",
     domainOffer: "",
     daysOffer: "",
     addressOffer: "",
-    imgOffer: "https://www.dentistfriend.com//uploads/praxisimages/dental-jobs-opp.png"
+    imgOffer: "http://polishlinux.org/wp-content/uploads/2017/11/Preview-2-icon.png"
   }
 
   componentDidMount() {
@@ -85,17 +85,18 @@ export class ProfileItem extends React.Component<Props, State> {
     mounted = false;
   }
   render() {
+    console.log('render');
     return (
       <Container>
         <MainArea>
 
-            <Grid container style={{ height: '725px', backgroundColor: 'white', alignItems:'center', flexDirection:'column'}}>
-            <Card style={{marginTop: Metrics.spacing.large, maxWidth:'350px'}}>
+            <Grid container style={{ height: window.screen.height - 295, backgroundColor: 'white', alignItems:'center', flexDirection:'column'}}>
+            <Card style={{marginTop: Metrics.spacing.huge, maxWidth: '300px'}}>
               <CardActionArea>
                 <CardMedia
                   component="img"
                   alt="Offer image card"
-                  height="140"
+                  style={{height: 125, width: 150, marginLeft: Metrics.spacing.huge - 5}}
                   image={this.state.imgOffer}
                   title="Offer image"
                 />
@@ -178,6 +179,7 @@ export class ProfileItem extends React.Component<Props, State> {
 
               <UpdateButton
                 color="primary"
+                disabled={this.state.addressOffer === ''}
                 id="goToDomainButton"
                 onClick={() => this.props.actions.createOffer(Offer.parseNew(
                   this.state.addressOffer,

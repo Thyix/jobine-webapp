@@ -30,7 +30,7 @@ const StyledAvatar = styled(Avatar)`
 width: 100px !important;
 height: 100px !important;
 align-items: center !important;
-margin-top: ${Metrics.spacing.large}px !important;
+margin-top: ${Metrics.spacing.huge}px !important;
 margin-bottom: ${Metrics.spacing.large}px !important;
 `;
 
@@ -99,7 +99,7 @@ export class ProfileItem extends React.Component<Props, State> {
       <Container>
         <MainArea>
 
-            <Grid container style={{ height: '725px', backgroundColor: 'white', alignItems:'center', flexDirection:'column'}}>
+            <Grid container style={{ height: window.screen.height - 295, backgroundColor: 'white', alignItems:'center', flexDirection:'column'}}>
                 <StyledAvatar src={this.props.session.imgUser ? this.props.session.imgUser : 'https://krourke.org/img/md_avatar_stormtrooper.svg'}/>
                 <React.Fragment>
                 <StyledTextField

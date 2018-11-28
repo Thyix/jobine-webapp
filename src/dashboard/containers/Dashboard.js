@@ -8,9 +8,11 @@ import Grid from '@material-ui/core/Grid';
 import NavigationBar from '../components/NavigationBar';
 import Activities from './Activities';
 import Scenes from '../../main/navigation/Scenes';
+import CreateOffer from '../../offers/containers/CreateOffer';
 import SearchResults from '../../search/containers/SearchResults';
 import LoginScene from '../../authentication/containers/LoginScene';
-import { isAuthenticated, getSession } from  '../../authentication/selectors/authenticationSelectors'; 
+import Profile from './tabs/Profile';
+import { isAuthenticated } from  '../../authentication/selectors/authenticationSelectors'; 
 import Sidebar from './Sidebar';
 import { Colors } from '../../main/themes';
 
@@ -67,6 +69,8 @@ export const Dashboard = ({ authenticated, session }: Props) => {
               <Switch>
                 <Route component={Activities} exact path={Scenes.Dashboard} />
                 <Route component={SearchResults} exact path={Scenes.Search} />
+                <Route component={CreateOffer} exact path={Scenes.CreateOffer}/>
+                <Route component={Profile} exact path={Scenes.Profile}/>
                 <Route component={Activities} />
               </Switch>
             </StyledContent>

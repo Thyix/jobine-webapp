@@ -3,17 +3,22 @@
 import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router'; 
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography/Typography';
 import Popover from '@material-ui/core/Popover';
 import { Avatar, Button } from '@material-ui/core';
 import LogoutButton from '../../authentication/containers/LogoutButton';
+import Scenes from '../../main/navigation/Scenes';
 import { Metrics } from '../../main/themes';
 import { getSession } from '../../authentication/selectors/authenticationSelectors';
 
 type Props = {
   session: Profile,
   status: string,
+  history: {
+    push: Function,
+  }
 };
 
 type State = {
@@ -75,11 +80,11 @@ class NavigationBarUser extends React.Component<Props, State> {
             }}
           >
             <div style={{ padding: Metrics.spacing.medium, flexDirection:'row' }}>
-              <Button>
+              <Button onClick={() => this.props.history.push(Scenes.Profile)}>
                 Aller au profil
               </Button> <br/>
-              <Button>
-                Préférences
+              <Button onClick={() => this.props.history.push(Scenes.CreateOffer)}>
+                Créer une offre
               </Button> <br/>
               <LogoutButton />
             </div>
@@ -97,4 +102,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(NavigationBarUser);
+export default withRouter(connect(mapStateToProps)(NavigationBarUser));
