@@ -43,7 +43,6 @@ Offer.parseNew = (address: string, date: string, days: string, description: stri
     daysOffer: days,
     descriptionOffer: description,
     domainOffer: domain,
-    idOffer: Math.random(),
     idUser: idUser,
     titleOffer: title,
   });

@@ -9,7 +9,7 @@ export async function FetchOffers(): Promise<any> {
     .then(function(data) {
       attempt = data;
   });
-  attempt.length > 0 ? attempt = Offer.parse(attempt[0]) : attempt = null;
+  attempt.length > 0 ? attempt.map(d => Offer.parse(d)) : attempt = null;
   return attempt;
 }
 
@@ -20,9 +20,11 @@ export async function CreateOffer(newOffer: Offer): Promise<any> {
     daysOffer: newOffer.daysOffer,
     descriptionOffer: newOffer.descriptionOffer,
     domainOffer: newOffer.domainOffer,
+    idOffer: null,
     idUser: newOffer.idUser,
     titleOffer: newOffer.titleOffer,
   });
+  console.log('data', data);
   let request = new Request("http://70.48.63.175:8080/JobineDB/webresources/entities.offer", {
     method: 'POST', 
     mode: 'cors', 

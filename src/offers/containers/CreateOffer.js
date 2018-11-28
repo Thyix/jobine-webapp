@@ -6,8 +6,9 @@ import styled from 'styled-components';
 import { Grid, TextField, Button, CardMedia, Card, CardActionArea, CardActions, CardContent, Typography } from '@material-ui/core';
 import { connect } from 'react-redux';
 import moment from 'moment';
-import Offer from '../domain/Offer';
 import { bindActionCreators }  from 'redux';
+import Offer from '../domain/Offer';
+import { getSession } from '../../authentication/selectors/authenticationSelectors';
 import { createOffer } from '../actions/offersActions';
 import { Medias, Metrics } from '../../main/themes';
 import Profile from '../../authentication/domain/Profile';
@@ -89,7 +90,7 @@ export class ProfileItem extends React.Component<Props, State> {
         <MainArea>
 
             <Grid container style={{ height: '725px', backgroundColor: 'white', alignItems:'center', flexDirection:'column'}}>
-            <Card style={{marginTop: Metrics.spacing.large, marginBottom: Metrics.spacing.medium, maxWidth:'350px'}}>
+            <Card style={{marginTop: Metrics.spacing.large, maxWidth:'350px'}}>
               <CardActionArea>
                 <CardMedia
                   component="img"
@@ -157,9 +158,9 @@ export class ProfileItem extends React.Component<Props, State> {
                 />
 
                 <StyledTextField
-                  autoComplete="jobField"
-                  id="jobField"
-                  label={"Image représentant le mandat"}
+                  autoComplete="addressField"
+                  id="addressField"
+                  label={"Adresse de l'entreprise"}
                   onChange={(event) => mounted && this.setState({ addressOffer: event.target.value })}
                   type="text"
                   value={this.state.addressOffer}
@@ -203,7 +204,7 @@ export class ProfileItem extends React.Component<Props, State> {
 
 const mapStateToProps = (state: any) => {
   return {
-    session: Profile,
+    session: getSession(state),
   };
 };
 

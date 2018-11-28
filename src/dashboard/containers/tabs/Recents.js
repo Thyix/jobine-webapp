@@ -55,7 +55,6 @@ export class Recents extends React.Component<Props, State> {
   state = {}
   
   componentWillMount() {
-    console.log('getting into component will mount');
     this.props.actions.fetchOffers();
   }
 
