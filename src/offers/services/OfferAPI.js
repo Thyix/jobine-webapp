@@ -24,7 +24,6 @@ export async function CreateOffer(newOffer: Offer): Promise<any> {
     idUser: newOffer.idUser,
     titleOffer: newOffer.titleOffer,
   });
-  console.log('data', data);
   let request = new Request("http://70.48.63.175:8080/JobineDB/webresources/entities.offer", {
     method: 'POST', 
     mode: 'cors', 

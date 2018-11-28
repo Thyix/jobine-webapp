@@ -59,7 +59,6 @@ export class Recents extends React.Component<Props, State> {
   }
 
   render() {
-    console.log('offers: ', this.props.offers);
     return (
       <Container>
         <MainArea>

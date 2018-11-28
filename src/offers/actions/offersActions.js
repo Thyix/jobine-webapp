@@ -12,7 +12,6 @@ export function fetchOffers() {
   return async (dispatch: Function, getState: any) => {
       dispatch({ type: FETCH_OFFERS_REQUEST });
       const newOffers = await FetchOffers();
-      console.log('here are the offers', newOffers);
       if (newOffers) {
         dispatch({ type: FETCH_OFFERS_SUCCESS, offers: newOffers });
       } else {
@@ -22,9 +21,7 @@ export function fetchOffers() {
 }
 
 export function createOffer(newOffer: Offer) {
-  console.log('getting into action', newOffer);
   return async (dispatch: Function, getState: any) => {
     const offer = await CreateOffer(newOffer);
-    console.log('new offer', offer);
   }
 }
