@@ -4,9 +4,10 @@ import React from 'react';
 import styled from 'styled-components';
 import { withNamespaces } from 'react-i18next';
 import Grid from '@material-ui/core/Grid';
+import { Typography } from '@material-ui/core';
 import TitledDivider from '../../main/components/TitledDivider';
 import { Metrics } from '../../main/themes';
-import { Typography } from '@material-ui/core';
+import OfferListItem from '../../offers/components/OfferListItem';
 
 const StyledTitledDivider = styled(TitledDivider)`
   margin-top: ${Metrics.spacing.medium}px;
@@ -14,7 +15,7 @@ const StyledTitledDivider = styled(TitledDivider)`
 `;
 
 type Props = {
-  activities: Offer,
+  activities: any,
   tab: string;
 }
 export const ActivityListSection = ({ activities, tab }: Props) => {
@@ -26,9 +27,11 @@ export const ActivityListSection = ({ activities, tab }: Props) => {
       {activities.length > 0 && activities.map(a =>
             <div key={a.idOffer}>
               {tab === 'recents' ? 
-              <Typography key={a.idOffer} style={{ marginLeft: '60px', alignSelf:'center', justifyContent:'space-between', color: 'red' }}>{a.titleOffer}</Typography>
+                <div style={{ marginLeft: '60px', alignSelf:'center', justifyContent:'space-between', color: 'blue' }}>
+                  <OfferListItem offer={a}/>
+                </div>
               :
-              <Typography key={a.idOffer} style={{ marginLeft: '60px', alignSelf:'center', justifyContent:'space-between', color: 'blue' }}>{a.titleOffer}</Typography>
+                <Typography key={a.idOffer} style={{ marginLeft: '60px', alignSelf:'center', justifyContent:'space-between', color: 'blue' }}>{a.titleOffer}</Typography>
               }
             </div>
       )}
