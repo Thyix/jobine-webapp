@@ -100,7 +100,7 @@ export class OfferListItem extends React.Component<Props, State> {
                   <Typography style={{marginLeft: Metrics.spacing.small}}>{this.state.domainOffer || 'Aucun domaine'}</Typography>
 
                   <Typography component="b" style={{color:'black'}}>Date de parution: </Typography>
-                  <Typography style={{marginLeft: Metrics.spacing.small}}>{moment(Date.parse(this.state.dateOffer.replace("[UTC]", ""))).format('DD/MM/YYYY')}</Typography>
+                  <Typography style={{marginLeft: Metrics.spacing.small}}>{moment(Date.parse(this.state.dateOffer.replace("[UTC]", ""))).format('DD/MM/YYYY') || 'Inconnu'}</Typography>
 
                 </CardContent>
               </CardActionArea>
