@@ -6,7 +6,7 @@ import { Grid, TextField, Button, CardMedia, Card, CardActionArea, CardActions, 
 import { connect } from 'react-redux';
 import { bindActionCreators }  from 'redux';
 import { getSession } from '../../authentication/selectors/authenticationSelectors';
-import { Medias, Metrics } from '../../main/themes';
+import { Medias, Metrics, Colors } from '../../main/themes';
 import Profile from '../../authentication/domain/Profile';
 import Offer from '../domain/Offer';
 
@@ -69,11 +69,11 @@ export class OfferListItem extends React.Component<Props, State> {
         <MainArea>
 
             <Card style={{marginTop: Metrics.spacing.large, width: '300px'}}>
-              <CardActionArea>
+              <CardActionArea style={{backgroundColor: Colors.backgroundLight}}>
                 <CardMedia
                   component="img"
                   alt="Offer image card"
-                  style={{ height: 125, width: 150, marginLeft: 75 }}
+                  style={{ height: 125, width: 150, marginLeft: 75, marginTop: Metrics.spacing.small }}
                   image={this.state.imgOffer || 'http://polishlinux.org/wp-content/uploads/2017/11/Preview-2-icon.png'}
                   title="Offer image"
                 />
@@ -84,11 +84,11 @@ export class OfferListItem extends React.Component<Props, State> {
                   </Typography>
                   </div>
                   <Typography component="p">
-                  {this.state.descriptionOffer}
+                  {this.state.descriptionOffer || 'Aucune description'}
                   </Typography>
                 </CardContent>
               </CardActionArea>
-              <CardActions>
+              <CardActions style={{ backgroundColor: Colors.highlightedBackground }}>
                 <Button size="small" color="secondary">
                   Postuler
                 </Button>

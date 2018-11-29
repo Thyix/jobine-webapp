@@ -27,7 +27,7 @@ export const ActivityListSection = ({ activities, tab }: Props) => {
       {activities.length > 0 && activities.map(a =>
             <div key={a.idOffer}>
               {tab === 'recents' ? 
-                <div style={{ marginLeft: '60px', alignSelf:'center', justifyContent:'space-between', color: 'blue' }}>
+                <div style={{ marginLeft: '70px', alignSelf:'center', justifyContent:'space-between', color: 'blue' }}>
                   <OfferListItem offer={a}/>
                 </div>
               :

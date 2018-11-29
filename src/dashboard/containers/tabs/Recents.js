@@ -64,7 +64,7 @@ export class Recents extends React.Component<Props, State> {
         <MainArea>
 
           <CallHistoryContainer>
-            <Grid container style={{ backgroundColor: 'white', height: '100%' }}>
+            <Grid container style={{ backgroundColor: 'white', height: '100%', paddingBottom:'50px' }}>
               <ActivityList dailyActivities={this.props.offers} tab={'recents'}/>
             </Grid>
           </CallHistoryContainer>
