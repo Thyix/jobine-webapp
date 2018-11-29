@@ -6,10 +6,12 @@ import { Grid, Button, CardMedia, Card, CardActionArea, CardActions, CardContent
 import { connect } from 'react-redux';
 import moment from 'moment';
 import { bindActionCreators }  from 'redux';
+import { fetchOfferUser } from '../actions/offersActions';
 import { getSession } from '../../authentication/selectors/authenticationSelectors';
 import { Medias, Metrics, Colors } from '../../main/themes';
 import Profile from '../../authentication/domain/Profile';
 import Offer from '../domain/Offer';
+import { getUserOffer } from '../selectors/offerSelector';
 
 const Container = styled(Grid)`
   display: flex !important;
@@ -40,7 +42,8 @@ type Props = {
   session: Profile,
   actions: {
   },
-  offer: Offer
+  offer: Offer,
+  userOffer: Profile,
 }
 
 type State = {
@@ -51,6 +54,7 @@ type State = {
   daysOffer: string,
   addressOffer: string,
   imgOffer: string,
+  userOffer: string,
 }
 
 
@@ -63,10 +67,15 @@ export class OfferListItem extends React.Component<Props, State> {
     dateOffer: this.props.offer.dateOffer,
     daysOffer: this.props.offer.daysOffer,
     addressOffer: this.props.offer.addressOffer,
-    imgOffer: this.props.offer.imgOffer
+    imgOffer: this.props.offer.imgOffer,
+    userOffer: this.props.userOffer,
   }
 
+  componentWillMount() {
+    this.props.actions.fetchOfferUser(this.props.offer.idUser);
+  }
   render() {
+    console.log(this.props.userOffer);
     return (
       <Container>
         <MainArea>
@@ -102,6 +111,9 @@ export class OfferListItem extends React.Component<Props, State> {
                   <Typography component="b" style={{color:'black'}}>Date de parution: </Typography>
                   <Typography style={{marginLeft: Metrics.spacing.small}}>{moment(Date.parse(this.state.dateOffer.replace("[UTC]", ""))).format('DD/MM/YYYY') || 'Inconnu'}</Typography>
 
+                  <Typography component="b" style={{color:'black'}}>Publié par: </Typography>
+                  <Typography style={{marginLeft: Metrics.spacing.small}}>{this.props.userOffer ? this.props.userOffer[0].nameUser : ''}</Typography>
+
                 </CardContent>
               </CardActionArea>
               <CardActions style={{ backgroundColor: Colors.highlightedBackground }}>
@@ -124,12 +136,14 @@ export class OfferListItem extends React.Component<Props, State> {
 const mapStateToProps = (state: any) => {
   return {
     session: getSession(state),
+    userOffer: getUserOffer(state),
   };
 };
 
 function mapDispatchToProps(dispatch: Function) {
   return {
     actions: bindActionCreators({
+      fetchOfferUser
     }, dispatch),
   };
 }
