@@ -91,12 +91,12 @@ export class ProfileItem extends React.Component<Props, State> {
         <MainArea>
 
             <Grid container style={{ height: window.screen.height - 295, backgroundColor: 'white', alignItems:'center', flexDirection:'column'}}>
-            <Card style={{marginTop: Metrics.spacing.huge, maxWidth: '300px'}}>
+            <Card style={{marginTop: Metrics.spacing.huge, width: '300px'}}>
               <CardActionArea>
                 <CardMedia
                   component="img"
                   alt="Offer image card"
-                  style={{ height: 125, width: 150, marginLeft: 55 }}
+                  style={{ height: 125, width: 150, marginLeft: 75 }}
                   image={this.state.imgOffer}
                   title="Offer image"
                 />

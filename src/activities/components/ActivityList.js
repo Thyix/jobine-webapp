@@ -6,14 +6,15 @@ import Offer from '../../offers/domain/Offer';
 
 type Props = {
   dailyActivities: Offer[],
+  tab: string
 };
 
-const ActivityList = ({ dailyActivities }: Props) => {
-  console.log('activity', dailyActivities);
+const ActivityList = ({ dailyActivities, tab }: Props) => {
   return (
     <React.Fragment>
           <ActivityListSection
             activities={dailyActivities}
+            tab={tab}
           />
     </React.Fragment>
   );

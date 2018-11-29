@@ -15,16 +15,17 @@ const StyledTitledDivider = styled(TitledDivider)`
 
 type Props = {
   activities: Offer,
+  tab: string;
 }
-export const ActivityListSection = ({ activities }: Props) => {
+export const ActivityListSection = ({ activities, tab }: Props) => {
   return (
     <React.Fragment>
-      <Grid item xs={12} style={{ marginLeft:'15px', marginRight:'15px' }}>
+      <Grid item xs={12} style={{  marginLeft:'15px', marginRight:'50px' }}>
         <StyledTitledDivider id="sectionTitle" title={"Fil d'actualité"} />
       </Grid>
       {activities.length > 0 && activities.map(a =>
         <div key={a.idOffer}>
-          <Typography style={{ marginLeft: '25px' }}>{a.titleOffer}</Typography><br/>
+          <Typography key={a.idOffer} style={{ marginLeft: '60px', alignSelf:'center', justifyContent:'space-between' }}>{a.titleOffer}</Typography><br/>
         </div>
       )}
     </React.Fragment>
