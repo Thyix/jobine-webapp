@@ -6,8 +6,6 @@ import { Tabs, Tab } from '@material-ui/core';
 import { Colors } from '../../main/themes';
 import Recents from './tabs/Recents';
 import Answers from './tabs/Answers';
-import ProfileItem from './tabs/Profile';
-import CreateOffer from '../../offers/containers/CreateOffer';
 
 type Props = {};
 

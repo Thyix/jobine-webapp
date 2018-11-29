@@ -64,7 +64,7 @@ export class Answers extends React.Component<Props, State> {
 
           <CallHistoryContainer>
             <Grid container style={{ backgroundColor: 'white', height: '100%' }}>
-              <ActivityList dailyActivities={this.props.offers}/>
+              <ActivityList dailyActivities={this.props.offers} tab={'answers'}/>
             </Grid>
           </CallHistoryContainer>
 

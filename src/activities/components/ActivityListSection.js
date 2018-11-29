@@ -21,12 +21,16 @@ export const ActivityListSection = ({ activities, tab }: Props) => {
   return (
     <React.Fragment>
       <Grid item xs={12} style={{  marginLeft:'15px', marginRight:'50px' }}>
-        <StyledTitledDivider id="sectionTitle" title={"Fil d'actualité"} />
+        <StyledTitledDivider id="sectionTitle" title={tab === 'recents' ? "Fil d'actualité" : "Fil des messages"} />
       </Grid>
       {activities.length > 0 && activities.map(a =>
-        <div key={a.idOffer}>
-          <Typography key={a.idOffer} style={{ marginLeft: '60px', alignSelf:'center', justifyContent:'space-between' }}>{a.titleOffer}</Typography><br/>
-        </div>
+            <div key={a.idOffer}>
+              {tab === 'recents' ? 
+              <Typography key={a.idOffer} style={{ marginLeft: '60px', alignSelf:'center', justifyContent:'space-between', color: 'red' }}>{a.titleOffer}</Typography>
+              :
+              <Typography key={a.idOffer} style={{ marginLeft: '60px', alignSelf:'center', justifyContent:'space-between', color: 'blue' }}>{a.titleOffer}</Typography>
+              }
+            </div>
       )}
     </React.Fragment>
   );
