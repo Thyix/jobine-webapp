@@ -13,13 +13,9 @@ const ActivityList = ({ dailyActivities }: Props) => {
   console.log('activity', dailyActivities);
   return (
     <React.Fragment>
-      {Object.keys(dailyActivities)
-        .map((idOffer: string) => 
           <ActivityListSection
-            key={idOffer}
             activities={dailyActivities}
           />
-        )}
     </React.Fragment>
   );
 };
