@@ -96,7 +96,7 @@ export class ProfileItem extends React.Component<Props, State> {
                 <CardMedia
                   component="img"
                   alt="Offer image card"
-                  style={{height: 125, width: 150, marginLeft: Metrics.spacing.huge - 5}}
+                  style={{ height: 125, width: 150, marginLeft: 55 }}
                   image={this.state.imgOffer}
                   title="Offer image"
                 />
