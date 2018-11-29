@@ -3,16 +3,20 @@
 import React from 'react';
 import styled from 'styled-components';
 import Grid from '@material-ui/core/Grid';
-import ActivityList from '../../../activities/components/ActivityList';
 import { Medias } from '../../../main/themes';
-import SendMessage from '../../../offers/containers/SendMessage';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { fetchOffers } from '../../../offers/actions/offersActions';
+import { getOffer } from '../../../offers/selectors/offerSelector';
+import Offer from '../../../offers/domain/Offer';
+import ActivityList from '../../../activities/components/ActivityList';
 
 const Container = styled(Grid)`
   display: flex !important;
   width: 100% !important;
-  height: 100% !important;
   flex-grow: 1 !important;
   align-self: stretch !important;
+
   ${Medias.xs} {
     flex-direction: column-reverse !important;
   }
@@ -28,16 +32,19 @@ const MainArea = styled.div`
   align-self: stretch !important;
   flex-direction: column !important;
   flex-grow: 1 !important;
-  height: 100%;
 `;
 
-const ChatContentContainer = styled.div`
+const CallHistoryContainer = styled.div`
   flex-grow: 1 !important;
   max-height: 100% !important;
   overflow-y: scroll !important;
 `;
 
 type Props = {
+  actions: {
+    fetchOffers: () => Promise<void>,
+  },
+  offers: Offer[],
 }
 
 type State = {}
@@ -45,18 +52,21 @@ type State = {}
 export class Answers extends React.Component<Props, State> {
 
   state = {}
+  
+  componentWillMount() {
+    this.props.actions.fetchOffers();
+  }
+
   render() {
-    
     return (
       <Container>
         <MainArea>
 
-          <ChatContentContainer>
-            <Grid container style={{backgroundColor: 'white'}}>
-            <ActivityList dailyActivities={'Réponsessssssss'}/>
-            <SendMessage />
+          <CallHistoryContainer>
+            <Grid container style={{ backgroundColor: 'white', height: '100%' }}>
+              <ActivityList dailyActivities={this.props.offers}/>
             </Grid>
-          </ChatContentContainer>
+          </CallHistoryContainer>
 
         </MainArea>
       </Container>
@@ -64,4 +74,18 @@ export class Answers extends React.Component<Props, State> {
   }
 
 }
-export default Answers;
+
+function mapStateToProps(state) {
+  return {
+    offers: getOffer(state),
+  };
+}
+
+function mapDispatchToProps(dispatch: Function) {
+  return {
+    actions: bindActionCreators({
+      fetchOffers
+    }, dispatch),
+  };
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Answers);

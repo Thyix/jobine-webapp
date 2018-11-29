@@ -2,7 +2,6 @@
 
 import React from 'react';
 import ActivityListSection from './ActivityListSection';
-import moment from 'moment';
 import Offer from '../../offers/domain/Offer';
 
 type Props = {

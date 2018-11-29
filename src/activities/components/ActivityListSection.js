@@ -17,14 +17,15 @@ type Props = {
   activities: Offer,
 }
 export const ActivityListSection = ({ activities }: Props) => {
-  console.log('received activities', activities);
   return (
     <React.Fragment>
       <Grid item xs={12} style={{ marginLeft:'15px', marginRight:'15px' }}>
-        <StyledTitledDivider id="sectionTitle" title={'this is my activity section'} />
+        <StyledTitledDivider id="sectionTitle" title={"Fil d'actualité"} />
       </Grid>
-      {activities.map(a => 
-        <Typography key={a.idOffer} style={{ marginLeft: '25px', flexDirection:'column' }}>{a.titleOffer}</Typography>
+      {activities.length > 0 && activities.map(a =>
+        <div key={a.idOffer}>
+          <Typography style={{ marginLeft: '25px' }}>{a.titleOffer}</Typography><br/>
+        </div>
       )}
     </React.Fragment>
   );
