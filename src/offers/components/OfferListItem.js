@@ -55,12 +55,6 @@ type State = {
   user: Profile,
 }
 
-/*<Typography component="b" style={{color:'black'}}>Publié par: </Typography>
-<div style={{display:'flex', justifyContent:'space-between'}}>
-<Avatar src={userOffer ? userOffer.imgUser : ''}/>
-<Typography component="p"  style={{ marginTop:10, marginLeft: 20, fontSize: 15}}>{userOffer ? userOffer[0].nameUser : ''}</Typography>
-</div>*/
-
 export class OfferListItem extends React.Component<Props, State> {
   state = {
     titleOffer: this.props.offer.titleOffer,
