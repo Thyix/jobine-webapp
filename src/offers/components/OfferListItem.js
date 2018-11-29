@@ -2,13 +2,13 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import { Grid, Button, CardMedia, Card, CardActionArea, CardActions, CardContent, Typography } from '@material-ui/core';
+import { Grid, Button, CardMedia, Card, CardActionArea, CardActions, CardContent, Typography, Avatar } from '@material-ui/core';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import { bindActionCreators }  from 'redux';
 import { fetchOfferUser } from '../actions/offersActions';
 import { getSession } from '../../authentication/selectors/authenticationSelectors';
-import { Medias, Metrics, Colors } from '../../main/themes';
+import { Medias, Metrics, Colors, Fonts } from '../../main/themes';
 import Profile from '../../authentication/domain/Profile';
 import Offer from '../domain/Offer';
 import { getUserOffer } from '../selectors/offerSelector';
@@ -109,10 +109,13 @@ export class OfferListItem extends React.Component<Props, State> {
                   <Typography style={{marginLeft: Metrics.spacing.small}}>{this.state.domainOffer || 'Aucun domaine'}</Typography>
 
                   <Typography component="b" style={{color:'black'}}>Date de parution: </Typography>
-                  <Typography style={{marginLeft: Metrics.spacing.small}}>{moment(Date.parse(this.state.dateOffer.replace("[UTC]", ""))).format('DD/MM/YYYY') || 'Inconnu'}</Typography>
+                  <Typography style={{marginLeft: Metrics.spacing.small}}>{this.state.dateOffer ? moment(Date.parse(this.state.dateOffer.replace("[UTC]", ""))).format('DD/MM/YYYY') : ''}</Typography>
 
                   <Typography component="b" style={{color:'black'}}>Publié par: </Typography>
-                  <Typography style={{marginLeft: Metrics.spacing.small}}>{this.props.userOffer ? this.props.userOffer[0].nameUser : ''}</Typography>
+                  <div style={{display:'flex', justifyContent:'space-between'}}>
+                  <Avatar src={this.props.userOffer ? this.props.userOffer[0].imgUser : ''}/>
+                  <Typography component="p"  style={{ marginTop:10, marginLeft: 20, fontSize: 15}}>{this.props.userOffer ? this.props.userOffer[0].nameUser : ''}</Typography>
+                  </div>
 
                 </CardContent>
               </CardActionArea>
