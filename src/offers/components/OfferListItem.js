@@ -2,8 +2,9 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import { Grid, TextField, Button, CardMedia, Card, CardActionArea, CardActions, CardContent, Typography } from '@material-ui/core';
+import { Grid, Button, CardMedia, Card, CardActionArea, CardActions, CardContent, Typography } from '@material-ui/core';
 import { connect } from 'react-redux';
+import moment from 'moment';
 import { bindActionCreators }  from 'redux';
 import { getSession } from '../../authentication/selectors/authenticationSelectors';
 import { Medias, Metrics, Colors } from '../../main/themes';
@@ -46,6 +47,7 @@ type State = {
   titleOffer: string,
   descriptionOffer: string,
   domainOffer: string,
+  dateOffer: string,
   daysOffer: string,
   addressOffer: string,
   imgOffer: string,
@@ -58,12 +60,14 @@ export class OfferListItem extends React.Component<Props, State> {
     titleOffer: this.props.offer.titleOffer,
     descriptionOffer: this.props.offer.descriptionOffer,
     domainOffer: this.props.offer.domainOffer,
+    dateOffer: this.props.offer.dateOffer,
     daysOffer: this.props.offer.daysOffer,
     addressOffer: this.props.offer.addressOffer,
     imgOffer: this.props.offer.imgOffer
   }
 
   render() {
+    console.log(this.state.dateOffer);
     return (
       <Container>
         <MainArea>
@@ -83,9 +87,22 @@ export class OfferListItem extends React.Component<Props, State> {
                   {this.state.titleOffer}
                   </Typography>
                   </div>
-                  <Typography component="p">
+                  <Typography component="p" style={{marginBottom: Metrics.spacing.small}}>
                   {this.state.descriptionOffer || 'Aucune description'}
                   </Typography>
+
+                  <Typography component="b" style={{color:'black'}}>Emplacement: </Typography>
+                  <Typography style={{marginLeft: Metrics.spacing.small}}>{this.state.addressOffer}</Typography>
+
+                  <Typography component="b" style={{color:'black'}}>Durée de l'offre: </Typography>
+                  <Typography style={{marginLeft: Metrics.spacing.small}}>{this.state.daysOffer} jours</Typography>
+
+                  <Typography component="b" style={{color:'black'}}>Domaine d'activité: </Typography>
+                  <Typography style={{marginLeft: Metrics.spacing.small}}>{this.state.domainOffer || 'Aucun domaine'}</Typography>
+
+                  <Typography component="b" style={{color:'black'}}>Date de parution: </Typography>
+                  <Typography style={{marginLeft: Metrics.spacing.small}}>{moment(Date(this.state.dateOffer)).format('DD/MM/YYYY')}</Typography>
+
                 </CardContent>
               </CardActionArea>
               <CardActions style={{ backgroundColor: Colors.highlightedBackground }}>
