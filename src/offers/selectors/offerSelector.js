@@ -11,8 +11,8 @@ const isFetched = createSelector(fetchedSelector, (fetched) => fetched);
 const fetchingSelector = state => state.offers.fetching;
 const isFetching = createSelector(fetchingSelector, (fetching) => fetching);
 
-const userOfferSelector = state => state.offers.userOffer;
-const getUserOffer= createSelector(userOfferSelector, (userOffer) => userOffer);
+const userOfferSelector = state => state.offers.offerUser;
+const getUserOffer= createSelector(userOfferSelector, (offerUser) => offerUser);
 
 export { 
   getOffer, 
