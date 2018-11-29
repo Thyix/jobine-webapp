@@ -6,12 +6,10 @@ import { Grid, Button, CardMedia, Card, CardActionArea, CardActions, CardContent
 import { connect } from 'react-redux';
 import moment from 'moment';
 import { bindActionCreators }  from 'redux';
-import { fetchOfferUser } from '../actions/offersActions';
-import { getSession } from '../../authentication/selectors/authenticationSelectors';
-import { Medias, Metrics, Colors, Fonts } from '../../main/themes';
+import { getSession, getAllUsers } from '../../authentication/selectors/authenticationSelectors';
+import { Medias, Metrics, Colors } from '../../main/themes';
 import Profile from '../../authentication/domain/Profile';
 import Offer from '../domain/Offer';
-import { getUserOffer } from '../selectors/offerSelector';
 
 const Container = styled(Grid)`
   display: flex !important;
@@ -43,7 +41,7 @@ type Props = {
   actions: {
   },
   offer: Offer,
-  userOffer: Profile,
+  users: Profile[],
 }
 
 type State = {
@@ -54,12 +52,16 @@ type State = {
   daysOffer: string,
   addressOffer: string,
   imgOffer: string,
-  userOffer: string,
+  user: Profile,
 }
 
+/*<Typography component="b" style={{color:'black'}}>Publié par: </Typography>
+<div style={{display:'flex', justifyContent:'space-between'}}>
+<Avatar src={userOffer ? userOffer.imgUser : ''}/>
+<Typography component="p"  style={{ marginTop:10, marginLeft: 20, fontSize: 15}}>{userOffer ? userOffer[0].nameUser : ''}</Typography>
+</div>*/
 
 export class OfferListItem extends React.Component<Props, State> {
-
   state = {
     titleOffer: this.props.offer.titleOffer,
     descriptionOffer: this.props.offer.descriptionOffer,
@@ -68,14 +70,11 @@ export class OfferListItem extends React.Component<Props, State> {
     daysOffer: this.props.offer.daysOffer,
     addressOffer: this.props.offer.addressOffer,
     imgOffer: this.props.offer.imgOffer,
-    userOffer: this.props.userOffer,
+    user: '',
   }
 
-  componentWillMount() {
-    this.props.actions.fetchOfferUser(this.props.offer.idUser);
-  }
   render() {
-    console.log(this.props.userOffer);
+    let user = this.props.users.filter(u => u.idUser === this.props.offer.idUser) || this.props.session;
     return (
       <Container>
         <MainArea>
@@ -112,10 +111,11 @@ export class OfferListItem extends React.Component<Props, State> {
                   <Typography style={{marginLeft: Metrics.spacing.small}}>{this.state.dateOffer ? moment(Date.parse(this.state.dateOffer.replace("[UTC]", ""))).format('DD/MM/YYYY') : ''}</Typography>
 
                   <Typography component="b" style={{color:'black'}}>Publié par: </Typography>
-                  <div style={{display:'flex', justifyContent:'space-between'}}>
-                  <Avatar src={this.props.userOffer ? this.props.userOffer[0].imgUser : ''}/>
-                  <Typography component="p"  style={{ marginTop:10, marginLeft: 20, fontSize: 15}}>{this.props.userOffer ? this.props.userOffer[0].nameUser : ''}</Typography>
-                  </div>
+                    <div style={{display:'flex', justifyContent:'space-between'}}>
+                    <Avatar src={user[0] ? user[0].imgUser : ''}/>
+                    <Typography component="p"  style={{ marginTop:10, marginLeft: 20, fontSize: 15}}>{user[0] ? user[0].nameUser : ''}</Typography>
+                    </div>
+
 
                 </CardContent>
               </CardActionArea>
@@ -139,14 +139,13 @@ export class OfferListItem extends React.Component<Props, State> {
 const mapStateToProps = (state: any) => {
   return {
     session: getSession(state),
-    userOffer: getUserOffer(state),
+    users: getAllUsers(state),
   };
 };
 
 function mapDispatchToProps(dispatch: Function) {
   return {
     actions: bindActionCreators({
-      fetchOfferUser
     }, dispatch),
   };
 }

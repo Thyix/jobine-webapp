@@ -22,16 +22,6 @@ export function fetchOffers() {
   };
 }
 
-export function fetchOfferUser(id: string) {
-  return async (dispatch: Function, getState: any) => {
-    const allUsers = await FetchProfiles();
-    if (allUsers) {
-      const user = allUsers.filter(f => f.idUser === id);
-      dispatch({ type: GET_OFFER_USER, offerUser: user });
-    }
-  }
-}
-
 export function createOffer(newOffer: Offer) {
   return async (dispatch: Function, getState: any) => {
     const offer = await CreateOffer(newOffer);
