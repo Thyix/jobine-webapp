@@ -2,6 +2,7 @@
 
 import React from 'react';
 import styled from 'styled-components';
+import { withRouter } from 'react-router';
 import { Grid, TextField, Button, CircularProgress } from '@material-ui/core';
 import { connect } from 'react-redux'; 
 import { bindActionCreators }  from 'redux';
@@ -61,6 +62,9 @@ type Props = {
   actions: {
     update: (newUser: Profile) => Promise<void>,
   },
+  history: {
+    push: Function,
+  },
 }
 
 type State = {
@@ -94,6 +98,22 @@ export class ProfileItem extends React.Component<Props, State> {
   componentWillUnmount() {
     mounted = false;
   }
+
+  ModifyProfile() {
+    this.props.actions.update(Profile.parseNew(
+      this.props.session.dateUser,
+      this.state.descriptionUser,
+      this.state.emailUser,
+      this.props.session.idUser,
+      this.props.session.idUserType,
+      this.state.imgUser,
+      this.state.jobUser,
+      this.state.nameUser,
+      this.props.session.pwdUser
+    ));
+    this.props.history.push('/');
+  }
+
   render() {
     return (
       <Container>
@@ -151,17 +171,9 @@ export class ProfileItem extends React.Component<Props, State> {
               <UpdateButton
                 color="primary"
                 id="goToDomainButton"
-                onClick={() => this.props.actions.update(Profile.parseNew(
-                  this.props.session.dateUser,
-                  this.state.descriptionUser,
-                  this.state.emailUser,
-                  this.props.session.idUser,
-                  this.props.session.idUserType,
-                  this.state.imgUser,
-                  this.state.jobUser,
-                  this.state.nameUser,
-                  this.props.session.pwdUser
-                ))}
+                onClick={
+                  () => this.ModifyProfile()
+                }
                 variant="contained"
               >
               {this.props.updating ? 
@@ -209,4 +221,4 @@ function mapDispatchToProps(dispatch: Function) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileItem);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ProfileItem));
