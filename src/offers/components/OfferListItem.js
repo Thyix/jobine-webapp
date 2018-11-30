@@ -75,7 +75,6 @@ export class OfferListItem extends React.Component<Props, State> {
   }
   render() {
     let user = this.props.users.filter(u => u.idUser === this.props.offer.idUser) || this.props.session;
-    console.log(user);
     return (
       <Container>
         <MainArea>
