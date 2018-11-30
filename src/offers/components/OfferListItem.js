@@ -66,9 +66,16 @@ export class OfferListItem extends React.Component<Props, State> {
     imgOffer: this.props.offer.imgOffer,
     user: '',
   }
-
+  getImage(user: Profile) {
+    if (user.imgUser === '') {
+      return 'https://krourke.org/img/md_avatar_stormtrooper.svg'
+    } else {
+      return user.imgUser;
+    }
+  }
   render() {
     let user = this.props.users.filter(u => u.idUser === this.props.offer.idUser) || this.props.session;
+    console.log(user);
     return (
       <Container>
         <MainArea>
@@ -79,7 +86,7 @@ export class OfferListItem extends React.Component<Props, State> {
                   component="img"
                   alt="Offer image card"
                   style={{ height: 125, width: 150, marginLeft: 75, marginTop: Metrics.spacing.small }}
-                  image={this.state.imgOffer || 'http://polishlinux.org/wp-content/uploads/2017/11/Preview-2-icon.png'}
+                  src={this.state.imgOffer || 'http://polishlinux.org/wp-content/uploads/2017/11/Preview-2-icon.png'}
                   title="Offer image"
                 />
                 <CardContent>
@@ -102,11 +109,11 @@ export class OfferListItem extends React.Component<Props, State> {
                   <Typography style={{marginLeft: Metrics.spacing.small}}>{this.state.domainOffer || 'Aucun domaine'}</Typography>
 
                   <Typography component="b" style={{color:'black'}}>Date de parution: </Typography>
-                  <Typography style={{marginLeft: Metrics.spacing.small}}>{this.state.dateOffer ? moment(Date.parse(this.state.dateOffer.replace("[UTC]", ""))).format('DD/MM/YYYY') : ''}</Typography>
+                  <Typography style={{marginLeft: Metrics.spacing.small}}>{this.props.offer.dateOffer instanceof moment ? moment(this.props.offer.dateOffer).format('DD/MM/YYYY') : moment(Date.parse(this.props.offer.dateOffer.replace("[UTC]", ""))).format('DD/MM/YYYY')}</Typography>
 
                   <Typography component="b" style={{color:'black'}}>Publié par: </Typography>
                     <div style={{display:'flex', justifyContent:'space-between'}}>
-                    <Avatar src={user[0] ? user[0].imgUser : ''}/>
+                    <Avatar src={user[0] ? this.getImage(user[0]) : 'https://krourke.org/img/md_avatar_stormtrooper.svg'}/>
                     <Typography component="p"  style={{ marginTop:10, marginLeft: 20, fontSize: 15}}>{user[0] ? user[0].nameUser : ''}</Typography>
                     </div>
 
