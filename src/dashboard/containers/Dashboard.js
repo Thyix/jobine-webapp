@@ -22,9 +22,8 @@ type Props = {
 };
 
 const PageRoot = styled.div`
-  display: flex;
+  display: flex !important;
   flex-flow: column;
-  height: 100% !important;
 `;
 
 const Header = styled.div`
@@ -59,7 +58,7 @@ export const Dashboard = ({ authenticated, session }: Props) => {
             <NavigationBar />
           </Header>
 
-          <StyledContainer id="main-container">
+          <StyledContainer id="main-container" style={{ height: window.screen.height - 295 }}>
             <StyledSidebarContainer>
               <Sidebar />
             </StyledSidebarContainer>

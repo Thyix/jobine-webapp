@@ -3,6 +3,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Tabs, Tab } from '@material-ui/core';
+import { connect } from 'react-redux'
 import { Colors } from '../../main/themes';
 import Recents from './tabs/Recents';
 import Answers from './tabs/Answers';
@@ -66,4 +67,9 @@ class Activities extends React.Component<Props, State> {
 
 }
 
-export default Activities;
+const mapStateToProps = (state: any) => {
+  return {
+  };
+};
+
+export default connect(mapStateToProps)(Activities);

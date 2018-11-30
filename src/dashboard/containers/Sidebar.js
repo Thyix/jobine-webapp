@@ -16,7 +16,6 @@ const SidebarContainer = styled.div`
   flex-direction: column;
   flex: 1;
   position: relative !important;
-  height: 100%px !important;
 `;
 
 const PaddedContainer = styled.div`
@@ -55,7 +54,7 @@ class Sidebar extends React.Component<Props> {
 
   render() {
     return (
-      <SidebarContainer>
+      <SidebarContainer style={{ height: window.screen.height - 295}}>
         <PaddedContainer>
         <SearchField 
             onFocus={this.goToSearch}
