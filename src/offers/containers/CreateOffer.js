@@ -2,6 +2,7 @@
 
 import React from 'react';
 import styled from 'styled-components';
+import { withRouter } from 'react-router';
 import { Grid, TextField, Button, CardMedia, Card, CardActionArea, CardActions, CardContent, Typography } from '@material-ui/core';
 import { connect } from 'react-redux';
 import moment from 'moment';
@@ -52,6 +53,9 @@ type Props = {
   session: Profile,
   actions: {
   },
+  history: {
+    push: Function,
+  }
 }
 
 type State = {
@@ -83,6 +87,21 @@ export class ProfileItem extends React.Component<Props, State> {
   componentWillUnmount() {
     mounted = false;
   }
+
+  CreateOffer() {
+    this.props.actions.createOffer(Offer.parseNew(
+      this.state.addressOffer,
+      moment(),
+      parseInt(this.state.daysOffer), 
+      this.state.descriptionOffer,
+      this.state.domainOffer,
+      this.state.imgOffer,
+      this.props.session.idUser,
+      this.state.titleOffer),
+      );
+    this.props.history.push('/');
+  }
+
   render() {
     return (
       <Container>
@@ -179,16 +198,7 @@ export class ProfileItem extends React.Component<Props, State> {
                 color="primary"
                 disabled={this.state.addressOffer === ''}
                 id="goToDomainButton"
-                onClick={() => this.props.actions.createOffer(Offer.parseNew(
-                  this.state.addressOffer,
-                  moment(),
-                  parseInt(this.state.daysOffer), 
-                  this.state.descriptionOffer,
-                  this.state.domainOffer,
-                  this.state.imgOffer,
-                  this.props.session.idUser,
-                  this.state.titleOffer),
-                  )}
+                onClick={() => this.CreateOffer()}
                 variant="contained"
               >
               Ajouter une offre
@@ -217,4 +227,4 @@ function mapDispatchToProps(dispatch: Function) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileItem);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ProfileItem));
