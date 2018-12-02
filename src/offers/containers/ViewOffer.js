@@ -2,13 +2,17 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import { Grid, Avatar, Button, TextField, Typography, CardMedia } from '@material-ui/core';
+import { Grid, Button, TextField, Typography, CardMedia } from '@material-ui/core';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 import { bindActionCreators }  from 'redux';
+import Scenes from '../../main/navigation/Scenes';
 import { Medias, Metrics, Colors } from '../../main/themes';
 import Profile from '../../authentication/domain/Profile';
+import { changeTab, updateSelectedUser } from '../actions/offersActions';
+import { getAllUsers } from '../../authentication/selectors/authenticationSelectors';
 import Offer from '../domain/Offer';
-import { getSelectedUser, getSelectedOffer } from '../selectors/offerSelector';
+import { getSelectedOffer } from '../selectors/offerSelector';
 
 const Container = styled(Grid)`
   display: flex !important;
@@ -74,6 +78,9 @@ type Props = {
   offer: Offer,
   users: Profile[],
   selectedOffer: Offer,
+  history: {
+    push: Function,
+  }
 }
 
 type State = {
@@ -84,14 +91,22 @@ export class ViewOffer extends React.Component<Props, State> {
 
   }
 
+  goToContact() {
+    const myUser = this.props.users.filter(u => u.idUser === this.props.selectedOffer.idUser)
+    console.log('myUser', myUser);
+    this.props.actions.updateSelectedUser(this.props.users.filter(u => u.idUser === this.props.selectedOffer.idUser)[0]);
+    this.props.actions.changeTab(3);
+    this.props.history.push(Scenes.Contact)
+  }
+
   render() {
-    console.log(this.props.selectedOffer);
+    console.log(this.props.users);
     return (
       <Container>
       <MainArea>
           {this.props.selectedOffer ?
           <Grid container style={{ height: window.screen.height - 185, backgroundColor: 'white', alignItems:'center', flexDirection:'column'}}>
-              <StyledAvatar image={this.props.selectedOffer.imgOffer ? this.props.selectedOffer.imgOffer : 'https://krourke.org/img/md_avatar_stormtrooper.svg'}/>
+              <StyledAvatar image={this.props.selectedOffer.imgOffer ? this.props.selectedOffer.imgOffer : 'http://polishlinux.org/wp-content/uploads/2017/11/Preview-2-icon.png'}/>
               <React.Fragment>
               <StyledTextField
                 autoComplete="titleOffer"
@@ -171,7 +186,7 @@ export class ViewOffer extends React.Component<Props, State> {
               color="primary"
               id="goToProfile"
               onClick={
-                () => {}
+                () => this.goToContact()
               }
               variant="contained"
             >
@@ -193,15 +208,18 @@ export class ViewOffer extends React.Component<Props, State> {
 
 const mapStateToProps = (state: any) => {
   return {
-    selectedOffer: getSelectedOffer(state),    
+    selectedOffer: getSelectedOffer(state),
+    users: getAllUsers(state),
   };
 };
 
 function mapDispatchToProps(dispatch: Function) {
   return {
     actions: bindActionCreators({
+      changeTab,
+      updateSelectedUser,
     }, dispatch),
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ViewOffer);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ViewOffer));

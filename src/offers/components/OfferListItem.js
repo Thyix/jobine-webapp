@@ -6,10 +6,11 @@ import { Grid, Button, CardMedia, Card, CardActionArea, CardActions, CardContent
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import moment from 'moment';
+import Scenes from '../../main/navigation/Scenes';
 import { bindActionCreators }  from 'redux';
 import { getSession, getAllUsers } from '../../authentication/selectors/authenticationSelectors';
 import { Medias, Metrics, Colors } from '../../main/themes';
-import { updateSelectedOffer } from '../actions/offersActions'; 
+import { updateSelectedOffer, changeTab } from '../actions/offersActions'; 
 import Profile from '../../authentication/domain/Profile';
 import Offer from '../domain/Offer';
 
@@ -42,6 +43,7 @@ type Props = {
   session: Profile,
   actions: {
     updateSelectedOffer: () => Promise<void>,
+    changeTab: (id: number) => Promise<void>,
   },
   offer: Offer,
   users: Profile[],
@@ -82,6 +84,8 @@ export class OfferListItem extends React.Component<Props, State> {
 
   seeOffer() {
     this.props.actions.updateSelectedOffer(this.props.offer);
+    this.props.actions.changeTab(2);
+    this.props.history.push(Scenes.Offer);
   } 
   render() {
     let user = this.props.users.filter(u => u.idUser === this.props.offer.idUser) || this.props.session;
@@ -157,6 +161,7 @@ function mapDispatchToProps(dispatch: Function) {
   return {
     actions: bindActionCreators({
       updateSelectedOffer,
+      changeTab,
     }, dispatch),
   };
 }

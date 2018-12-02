@@ -2,13 +2,16 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import { Grid, Avatar, Button, TextField, CircularProgress, Typography } from '@material-ui/core';
+import { Grid, Avatar, Button, TextField, Typography } from '@material-ui/core';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 import { bindActionCreators }  from 'redux';
+import Scenes from '../../main/navigation/Scenes';
 import { Medias, Metrics, Colors } from '../../main/themes';
 import Profile from '../../authentication/domain/Profile';
 import Offer from '../domain/Offer';
 import { getSelectedUser } from '../selectors/offerSelector';
+import { getAllUsers } from '../../authentication/selectors/authenticationSelectors';
 
 const Container = styled(Grid)`
   display: flex !important;
@@ -60,10 +63,14 @@ const UpdateButton = styled(Button)`
 type Props = {
   session: Profile,
   actions: {
+    updateSelectedUser: (user: Profile) => Promise<void>,
   },
   offer: Offer,
   users: Profile[],
   selectedUser: any,
+  history: {
+    push: Function,
+  }
 }
 
 type State = {
@@ -148,7 +155,7 @@ export class ViewContact extends React.Component<Props, State> {
               color="primary"
               id="goToDomainButton"
               onClick={
-                () => {}
+                () => this.props.history.push(Scenes.Messages)
               }
               variant="contained"
             >
@@ -171,7 +178,8 @@ export class ViewContact extends React.Component<Props, State> {
 
 const mapStateToProps = (state: any) => {
   return {
-    selectedUser: getSelectedUser(state),    
+    selectedUser: getSelectedUser(state), 
+    users: getAllUsers(state),   
   };
 };
 
@@ -182,4 +190,4 @@ function mapDispatchToProps(dispatch: Function) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ViewContact);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ViewContact));
