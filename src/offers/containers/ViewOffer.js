@@ -93,14 +93,12 @@ export class ViewOffer extends React.Component<Props, State> {
 
   goToContact() {
     const myUser = this.props.users.filter(u => u.idUser === this.props.selectedOffer.idUser)
-    console.log('myUser', myUser);
     this.props.actions.updateSelectedUser(this.props.users.filter(u => u.idUser === this.props.selectedOffer.idUser)[0]);
     this.props.actions.changeTab(3);
     this.props.history.push(Scenes.Contact)
   }
 
   render() {
-    console.log(this.props.users);
     return (
       <Container>
       <MainArea>
