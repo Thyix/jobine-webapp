@@ -3,7 +3,7 @@
 import { createSelector } from 'reselect';
 
 const messageSelector = state => state.messages.messages;
-const getOffer = createSelector(messageSelector, (messages) => messages);
+const getMessages = createSelector(messageSelector, (messages) => messages);
 
 const fetchedSelector = state => state.messages.fetched;
 const isFetched = createSelector(fetchedSelector, (fetched) => fetched);
@@ -13,7 +13,7 @@ const isFetching = createSelector(fetchingSelector, (fetching) => fetching);
 
 
 export { 
-  getOffer, 
+  getMessages, 
   isFetched,
   isFetching,
 };

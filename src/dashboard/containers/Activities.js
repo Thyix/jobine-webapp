@@ -11,6 +11,7 @@ import { bindActionCreators } from 'redux';
 import { fetchOffers, changeTab } from '../../offers/actions/offersActions';
 import Recents from './tabs/Recents';
 import Answers from './tabs/Answers';
+import { fetchMessages } from '../../chat/actions/chatActions';
 import ViewContact from '../../offers/containers/ViewContact';
 import ViewOffer from '../../offers/containers/ViewOffer';
 import { getTab } from '../../offers/selectors/offerSelector';
@@ -18,6 +19,7 @@ import { getTab } from '../../offers/selectors/offerSelector';
 type Props = {
   actions: {
     fetchOffers: () => Promise<void>,
+    fetchMessages: () => Promise<void>,
   },
   tab: string,
   history: {
@@ -96,6 +98,7 @@ class Activities extends React.Component<Props, State> {
       time: new Date().toLocaleString()
     });
     this.props.actions.fetchOffers();
+    this.props.actions.fetchMessages();
   }
 
   render() {
@@ -131,6 +134,7 @@ function mapDispatchToProps(dispatch: Function) {
     actions: bindActionCreators({
       fetchOffers,
       changeTab,
+      fetchMessages,
     }, dispatch),
   };
 }

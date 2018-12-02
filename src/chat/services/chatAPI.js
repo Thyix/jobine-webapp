@@ -7,6 +7,7 @@ export async function FetchMessages(): Promise<any> {
     .then((resp) => resp.json()) // Transform the data into json
     .then(function(data) {
       attempt = data;
+      console.log(attempt);
   });
   return attempt;
 }

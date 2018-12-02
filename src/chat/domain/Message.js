@@ -1,54 +1,44 @@
 import { Record } from 'immutable';
 
+/*contentMsg: "salut xd je m'appel bob, même si jsuis mécanicien d'engin lourd j'aimerais bien travailler chex nexapp! "
+dateMsg: "2018-11-30T05:00:00Z[UTC]"
+idMsg: 1
+idOffer: 1
+idUser: 1*/
+
 const OfferRecord = Record({
-  addressOffer: undefined,
-  dateOffer: undefined,
-  daysOffer: undefined,
-  descriptionOffer: undefined,
-  domainOffer: undefined,
-  imgOffer: undefined,
+  contentMsg: undefined,
+  dateMsg: undefined,
+  idMsg: undefined,
   idOffer: undefined,
   idUser: undefined,
-  titleOffer: undefined,
-  
 });
 
 class Message extends OfferRecord {
-  addressOffer: string;
-  dateOffer: string;
-  daysOffer: number;
-  descriptionOffer: string;
-  domainOffer: string;
-  imgOffer: string;
+  contentMsg: string;
+  dateMsg: string;
+  idMsg: number;
   idOffer: number;
   idUser: number;
-  titleOffer: string;
 }
 
-Offer.parse = (plain: any): Offer => {
+Message.parse = (plain: any): Offer => {
   return new Offer({
-    addressOffer: plain["adressOffer"],
-    dateOffer: plain["dateOffer"],
-    daysOffer: plain["daysOffer"],
-    descriptionOffer: plain["descriptionOffer"],
-    domainOffer: plain["domainOffer"],
-    imgOffer: plain["imgOffer"],
+    contentMsg: plain["contentMsg"],
+    dateMsg: plain["dateMsg"],
+    idMsg: plain["idMsg"],
     idOffer: plain["idOffer"],
     idUser: plain["idUser"],
-    titleOffer: plain["titleOffer"],
   });
 };
 
-Message.parseNew = (address: string, date: string, days: number, description: string, domain: string, imgOffer: string, idUser: string, title:string): Offer => {
+Message.parseNew = (contentMsg: string, dateMsg: string, idMsg: number, idOffer: number, idUser: number): Message => {
   return new Message({
-    addressOffer: address,
-    dateOffer: date,
-    daysOffer: days,
-    descriptionOffer: description,
-    domainOffer: domain,
-    imgOffer: imgOffer,
+    contentMsg: contentMsg,
+    dateMsg: dateMsg,
+    idMsg: idMsg,
+    idOffer: idOffer,
     idUser: idUser,
-    titleOffer: title,
   });
 };
 

@@ -6,9 +6,9 @@ import Grid from '@material-ui/core/Grid';
 import { Medias } from '../../../main/themes';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { fetchOffers, changeTab } from '../../../offers/actions/offersActions';
+import { fetchMessages } from '../../../chat/actions/chatActions';
+import { getMessages } from '../../../chat/selector/chatSelector';
 import { getOffer } from '../../../offers/selectors/offerSelector';
-import Offer from '../../../offers/domain/Offer';
 import ActivityList from '../../../activities/components/ActivityList';
 
 const Container = styled(Grid)`
@@ -42,9 +42,9 @@ const CallHistoryContainer = styled.div`
 
 type Props = {
   actions: {
-    fetchOffers: () => Promise<void>,
+    fetchMessages: () => Promise<void>,
   },
-  offers: Offer[],
+  messages:[],
 }
 
 type State = {}
@@ -54,17 +54,18 @@ export class Answers extends React.Component<Props, State> {
   state = {}
   
   componentWillMount() {
-    this.props.actions.fetchOffers();
+    this.props.actions.fetchMessages();
   }
 
   render() {
+    console.log(this.props.messages);
     return (
       <Container>
         <MainArea>
 
           <CallHistoryContainer>
             <Grid container style={{ backgroundColor: 'white', height: '100%' }}>
-              <ActivityList dailyActivities={this.props.offers} tab={'answers'}/>
+              <ActivityList dailyActivities={this.props.messages} tab={'answers'}/>
             </Grid>
           </CallHistoryContainer>
 
@@ -77,14 +78,14 @@ export class Answers extends React.Component<Props, State> {
 
 function mapStateToProps(state) {
   return {
-    offers: getOffer(state),
+    messages: getOffer(state),
   };
 }
 
 function mapDispatchToProps(dispatch: Function) {
   return {
     actions: bindActionCreators({
-      fetchOffers,
+      fetchMessages,
     }, dispatch),
   };
 }

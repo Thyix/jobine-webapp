@@ -1,16 +1,18 @@
 // @flow
 
-import { FetchOffers } from '../services/OfferAPI';
+import { FetchMessages } from '../services/chatAPI';
 
 export const FETCH_MESSAGES_REQUEST = 'offers/FETCH_OFFERS_REQUEST';
 export const FETCH_MESSAGES_SUCCESS = 'offers/FETCH_OFFERS_SUCCESS';
 export const FETCH_MESSAGES_FAILURE = 'offers/FETCH_OFFERS_FAILURE';
 
 
-export function fetchOffers() {
+export function fetchMessages() {
+  console.log('fetching messages');
   return async (dispatch: Function, getState: any) => {
       dispatch({ type: FETCH_MESSAGES_REQUEST });
-      const newMessages = '';
+      const newMessages = await FetchMessages();
+      console.log('new messages', newMessages);
       if (newMessages) {
         dispatch({ type: FETCH_MESSAGES_SUCCESS, messages: newMessages });
       } else {
