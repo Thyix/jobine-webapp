@@ -1,5 +1,6 @@
 // @flow
 
+import Message from '../domain/Message';
 
 export async function FetchMessages(): Promise<any> {
   let attempt
@@ -7,7 +8,8 @@ export async function FetchMessages(): Promise<any> {
     .then((resp) => resp.json()) // Transform the data into json
     .then(function(data) {
       attempt = data;
-      console.log(attempt);
   });
+  attempt.length > 0 ? attempt.map(d => Message.parse(d)) : attempt = null;
+  console.log('attempt', attempt);
   return attempt;
 }

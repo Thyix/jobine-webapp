@@ -8,7 +8,6 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { fetchMessages } from '../../../chat/actions/chatActions';
 import { getMessages } from '../../../chat/selector/chatSelector';
-import { getOffer } from '../../../offers/selectors/offerSelector';
 import ActivityList from '../../../activities/components/ActivityList';
 
 const Container = styled(Grid)`
@@ -78,7 +77,7 @@ export class Answers extends React.Component<Props, State> {
 
 function mapStateToProps(state) {
   return {
-    messages: getOffer(state),
+    messages: getMessages(state),
   };
 }
 

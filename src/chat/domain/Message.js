@@ -17,7 +17,7 @@ class Message extends OfferRecord {
 }
 
 Message.parse = (plain: any): Offer => {
-  return new Offer({
+  return new Message({
     contentMsg: plain["contentMsg"],
     dateMsg: plain["dateMsg"],
     idMsg: plain["idMsg"],
