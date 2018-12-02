@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'; 
 import { withRouter } from 'react-router';
 import Scenes from '../../main/navigation/Scenes';
+import { updateSelectedUser } from '../../offers/actions/offersActions';
 const ContactTypeLabel = styled.div`
 ${Fonts.toCSS(Fonts.medium())}
 color: ${Colors.primary} !important;
@@ -21,7 +22,7 @@ type Props = {
 };
 
 class ContactList extends React.Component<Props>  {
-  changeSelectedUser() {
+  changeSelectedUser(id: number) {
     this.props.history.push(Scenes.Contact);
   }
 
@@ -31,7 +32,7 @@ class ContactList extends React.Component<Props>  {
         <ContactTypeLabel>{this.props.title}</ContactTypeLabel>
         {this.props.contacts.map((contact: Profile) => {
           return (
-          <div key={contact.idUser} onClick={() => this.changeSelectedUser()}>
+          <div key={contact.idUser} onClick={() => this.changeSelectedUser(contact)}>
             <ContactItem
               contact={contact}
               key={contact.idUser}
@@ -52,6 +53,7 @@ const mapStateToProps = (state: any) => {
 function mapDispatchToProps(dispatch: Function) {
   return {
     actions: bindActionCreators({
+      updateSelectedUser,
     }, dispatch),
   };
 }
