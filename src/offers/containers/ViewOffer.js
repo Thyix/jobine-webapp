@@ -75,7 +75,7 @@ export class ViewOffer extends React.Component<Props, State> {
   }
 
   render() {
-    console.log('profil recu', this.props.selectedUser);
+    console.log(this.props.selectedOffer);
     return (
       <Container>
       <MainArea>

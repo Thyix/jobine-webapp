@@ -38,6 +38,7 @@ export function updateSelectedUser(id: Profile) {
 }
 
 export function updateSelectedOffer(id: Offer) {
+  console.log('update selected offer');
   return async (dispatch: Function, getState: any) => {
     dispatch({ type: UPDATE_SELECTED_OFFER, selectedOffer: id });
   }

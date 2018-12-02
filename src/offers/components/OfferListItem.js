@@ -4,6 +4,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Grid, Button, CardMedia, Card, CardActionArea, CardActions, CardContent, Typography, Avatar } from '@material-ui/core';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 import moment from 'moment';
 import { bindActionCreators }  from 'redux';
 import { getSession, getAllUsers } from '../../authentication/selectors/authenticationSelectors';
@@ -44,6 +45,9 @@ type Props = {
   },
   offer: Offer,
   users: Profile[],
+  history: {
+    push: Function,
+  }
 }
 
 type State = {
@@ -75,6 +79,10 @@ export class OfferListItem extends React.Component<Props, State> {
       return user.imgUser;
     }
   }
+
+  seeOffer() {
+    this.props.actions.updateSelectedOffer(this.props.offer);
+  } 
   render() {
     let user = this.props.users.filter(u => u.idUser === this.props.offer.idUser) || this.props.session;
     return (
@@ -82,7 +90,7 @@ export class OfferListItem extends React.Component<Props, State> {
         <MainArea>
 
             <Card style={{marginTop: Metrics.spacing.large, width: '300px'}}>
-              <CardActionArea style={{backgroundColor: Colors.backgroundLight}} onClick={() => this.props.actions.updateSelectedOffer(this.props.offer)}>
+              <CardActionArea style={{backgroundColor: Colors.backgroundLight}} onClick={() => this.seeOffer()}>
                 <CardMedia
                   component="img"
                   alt="Offer image card"
@@ -125,7 +133,7 @@ export class OfferListItem extends React.Component<Props, State> {
                 <Button size="small" color="secondary">
                   Postuler
                 </Button>
-                <Button size="small" color="secondary" onClick={() => this.props.actions.updateSelectedOffer(this.props.offer)}>
+                <Button size="small" color="secondary" onClick={() => this.seeOffer()}>
                   En savoir plus
                 </Button>
               </CardActions>
@@ -148,8 +156,9 @@ const mapStateToProps = (state: any) => {
 function mapDispatchToProps(dispatch: Function) {
   return {
     actions: bindActionCreators({
+      updateSelectedOffer,
     }, dispatch),
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(OfferListItem);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(OfferListItem));
