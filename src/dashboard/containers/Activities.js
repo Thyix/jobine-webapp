@@ -112,8 +112,8 @@ class Activities extends React.Component<Props, State> {
         <TabContent>
           {this.props.tab === 0 && <Recents/>}
           {this.props.tab === 1 && <Answers/>}
-          {this.props.tab === 2 && <ViewContact/>}
-          {this.props.tab === 3 && <ViewOffer/>}
+          {this.props.tab === 2 && <ViewOffer/>}
+          {this.props.tab === 3 && <ViewContact/>}
         </TabContent>
         <div />
       </RootContainer>

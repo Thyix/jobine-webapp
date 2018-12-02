@@ -22,16 +22,16 @@ type Props = {
 
 class ContactList extends React.Component<Props>  {
   changeSelectedUser() {
-    
     this.props.history.push(Scenes.Contact);
   }
+
   render() {
     return (
       <React.Fragment>
-        <ContactTypeLabel>{title}</ContactTypeLabel>
-        {contacts.map((contact: Profile) => {
+        <ContactTypeLabel>{this.props.title}</ContactTypeLabel>
+        {this.props.contacts.map((contact: Profile) => {
           return (
-          <div onClick={() => this.changeSelectedUser()}>
+          <div key={contact.idUser} onClick={() => this.changeSelectedUser()}>
             <ContactItem
               contact={contact}
               key={contact.idUser}
@@ -58,4 +58,4 @@ function mapDispatchToProps(dispatch: Function) {
 
 
 
-export default withRouter(ContactList);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ContactList));
