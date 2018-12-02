@@ -79,7 +79,7 @@ export class ViewContact extends React.Component<Props, State> {
       <Container>
       <MainArea>
           {this.props.selectedUser ?
-          <Grid container style={{ height: window.screen.height - 295, backgroundColor: 'white', alignItems:'center', flexDirection:'column'}}>
+          <Grid container style={{ height: window.screen.height - 185, backgroundColor: 'white', alignItems:'center', flexDirection:'column'}}>
               <StyledAvatar src={this.props.selectedUser.imgUser ? this.props.selectedUser.imgUser : 'https://krourke.org/img/md_avatar_stormtrooper.svg'}/>
               <React.Fragment>
               <StyledTextField

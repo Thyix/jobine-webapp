@@ -54,7 +54,7 @@ class Sidebar extends React.Component<Props> {
 
   render() {
     return (
-      <SidebarContainer style={{ height: window.screen.height - 295}}>
+      <SidebarContainer style={{ height: window.screen.height - 350}}>
         <PaddedContainer>
         <SearchField 
             onFocus={this.goToSearch}

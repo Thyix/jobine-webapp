@@ -58,7 +58,7 @@ export const Dashboard = ({ authenticated, session }: Props) => {
             <NavigationBar />
           </Header>
 
-          <StyledContainer id="main-container" style={{ height: window.screen.height - 295 }}>
+          <StyledContainer id="main-container" style={{ height: window.screen.height - 185 }}>
             <StyledSidebarContainer>
               <Sidebar />
             </StyledSidebarContainer>

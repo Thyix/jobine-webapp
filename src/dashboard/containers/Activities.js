@@ -38,7 +38,7 @@ const RootContainer = styled.div`
 `;
 
 const TabContent = styled.div`
-  height: 705px !important;
+  height: 815px !important;
   overflow: auto;
 `;
 

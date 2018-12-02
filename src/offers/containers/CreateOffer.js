@@ -107,7 +107,7 @@ export class ProfileItem extends React.Component<Props, State> {
       <Container>
         <MainArea>
 
-            <Grid container style={{ height: window.screen.height - 295, backgroundColor: 'white', alignItems:'center', flexDirection:'column'}}>
+            <Grid container style={{ height: window.screen.height - 185, backgroundColor: 'white', alignItems:'center', flexDirection:'column'}}>
             <Card style={{marginTop: Metrics.spacing.huge, width: '300px'}}>
               <CardActionArea>
                 <CardMedia

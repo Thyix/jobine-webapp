@@ -90,7 +90,7 @@ export class ViewOffer extends React.Component<Props, State> {
       <Container>
       <MainArea>
           {this.props.selectedOffer ?
-          <Grid container style={{ height: window.screen.height - 295, backgroundColor: 'white', alignItems:'center', flexDirection:'column'}}>
+          <Grid container style={{ height: window.screen.height - 185, backgroundColor: 'white', alignItems:'center', flexDirection:'column'}}>
               <StyledAvatar image={this.props.selectedOffer.imgOffer ? this.props.selectedOffer.imgOffer : 'https://krourke.org/img/md_avatar_stormtrooper.svg'}/>
               <React.Fragment>
               <StyledTextField
