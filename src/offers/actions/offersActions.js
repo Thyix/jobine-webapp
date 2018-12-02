@@ -11,6 +11,7 @@ export const GET_OFFER_USER = 'offers/GET_OFFER_USER';
 export const CHANGE_TAB = 'offers/CHANGE_TAB';
 export const UPDATE_SELECTED_USER = 'offers/UPDATE_SELECTED_USER';
 export const UPDATE_SELECTED_OFFER = 'offers/UPDATE_SELECTED_OFFER';
+export const UPDATE_CHAT_USER = 'offers/UPDATE_CHAT_USER';
 export const CREATE_OFFER = 'offers/CREATE_OFFER';
 
 
@@ -42,6 +43,12 @@ export function updateSelectedUser(id: Profile) {
 export function updateSelectedOffer(id: Offer) {
   return async (dispatch: Function, getState: any) => {
     dispatch({ type: UPDATE_SELECTED_OFFER, selectedOffer: id });
+  }
+}
+
+export function updateChatUser(id: Profile) {
+  return async (dispatch: Function, getState: any) => {
+    dispatch({ type: UPDATE_CHAT_USER, chatUser: id });
   }
 }
 

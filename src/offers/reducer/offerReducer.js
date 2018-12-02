@@ -7,6 +7,7 @@ import {
   CHANGE_TAB,
   UPDATE_SELECTED_USER,
   UPDATE_SELECTED_OFFER,
+  UPDATE_CHAT_USER,
   CREATE_OFFER,
 } from '../actions/offersActions';
 
@@ -16,6 +17,7 @@ const initialState = {
   offers: [],
   selectedUser: null,
   selectedOffer: null,
+  chatUser: null,
   tab: 0,
 };
 
@@ -38,6 +40,9 @@ export default function reducer(state: any = initialState, action: any) {
     }
     case UPDATE_SELECTED_OFFER: {
       return { ...state, selectedOffer: action.selectedOffer };
+    }
+    case UPDATE_CHAT_USER: {
+      return { ...state, chatUser: action.chatUser };
     }
     case CREATE_OFFER: {
       return { ...state, offers: [...state.offers, action.offers]}

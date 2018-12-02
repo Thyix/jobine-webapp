@@ -20,6 +20,9 @@ const getSelectedUser = createSelector(selectedUserSelector , (selectedUser) => 
 const selectedOfferSelector = state => state.offers.selectedOffer;
 const getSelectedOffer = createSelector(selectedOfferSelector, (selectedOffer) => selectedOffer);
 
+const chatUserSelector = state => state.offers.chatUser;
+const getChatUser = createSelector(chatUserSelector, (chatUser) => chatUser);
+
 export { 
   getOffer, 
   isFetched,
@@ -27,4 +30,5 @@ export {
   getTab, 
   getSelectedUser,
   getSelectedOffer,
+  getChatUser
 };
