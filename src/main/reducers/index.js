@@ -3,6 +3,7 @@
 import { combineReducers } from 'redux';
 import authentication from '../../authentication/reducers/authenticationReducers';
 import offers from '../../offers/reducer/offerReducer';
+import messages from '../../chat/reducer/chatReducer';
 
 const appReducer = combineReducers({
   authentication,
@@ -12,6 +13,7 @@ const appReducer = combineReducers({
 type State = {
   authentication:any,
   offers: any,
+  messages: any,
 };
 
 type Action = {
