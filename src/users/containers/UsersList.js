@@ -7,6 +7,7 @@ import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router';
 import Scenes from '../../main/navigation/Scenes';
 import { updateSelectedUser } from '../../offers/actions/offersActions';
+import Profile from '../../authentication/domain/Profile';
 const ContactTypeLabel = styled.div`
 ${Fonts.toCSS(Fonts.medium())}
 color: ${Colors.primary} !important;
@@ -19,10 +20,15 @@ type Props = {
   history: {
     push: Function,
   },
+  actions: {
+    updateSelectedUser: (contact: Profile) => Promise<void>,
+  }
 };
 
 class ContactList extends React.Component<Props>  {
-  changeSelectedUser(id: number) {
+  changeSelectedUser(id: Profile) {
+    console.log('profile', id);
+    this.props.actions.updateSelectedUser(id);
     this.props.history.push(Scenes.Contact);
   }
 

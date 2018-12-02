@@ -34,6 +34,7 @@ export default function reducer(state: any = initialState, action: any) {
       return { ...state, tab: action.tab };
     }
     case UPDATE_SELECTED_USER: {
+      console.log('selected user reducer', action.selectedUser);
       return { ...state, selectedUser: action.selectedUser };
     }
     case UPDATE_SELECTED_OFFER: {

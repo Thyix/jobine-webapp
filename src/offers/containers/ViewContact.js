@@ -10,6 +10,7 @@ import { getSession, getAllUsers } from '../../authentication/selectors/authenti
 import { Medias, Metrics, Colors } from '../../main/themes';
 import Profile from '../../authentication/domain/Profile';
 import Offer from '../domain/Offer';
+import { getSelectedUser } from '../selectors/offerSelector';
 
 const Container = styled(Grid)`
   display: flex !important;
@@ -42,6 +43,7 @@ type Props = {
   },
   offer: Offer,
   users: Profile[],
+  selectedUser: any,
 }
 
 type State = {
@@ -53,6 +55,7 @@ export class ViewContact extends React.Component<Props, State> {
   }
 
   render() {
+    console.log('profil recu', this.props.selectedUser);
     return (
       <div>ViewContact</div>
     );
@@ -61,8 +64,7 @@ export class ViewContact extends React.Component<Props, State> {
 
 const mapStateToProps = (state: any) => {
   return {
-    session: getSession(state),
-    users: getAllUsers(state),
+    selectedUser: getSelectedUser(state),    
   };
 };
 
