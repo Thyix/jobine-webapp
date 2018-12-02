@@ -103,7 +103,7 @@ class Activities extends React.Component<Props, State> {
     console.log('tab', this.props.tab);
     return (
       <RootContainer id="higher-activities">
-        <StyledTabs indicatorColor="primary" onChange={this.handleChange} value={this.props.tab}>
+        <StyledTabs indicatorColor="secondary" onChange={this.handleChange} value={this.props.tab}>
           <Tab label="Offres en cours" id={this.state.time} />
           <Tab label="Messagerie" />
           <Tab label="Visualiser une offre" />

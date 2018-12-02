@@ -2,7 +2,7 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import { Grid, Avatar, Button, TextField, CircularProgress } from '@material-ui/core';
+import { Grid, Avatar, Button, TextField, CircularProgress, Typography } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { bindActionCreators }  from 'redux';
 import { Medias, Metrics, Colors } from '../../main/themes';
@@ -157,8 +157,10 @@ export class ViewContact extends React.Component<Props, State> {
             </UpdateButton>
           </Grid>
           :
-          <div>
-            Veuillez selectionner qqun
+          <div style={{display:'flex', justifyContent:'center', alignContent:'center', marginTop: Metrics.spacing.huge}}>
+            <Typography style={{ color: Colors.primary, fontSize: 25, display:'flex'}}>
+              Veuillez sélectionner un contact pour explorer ses informations
+            </Typography>
           </div>
           }
 
