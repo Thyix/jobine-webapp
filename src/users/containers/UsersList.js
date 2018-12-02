@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'; 
 import { withRouter } from 'react-router';
 import Scenes from '../../main/navigation/Scenes';
-import { updateSelectedUser } from '../../offers/actions/offersActions';
+import { updateSelectedUser, changeTab } from '../../offers/actions/offersActions';
 import Profile from '../../authentication/domain/Profile';
 const ContactTypeLabel = styled.div`
 ${Fonts.toCSS(Fonts.medium())}
@@ -29,6 +29,7 @@ class ContactList extends React.Component<Props>  {
   changeSelectedUser(id: Profile) {
     console.log('profile', id);
     this.props.actions.updateSelectedUser(id);
+    this.props.actions.changeTab(3);
     this.props.history.push(Scenes.Contact);
   }
 
@@ -60,6 +61,7 @@ function mapDispatchToProps(dispatch: Function) {
   return {
     actions: bindActionCreators({
       updateSelectedUser,
+      changeTab,
     }, dispatch),
   };
 }

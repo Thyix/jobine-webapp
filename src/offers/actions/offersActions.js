@@ -30,7 +30,7 @@ export function changeTab(newTab: number) {
   }
 }
 
-export function updateSelectedUser(id: number) {
+export function updateSelectedUser(id: Profile) {
   return async (dispatch: Function, getState: any) => {
     dispatch({ type: UPDATE_SELECTED_USER, selectedUser: id });
   }

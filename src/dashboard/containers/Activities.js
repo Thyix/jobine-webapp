@@ -72,11 +72,11 @@ class Activities extends React.Component<Props, State> {
         this.props.actions.changeTab(1);
         break;
       case 2:
-        this.props.history.push(Scenes.Contact);
+        this.props.history.push(Scenes.Offer);
         this.props.actions.changeTab(2);
         break;
       case 3:
-        this.props.history.push(Scenes.Offer);
+        this.props.history.push(Scenes.Contact);
         this.props.actions.changeTab(3);
         break;
       default:

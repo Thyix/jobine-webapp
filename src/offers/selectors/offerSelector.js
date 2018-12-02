@@ -15,10 +15,10 @@ const tabSelector = state => state.offers.tab;
 const getTab = createSelector(tabSelector, (tab) => tab);
 
 const selectedUserSelector = state => state.offers.selectedUser;
-const getSelectedUser = (selectedUserSelector , (selectedUser) => selectedUser);
+const getSelectedUser = createSelector(selectedUserSelector , (selectedUser) => selectedUser);
 
 const selectedOfferSelector = state => state.offers.selectedOffer;
-const getSelectedOffer = (selectedOfferSelector, (selectedOffer) => selectedOffer);
+const getSelectedOffer = createSelector(selectedOfferSelector, (selectedOffer) => selectedOffer);
 
 export { 
   getOffer, 

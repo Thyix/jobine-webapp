@@ -2,11 +2,9 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import { Grid, Button, CardMedia, Card, CardActionArea, CardActions, CardContent, Typography, Avatar } from '@material-ui/core';
+import { Grid, Avatar, Button, TextField, CircularProgress } from '@material-ui/core';
 import { connect } from 'react-redux';
-import moment from 'moment';
 import { bindActionCreators }  from 'redux';
-import { getSession, getAllUsers } from '../../authentication/selectors/authenticationSelectors';
 import { Medias, Metrics, Colors } from '../../main/themes';
 import Profile from '../../authentication/domain/Profile';
 import Offer from '../domain/Offer';
@@ -27,6 +25,19 @@ const Container = styled(Grid)`
   }
 `;
 
+const StyledAvatar = styled(Avatar)`
+width: 100px !important;
+height: 100px !important;
+align-items: center !important;
+margin-top: ${Metrics.spacing.huge}px !important;
+margin-bottom: ${Metrics.spacing.large}px !important;
+`;
+
+const StyledTextField = styled(TextField)`
+  width: ${300}px !important;
+  margin-top: ${Metrics.spacing.small}px !important;
+`;
+
 const MainArea = styled.div`
   display: flex !important;
   height: 100% !important;
@@ -34,6 +45,15 @@ const MainArea = styled.div`
   align-self: stretch !important;
   flex-direction: column !important;
   flex-grow: 1 !important;
+`;
+
+const UpdateButton = styled(Button)`
+  margin-top: ${Metrics.spacing.large}px !important;
+  width: 300px !important;
+  height: 50px !important;
+  font-size: 15px !important;
+  border-radius: 20px !important; 
+  padding-vertical: ${Metrics.spacing.small}px !important;
 `;
 
 
@@ -57,7 +77,93 @@ export class ViewContact extends React.Component<Props, State> {
   render() {
     console.log('profil recu', this.props.selectedUser);
     return (
-      <div>ViewContact</div>
+      <Container>
+      <MainArea>
+          {this.props.selectedUser ?
+          <Grid container style={{ height: window.screen.height - 295, backgroundColor: 'white', alignItems:'center', flexDirection:'column'}}>
+              <StyledAvatar src={this.props.selectedUser.imgUser ? this.props.selectedUser.imgUser : 'https://krourke.org/img/md_avatar_stormtrooper.svg'}/>
+              <React.Fragment>
+              <StyledTextField
+                autoComplete="username"
+                id="usernameField"
+                label={"Nom d'utilisateur"}
+                style={{color: Colors.primary}}
+                type="text"
+                value={this.props.selectedUser.nameUser || 'Aucun'}
+                variant="outlined"
+                InputProps={{
+                  readOnly: true,
+                }}
+              />
+
+              <StyledTextField
+                id="emailField"
+                label={"Adresse mail"}
+                type="text"
+                autoComplete="email"
+                value={this.props.selectedUser.emailUser}
+                variant="outlined"
+                InputProps={{
+                  readOnly: true,
+                }}
+              />
+
+              <StyledTextField
+                id="descriptionField"
+                label={"Description de votre profil"}
+                type="text"
+                autoComplete="description"
+                value={this.props.selectedUser.descriptionUser || 'Aucune description'}
+                variant="outlined"
+                InputProps={{
+                  readOnly: true,
+                }}
+              />
+
+              <StyledTextField
+                id="imgField"
+                label={'Image du profil'}
+                autoComplete="imgLink"
+                type="text"
+                value={this.props.selectedUser.imgUser || 'Aucune image'}
+                variant="outlined"
+                InputProps={{
+                  readOnly: true,
+                }}
+              />
+
+              <StyledTextField
+                autoComplete="jobField"
+                id="jobField"
+                label={"Domaine d'affaire"}
+                type="text"
+                value={this.props.selectedUser.jobUser}
+                variant="outlined"
+                InputProps={{
+                  readOnly: true,
+                }}
+              />
+            </React.Fragment>
+
+            <UpdateButton
+              color="primary"
+              id="goToDomainButton"
+              onClick={
+                () => {}
+              }
+              variant="contained"
+            >
+              Envoyer un message
+            </UpdateButton>
+          </Grid>
+          :
+          <div>
+            Veuillez selectionner qqun
+          </div>
+          }
+
+      </MainArea>
+    </Container>
     );
   };
 }
