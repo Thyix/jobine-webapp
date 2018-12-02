@@ -1,6 +1,7 @@
 // @flow
 
 import { FetchOffers, CreateOffer } from '../services/OfferAPI';
+import Offer from '../domain/Offer';
 
 export const FETCH_OFFERS_REQUEST = 'offers/FETCH_OFFERS_REQUEST';
 export const FETCH_OFFERS_SUCCESS = 'offers/FETCH_OFFERS_SUCCESS';
@@ -36,7 +37,7 @@ export function updateSelectedUser(id: Profile) {
   }
 }
 
-export function updateSelectedOffer(id: number) {
+export function updateSelectedOffer(id: Offer) {
   return async (dispatch: Function, getState: any) => {
     dispatch({ type: UPDATE_SELECTED_OFFER, selectedOffer: id });
   }

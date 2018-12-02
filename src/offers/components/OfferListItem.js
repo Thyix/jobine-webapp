@@ -8,6 +8,7 @@ import moment from 'moment';
 import { bindActionCreators }  from 'redux';
 import { getSession, getAllUsers } from '../../authentication/selectors/authenticationSelectors';
 import { Medias, Metrics, Colors } from '../../main/themes';
+import { updateSelectedOffer } from '../actions/offersActions'; 
 import Profile from '../../authentication/domain/Profile';
 import Offer from '../domain/Offer';
 
@@ -39,6 +40,7 @@ const MainArea = styled.div`
 type Props = {
   session: Profile,
   actions: {
+    updateSelectedOffer: () => Promise<void>,
   },
   offer: Offer,
   users: Profile[],
@@ -80,7 +82,7 @@ export class OfferListItem extends React.Component<Props, State> {
         <MainArea>
 
             <Card style={{marginTop: Metrics.spacing.large, width: '300px'}}>
-              <CardActionArea style={{backgroundColor: Colors.backgroundLight}}>
+              <CardActionArea style={{backgroundColor: Colors.backgroundLight}} onClick={() => this.props.actions.updateSelectedOffer(this.props.offer)}>
                 <CardMedia
                   component="img"
                   alt="Offer image card"
@@ -123,7 +125,7 @@ export class OfferListItem extends React.Component<Props, State> {
                 <Button size="small" color="secondary">
                   Postuler
                 </Button>
-                <Button size="small" color="secondary">
+                <Button size="small" color="secondary" onClick={() => this.props.actions.updateSelectedOffer(this.props.offer)}>
                   En savoir plus
                 </Button>
               </CardActions>

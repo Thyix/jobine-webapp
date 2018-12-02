@@ -27,7 +27,6 @@ type Props = {
 
 class ContactList extends React.Component<Props>  {
   changeSelectedUser(id: Profile) {
-    console.log('profile', id);
     this.props.actions.updateSelectedUser(id);
     this.props.actions.changeTab(3);
     this.props.history.push(Scenes.Contact);
