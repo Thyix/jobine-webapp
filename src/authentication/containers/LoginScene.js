@@ -178,7 +178,6 @@ export class Login extends React.Component<Props, State> {
   }
 
   render() {
-    console.log('login scene');
     return (
       <StyledContainer>
         <LoginFailedDialog opened={this.state.messageOpened && this.state.dialog} closeDialog={this.closeMessage}/>
