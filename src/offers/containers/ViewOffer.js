@@ -2,12 +2,11 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import { Grid, Button, CardMedia, Card, CardActionArea, CardActions, CardContent, Typography, Avatar } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import { connect } from 'react-redux';
-import moment from 'moment';
 import { bindActionCreators }  from 'redux';
 import { getSession, getAllUsers } from '../../authentication/selectors/authenticationSelectors';
-import { Medias, Metrics, Colors } from '../../main/themes';
+import { Medias } from '../../main/themes';
 import Profile from '../../authentication/domain/Profile';
 import Offer from '../domain/Offer';
 

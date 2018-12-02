@@ -6,7 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import { Medias } from '../../../main/themes';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { fetchOffers, changeTab } from '../../../offers/actions/offersActions';
+import { fetchOffers } from '../../../offers/actions/offersActions';
 import { fetchProfiles } from '../../../authentication/actions/authenticationActions';
 import { getOffer } from '../../../offers/selectors/offerSelector';
 import Offer from '../../../offers/domain/Offer';
@@ -46,7 +46,6 @@ type Props = {
   actions: {
     fetchOffers: () => Promise<void>,
     fetchProfiles: () => Promise<void>,
-    changeTab: (tab: number) => Promise<void>,
   },
   offers: Offer[],
 }
@@ -91,7 +90,6 @@ function mapDispatchToProps(dispatch: Function) {
     actions: bindActionCreators({
       fetchOffers,
       fetchProfiles,
-      changeTab
     }, dispatch),
   };
 }

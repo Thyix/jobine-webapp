@@ -9,6 +9,5 @@ export default {
   Profile: '/profile',
   Recents: 'recents',
   Messages: '/messages',
-  Contact: '/contact',
   Offer: '/offer',
 };

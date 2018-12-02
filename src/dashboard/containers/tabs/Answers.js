@@ -43,7 +43,6 @@ const CallHistoryContainer = styled.div`
 type Props = {
   actions: {
     fetchOffers: () => Promise<void>,
-    changeTab: () => Promise<void>,
   },
   offers: Offer[],
 }
@@ -87,7 +86,6 @@ function mapDispatchToProps(dispatch: Function) {
   return {
     actions: bindActionCreators({
       fetchOffers,
-      changeTab,
     }, dispatch),
   };
 }
