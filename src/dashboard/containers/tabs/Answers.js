@@ -58,7 +58,6 @@ export class Answers extends React.Component<Props, State> {
   }
 
   render() {
-    console.log('rendering answers');
     return (
       <Container>
         <MainArea>

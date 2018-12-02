@@ -2,7 +2,7 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import { Grid, Avatar, Button, TextField, Typography } from '@material-ui/core';
+import { Grid, Avatar, Button, TextField, Typography, CardMedia } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { bindActionCreators }  from 'redux';
 import { Medias, Metrics, Colors } from '../../main/themes';
@@ -25,9 +25,10 @@ const Container = styled(Grid)`
   }
 `;
 
-const StyledAvatar = styled(Avatar)`
+const StyledAvatar = styled(CardMedia)`
 width: 100px !important;
 height: 100px !important;
+border-radius: 20px !important;
 align-items: center !important;
 margin-top: ${Metrics.spacing.huge}px !important;
 margin-bottom: ${Metrics.spacing.large}px !important;
@@ -56,6 +57,15 @@ const UpdateButton = styled(Button)`
   padding-vertical: ${Metrics.spacing.small}px !important;
 `;
 
+const ProfileButton = styled(Button)`
+  margin-top: ${Metrics.spacing.large}px !important;
+  width: 250px !important;
+  height: 50px !important;
+  font-size: 13px !important;
+  border-radius: 20px !important; 
+  padding-vertical: ${Metrics.spacing.small}px !important;
+`;
+
 
 type Props = {
   session: Profile,
@@ -63,7 +73,7 @@ type Props = {
   },
   offer: Offer,
   users: Profile[],
-  selectedOffer: any,
+  selectedOffer: Offer,
 }
 
 type State = {
@@ -81,27 +91,15 @@ export class ViewOffer extends React.Component<Props, State> {
       <MainArea>
           {this.props.selectedOffer ?
           <Grid container style={{ height: window.screen.height - 295, backgroundColor: 'white', alignItems:'center', flexDirection:'column'}}>
-              <StyledAvatar src={this.props.selectedUser.imgUser ? this.props.selectedUser.imgUser : 'https://krourke.org/img/md_avatar_stormtrooper.svg'}/>
+              <StyledAvatar image={this.props.selectedOffer.imgOffer ? this.props.selectedOffer.imgOffer : 'https://krourke.org/img/md_avatar_stormtrooper.svg'}/>
               <React.Fragment>
               <StyledTextField
-                autoComplete="username"
-                id="usernameField"
-                label={"Nom d'utilisateur"}
+                autoComplete="titleOffer"
+                id="titleField"
+                label={"Titre de l'offre"}
                 style={{color: Colors.primary}}
                 type="text"
-                value={this.props.selectedUser.nameUser || 'Aucun'}
-                variant="outlined"
-                InputProps={{
-                  readOnly: true,
-                }}
-              />
-
-              <StyledTextField
-                id="emailField"
-                label={"Adresse mail"}
-                type="text"
-                autoComplete="email"
-                value={this.props.selectedUser.emailUser}
+                value={this.props.selectedOffer.titleOffer || 'Aucun titre'}
                 variant="outlined"
                 InputProps={{
                   readOnly: true,
@@ -110,10 +108,12 @@ export class ViewOffer extends React.Component<Props, State> {
 
               <StyledTextField
                 id="descriptionField"
-                label={"Description de votre profil"}
+                label={"Description de l'offre"}
+                multiline
+                rowsMax="4"
                 type="text"
                 autoComplete="description"
-                value={this.props.selectedUser.descriptionUser || 'Aucune description'}
+                value={this.props.selectedOffer.descriptionOffer || 'Aucune description'}
                 variant="outlined"
                 InputProps={{
                   readOnly: true,
@@ -121,11 +121,11 @@ export class ViewOffer extends React.Component<Props, State> {
               />
 
               <StyledTextField
-                id="imgField"
-                label={'Image du profil'}
-                autoComplete="imgLink"
+                id="domainField"
+                label={"Domaine associé"}
                 type="text"
-                value={this.props.selectedUser.imgUser || 'Aucune image'}
+                autoComplete="domain"
+                value={this.props.selectedOffer.domainOffer || 'Aucun domaine' }
                 variant="outlined"
                 InputProps={{
                   readOnly: true,
@@ -133,11 +133,23 @@ export class ViewOffer extends React.Component<Props, State> {
               />
 
               <StyledTextField
-                autoComplete="jobField"
-                id="jobField"
-                label={"Domaine d'affaire"}
+                id="daysField"
+                label={'Durée du mandat'}
+                autoComplete="daysOffer"
                 type="text"
-                value={this.props.selectedUser.jobUser}
+                value={this.props.selectedOffer.daysOffer + ' jours' || 'Aucune durée'}
+                variant="outlined"
+                InputProps={{
+                  readOnly: true,
+                }}
+              />
+
+              <StyledTextField
+                autoComplete="adressField"
+                id="adressField"
+                label={"Adresse de l'entreprise"}
+                type="text"
+                value={this.props.selectedOffer.addressOffer || 'Aucune adresse'}
                 variant="outlined"
                 InputProps={{
                   readOnly: true,
@@ -146,15 +158,25 @@ export class ViewOffer extends React.Component<Props, State> {
             </React.Fragment>
 
             <UpdateButton
-              color="primary"
+              style={{ backgroundColor: Colors.green}}
               id="goToDomainButton"
               onClick={
                 () => {}
               }
               variant="contained"
             >
-              Envoyer un message
+              POSTULER
             </UpdateButton>
+            <ProfileButton
+              color="primary"
+              id="goToProfile"
+              onClick={
+                () => {}
+              }
+              variant="contained"
+            >
+              Profil de l'annonceur
+            </ProfileButton>
           </Grid>
           :
           <div style={{display:'flex', justifyContent:'center', alignContent:'center', marginTop: Metrics.spacing.huge}}>
@@ -171,7 +193,7 @@ export class ViewOffer extends React.Component<Props, State> {
 
 const mapStateToProps = (state: any) => {
   return {
-  selectedUser: getSelectedOffer(state),    
+    selectedOffer: getSelectedOffer(state),    
   };
 };
 

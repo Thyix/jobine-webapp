@@ -2,6 +2,7 @@
 
 import { FetchOffers, CreateOffer } from '../services/OfferAPI';
 import Offer from '../domain/Offer';
+import moment from 'moment';
 
 export const FETCH_OFFERS_REQUEST = 'offers/FETCH_OFFERS_REQUEST';
 export const FETCH_OFFERS_SUCCESS = 'offers/FETCH_OFFERS_SUCCESS';
@@ -17,6 +18,7 @@ export function fetchOffers() {
   return async (dispatch: Function, getState: any) => {
       dispatch({ type: FETCH_OFFERS_REQUEST });
       const newOffers = await FetchOffers();
+      newOffers.sort(function(a, b){return moment(Date.parse(b.dateOffer.replace("[UTC]", ""))) - moment(Date.parse(a.dateOffer.replace("[UTC]", "")))});
       if (newOffers) {
         dispatch({ type: FETCH_OFFERS_SUCCESS, offers: newOffers });
       } else {
@@ -38,7 +40,6 @@ export function updateSelectedUser(id: Profile) {
 }
 
 export function updateSelectedOffer(id: Offer) {
-  console.log('update selected offer');
   return async (dispatch: Function, getState: any) => {
     dispatch({ type: UPDATE_SELECTED_OFFER, selectedOffer: id });
   }

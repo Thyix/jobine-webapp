@@ -75,7 +75,6 @@ export class ViewContact extends React.Component<Props, State> {
   }
 
   render() {
-    console.log('profil recu', this.props.selectedUser);
     return (
       <Container>
       <MainArea>

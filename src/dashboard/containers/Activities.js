@@ -60,7 +60,6 @@ class Activities extends React.Component<Props, State> {
   }
 
   handleChange = (event: any, value: number) => {
-    console.log('handling it', this.props.tab);
     this.setState({ value });
     switch(value) {
       case 0:
@@ -100,7 +99,6 @@ class Activities extends React.Component<Props, State> {
   }
 
   render() {
-    console.log('tab', this.props.tab);
     return (
       <RootContainer id="higher-activities">
         <StyledTabs indicatorColor="secondary" onChange={this.handleChange} value={this.props.tab}>
