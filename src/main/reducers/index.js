@@ -8,6 +8,7 @@ import messages from '../../chat/reducer/chatReducer';
 const appReducer = combineReducers({
   authentication,
   offers,
+  messages,
 });
 
 type State = {

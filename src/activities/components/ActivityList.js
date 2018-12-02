@@ -2,11 +2,10 @@
 
 import React from 'react';
 import ActivityListSection from './ActivityListSection';
-import Offer from '../../offers/domain/Offer';
 
 type Props = {
-  dailyActivities: Offer[],
-  tab: string
+  dailyActivities: [],
+  tab: string,
 };
 
 const ActivityList = ({ dailyActivities, tab }: Props) => {

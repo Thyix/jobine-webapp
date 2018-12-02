@@ -10,6 +10,5 @@ export async function FetchMessages(): Promise<any> {
       attempt = data;
   });
   attempt.length > 0 ? attempt.map(d => Message.parse(d)) : attempt = null;
-  console.log('attempt', attempt);
   return attempt;
 }

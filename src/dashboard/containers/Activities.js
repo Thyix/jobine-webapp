@@ -15,16 +15,18 @@ import { fetchMessages } from '../../chat/actions/chatActions';
 import ViewContact from '../../offers/containers/ViewContact';
 import ViewOffer from '../../offers/containers/ViewOffer';
 import { getTab } from '../../offers/selectors/offerSelector';
+import { getMessages } from '../../chat/selector/chatSelector';
 
 type Props = {
   actions: {
     fetchOffers: () => Promise<void>,
-    fetchMessages: () => Promise<void>,
+    fetchMessages: () => Promise<void>
   },
   tab: string,
   history: {
     push: Function,
   },
+  messages: any,
 };
 
 type State = {
@@ -102,6 +104,7 @@ class Activities extends React.Component<Props, State> {
   }
 
   render() {
+    console.log(this.props.messages);
     return (
       <RootContainer id="higher-activities">
         <StyledTabs indicatorColor="secondary" onChange={this.handleChange} value={this.props.tab}>
@@ -126,6 +129,7 @@ class Activities extends React.Component<Props, State> {
 const mapStateToProps = (state: any) => {
   return {
     tab: getTab(state),
+    messages: getMessages(state),
   };
 };
 

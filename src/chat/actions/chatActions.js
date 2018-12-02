@@ -8,11 +8,9 @@ export const FETCH_MESSAGES_FAILURE = 'offers/FETCH_OFFERS_FAILURE';
 
 
 export function fetchMessages() {
-  console.log('fetching messages');
   return async (dispatch: Function, getState: any) => {
       dispatch({ type: FETCH_MESSAGES_REQUEST });
       const newMessages = await FetchMessages();
-      console.log('new messages', newMessages);
       if (newMessages) {
         dispatch({ type: FETCH_MESSAGES_SUCCESS, messages: newMessages });
       } else {

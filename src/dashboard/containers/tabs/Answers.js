@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import { fetchMessages } from '../../../chat/actions/chatActions';
 import { getMessages } from '../../../chat/selector/chatSelector';
 import ActivityList from '../../../activities/components/ActivityList';
+import { getOffer } from '../../../offers/selectors/offerSelector';
 
 const Container = styled(Grid)`
   display: flex !important;
@@ -44,6 +45,7 @@ type Props = {
     fetchMessages: () => Promise<void>,
   },
   messages:[],
+  offer: []
 }
 
 type State = {}
@@ -57,14 +59,13 @@ export class Answers extends React.Component<Props, State> {
   }
 
   render() {
-    console.log(this.props.messages);
     return (
       <Container>
         <MainArea>
 
           <CallHistoryContainer>
             <Grid container style={{ backgroundColor: 'white', height: '100%' }}>
-              <ActivityList dailyActivities={this.props.messages} tab={'answers'}/>
+              <ActivityList dailyActivities={this.props.offer} tab={'answers'}/>
             </Grid>
           </CallHistoryContainer>
 
@@ -78,6 +79,7 @@ export class Answers extends React.Component<Props, State> {
 function mapStateToProps(state) {
   return {
     messages: getMessages(state),
+    offer: getOffer(state),
   };
 }
 
