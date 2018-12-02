@@ -3,7 +3,11 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import { AppBar, Toolbar } from '@material-ui/core';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { changeTab } from '../../offers/actions/offersActions';
 import styled from 'styled-components';
+import Scenes from '../../main/navigation/Scenes';
 import NavigationBarUser from './NavigationBarUser';
 import { Images, Colors, Metrics} from '../../main/themes';
 
@@ -38,6 +42,9 @@ type Props = {
     push: Function,
   },
   session: string,
+  actions: {
+    changeTab: (id: number) => Promise<void>,
+  }
 };
 
 type State = {
@@ -45,14 +52,17 @@ type State = {
 
 class NavigationBar extends React.Component<Props, State> {
 
-  goToDashboard = () => this.props.history.push('/');
+  goToDashboard() {
+    this.props.actions.changeTab(0);
+    this.props.history.push(Scenes.Recents);
+  }
 
   render() {
     return (
       <StyledAppBar position="static">
         <StyledToolbar>
           <StyledDiv>
-            <StyledLogoContainer onClick={() => this.props.history.push('/')}>
+            <StyledLogoContainer onClick={() => this.goToDashboard()}>
               <StyledLogo style={{ marginTop: Metrics.spacing.small, marginLeft: Metrics.spacing.medium }} src={Images.logo} />
             </StyledLogoContainer>
           </StyledDiv>
@@ -68,4 +78,17 @@ class NavigationBar extends React.Component<Props, State> {
 
 }
 
-export default withRouter(NavigationBar);
+function mapStateToProps(state) {
+  return {
+  };
+}
+
+function mapDispatchToProps(dispatch: Function) {
+  return {
+    actions: bindActionCreators({
+      changeTab,
+    }, dispatch),
+  };
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NavigationBar));
