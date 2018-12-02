@@ -11,6 +11,8 @@ import { bindActionCreators } from 'redux';
 import { fetchOffers, changeTab } from '../../offers/actions/offersActions';
 import Recents from './tabs/Recents';
 import Answers from './tabs/Answers';
+import ViewContact from '../../offers/containers/ViewContact';
+import ViewOffer from '../../offers/containers/ViewOffer';
 import { getTab } from '../../offers/selectors/offerSelector';
 
 type Props = {
@@ -69,6 +71,14 @@ class Activities extends React.Component<Props, State> {
         this.props.history.push(Scenes.Messages);
         this.props.actions.changeTab(1);
         break;
+      case 2:
+        this.props.history.push(Scenes.Contact);
+        this.props.actions.changeTab(2);
+        break;
+      case 3:
+        this.props.history.push(Scenes.Offer);
+        this.props.actions.changeTab(3);
+        break;
       default:
     }
   };
@@ -102,8 +112,8 @@ class Activities extends React.Component<Props, State> {
         <TabContent>
           {this.props.tab === 0 && <Recents/>}
           {this.props.tab === 1 && <Answers/>}
-          {this.props.tab === 2 && <div>Cliquez sur une offre</div>}
-          {this.props.tab === 3 && <div>Cliquez sur un profil</div>}
+          {this.props.tab === 2 && <ViewContact/>}
+          {this.props.tab === 3 && <ViewOffer/>}
         </TabContent>
         <div />
       </RootContainer>
