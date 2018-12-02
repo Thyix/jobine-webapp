@@ -71,6 +71,8 @@ export const Dashboard = ({ authenticated, session }: Props) => {
                 <Route component={CreateOffer} exact path={Scenes.CreateOffer}/>
                 <Route component={Profile} exact path={Scenes.Profile}/>
                 <Route component={Activities} />
+                <Route component={Activities} exact path={Scenes.Recents}/>
+                <Route component={Activities} exact path={Scenes.Messages}/>
               </Switch>
             </StyledContent>
           </StyledContainer>

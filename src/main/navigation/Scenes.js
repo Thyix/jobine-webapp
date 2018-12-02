@@ -7,4 +7,8 @@ export default {
   Search: '/search',
   CreateOffer: '/createOffer',
   Profile: '/profile',
+  Recents: 'recents',
+  Messages: '/messages',
+  Contact: '/contact',
+  Offer: '/offer',
 };

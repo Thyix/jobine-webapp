@@ -6,7 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import { Medias } from '../../../main/themes';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { fetchOffers } from '../../../offers/actions/offersActions';
+import { fetchOffers, changeTab } from '../../../offers/actions/offersActions';
 import { getOffer } from '../../../offers/selectors/offerSelector';
 import Offer from '../../../offers/domain/Offer';
 import ActivityList from '../../../activities/components/ActivityList';
@@ -43,6 +43,7 @@ const CallHistoryContainer = styled.div`
 type Props = {
   actions: {
     fetchOffers: () => Promise<void>,
+    changeTab: () => Promise<void>,
   },
   offers: Offer[],
 }
@@ -58,6 +59,7 @@ export class Answers extends React.Component<Props, State> {
   }
 
   render() {
+    console.log('rendering answers');
     return (
       <Container>
         <MainArea>
@@ -84,7 +86,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch: Function) {
   return {
     actions: bindActionCreators({
-      fetchOffers
+      fetchOffers,
+      changeTab,
     }, dispatch),
   };
 }

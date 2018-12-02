@@ -11,8 +11,12 @@ const isFetched = createSelector(fetchedSelector, (fetched) => fetched);
 const fetchingSelector = state => state.offers.fetching;
 const isFetching = createSelector(fetchingSelector, (fetching) => fetching);
 
+const tabSelector = state => state.offers.tab;
+const getTab = createSelector(tabSelector, (tab) => tab);
+
 export { 
   getOffer, 
   isFetched,
-  isFetching, 
+  isFetching,
+  getTab, 
 };

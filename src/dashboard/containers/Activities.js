@@ -4,15 +4,22 @@ import React from 'react';
 import styled from 'styled-components';
 import { Tabs, Tab } from '@material-ui/core';
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router';
 import { Colors } from '../../main/themes';
+import Scenes from '../../main/navigation/Scenes'
 import { bindActionCreators } from 'redux';
-import { fetchOffers } from '../../offers/actions/offersActions';
+import { fetchOffers, changeTab } from '../../offers/actions/offersActions';
 import Recents from './tabs/Recents';
 import Answers from './tabs/Answers';
+import { getTab } from '../../offers/selectors/offerSelector';
 
 type Props = {
   actions: {
     fetchOffers: () => Promise<void>,
+  },
+  tab: string,
+  history: {
+    push: Function,
   },
 };
 
@@ -51,13 +58,25 @@ class Activities extends React.Component<Props, State> {
   }
 
   handleChange = (event: any, value: number) => {
+    console.log('handling it', this.props.tab);
     this.setState({ value });
+    switch(value) {
+      case 0:
+        this.props.history.push(Scenes.Recents);
+        this.props.actions.changeTab(0);
+        break;
+      case 1:
+        this.props.history.push(Scenes.Messages);
+        this.props.actions.changeTab(1);
+        break;
+      default:
+    }
   };
 
   componentDidMount() {
     this.intervalID = setInterval(
       () => this.tick(),
-      1000
+      2000,
     );
   }
   componentWillUnmount() {
@@ -71,19 +90,20 @@ class Activities extends React.Component<Props, State> {
   }
 
   render() {
+    console.log('tab', this.props.tab);
     return (
       <RootContainer id="higher-activities">
-        <StyledTabs indicatorColor="primary" onChange={this.handleChange} value={this.state.value}>
+        <StyledTabs indicatorColor="primary" onChange={this.handleChange} value={this.props.tab}>
           <Tab label="Offres en cours" id={this.state.time} />
           <Tab label="Messagerie" />
           <Tab label="Visualiser une offre" />
           <Tab label="Visualiser un profil"/>
         </StyledTabs>
         <TabContent>
-          {this.state.value === 0 && <Recents/>}
-          {this.state.value === 1 && <Answers/>}
-          {this.state.value === 2 && <div>Cliquez sur une offre</div>}
-          {this.state.value === 3 && <div>Cliquez sur un profil</div>}
+          {this.props.tab === 0 && <Recents/>}
+          {this.props.tab === 1 && <Answers/>}
+          {this.props.tab === 2 && <div>Cliquez sur une offre</div>}
+          {this.props.tab === 3 && <div>Cliquez sur un profil</div>}
         </TabContent>
         <div />
       </RootContainer>
@@ -94,15 +114,17 @@ class Activities extends React.Component<Props, State> {
 
 const mapStateToProps = (state: any) => {
   return {
+    tab: getTab(state),
   };
 };
 
 function mapDispatchToProps(dispatch: Function) {
   return {
     actions: bindActionCreators({
-      fetchOffers
+      fetchOffers,
+      changeTab,
     }, dispatch),
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Activities);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Activities));

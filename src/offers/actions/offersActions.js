@@ -1,12 +1,12 @@
 // @flow
 
 import { FetchOffers, CreateOffer } from '../services/OfferAPI';
-import { FetchProfiles } from '../../authentication/services/AuthenticationAPI';
 
 export const FETCH_OFFERS_REQUEST = 'offers/FETCH_OFFERS_REQUEST';
 export const FETCH_OFFERS_SUCCESS = 'offers/FETCH_OFFERS_SUCCESS';
 export const FETCH_OFFERS_FAILURE = 'offers/FETCH_OFFERS_FAILURE';
 export const GET_OFFER_USER = 'offers/GET_OFFER_USER';
+export const CHANGE_TAB = 'offers/CHANGE_TAB';
 export const CREATE_OFFER = 'offers/CREATE_OFFER';
 
 
@@ -20,6 +20,12 @@ export function fetchOffers() {
         dispatch({ type: FETCH_OFFERS_FAILURE });
       }
   };
+}
+
+export function changeTab(newTab: number) {
+  return async (dispatch: Function, getState: any) => {
+    dispatch({ type: CHANGE_TAB, tab: newTab });
+  }
 }
 
 export function createOffer(newOffer: Offer) {

@@ -6,7 +6,8 @@ import Grid from '@material-ui/core/Grid';
 import { Medias } from '../../../main/themes';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { fetchOffers } from '../../../offers/actions/offersActions';
+import { fetchOffers, changeTab } from '../../../offers/actions/offersActions';
+import { fetchProfiles } from '../../../authentication/actions/authenticationActions';
 import { getOffer } from '../../../offers/selectors/offerSelector';
 import Offer from '../../../offers/domain/Offer';
 import ActivityList from '../../../activities/components/ActivityList';
@@ -44,6 +45,8 @@ const CallHistoryContainer = styled.div`
 type Props = {
   actions: {
     fetchOffers: () => Promise<void>,
+    fetchProfiles: () => Promise<void>,
+    changeTab: (tab: number) => Promise<void>,
   },
   offers: Offer[],
 }
@@ -56,8 +59,9 @@ export class Recents extends React.Component<Props, State> {
   
   componentWillMount() {
     this.props.actions.fetchOffers();
+    this.props.actions.fetchProfiles();
   }
-
+  
   render() {
     return (
       <Container>
@@ -85,7 +89,9 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch: Function) {
   return {
     actions: bindActionCreators({
-      fetchOffers
+      fetchOffers,
+      fetchProfiles,
+      changeTab
     }, dispatch),
   };
 }
