@@ -10,7 +10,7 @@ import { fetchMessages } from '../../../chat/actions/chatActions';
 import { getSession } from '../../../authentication/selectors/authenticationSelectors';
 import { getMessages } from '../../../chat/selector/chatSelector';
 import ActivityList from '../../../activities/components/ActivityList';
-import { getOffer } from '../../../offers/selectors/offerSelector';
+import { getOffer, getChatUser } from '../../../offers/selectors/offerSelector';
 import SendMessage from '../../../offers/containers/SendMessage';
 
 const Container = styled(Grid)`
@@ -49,6 +49,7 @@ type Props = {
   messages:[],
   offer: [],
   session: Profile,
+  selectedUser: Profile,
 }
 
 type State = {}
@@ -88,7 +89,9 @@ export class Answers extends React.Component<Props, State> {
               <ActivityList dailyActivities={this.props.messages} tab={'answers'}/>
             </Grid>
             <div>
-              <SendMessage/>
+              {this.props.selectedUser &&
+                <SendMessage/>
+              }
             </div>
           </CallHistoryContainer>
 
@@ -104,6 +107,7 @@ function mapStateToProps(state) {
     messages: getMessages(state),
     offer: getOffer(state),
     session: getSession(state),
+    chatUser: getChatUser(state),
   };
 }
 

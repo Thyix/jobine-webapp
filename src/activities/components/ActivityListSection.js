@@ -6,11 +6,13 @@ import Grid from '@material-ui/core/Grid';
 import { connect } from 'react-redux';
 import { Typography } from '@material-ui/core';
 import TitledDivider from '../../main/components/TitledDivider';
-import { Metrics } from '../../main/themes';
+import { Metrics, Colors } from '../../main/themes';
 import OfferListItem from '../../offers/components/OfferListItem';
 import { getMessages } from '../../chat/selector/chatSelector';
+import { getSession } from '../../authentication/selectors/authenticationSelectors';
 import { getChatUser } from '../../offers/selectors/offerSelector';
 import Profile from '../../authentication/domain/Profile';
+import ChatMessage from '../../chat/components/ChatMessage';
 
 const StyledTitledDivider = styled(TitledDivider)`
   margin-top: ${Metrics.spacing.medium}px;
@@ -20,6 +22,7 @@ const StyledTitledDivider = styled(TitledDivider)`
 type Props = {
   activities: any,
   tab: string;
+  session: Profile,
   chatUser: Profile,
 }
 export class ActivityListSection extends React.Component<Props> {
@@ -38,9 +41,13 @@ export class ActivityListSection extends React.Component<Props> {
                 :
                   <div>
                   {this.props.chatUser ?
-                    <Typography key={a.idMsg} style={{ marginLeft: '60px', alignSelf:'center', justifyContent:'space-between', color: 'blue' }}>{a.contentMsg}</Typography>
+                    <ChatMessage chatMessage={a} received={this.props.session.idUser === a.idUserFrom ? false : true}/>
                   :
-                    <Typography key={a.idMsg} style={{ marginLeft: '60px', alignSelf:'center', justifyContent:'space-between', color: 'blue' }}>nani, choisis qqun sale cunt</Typography>
+                  <div style={{display:'flex', marginLeft: 225, justifyContent:'center', alignContent:'center', marginTop: Metrics.spacing.huge }}>
+                    <Typography style={{ color: Colors.primary, fontSize: 25, display:'flex', textAlign:'center'}}>
+                      Vous devez postuler ou envoyer un message <br/> à un utilisateur pour voir le fil des messages
+                    </Typography>
+                  </div>
                   }
                   </div>
                 }
@@ -55,6 +62,7 @@ function mapStateToProps(state) {
   return {
     messages: getMessages(state),
     chatUser: getChatUser(state),
+    session: getSession(state),
   };
 }
 
