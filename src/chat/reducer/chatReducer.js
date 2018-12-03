@@ -18,7 +18,6 @@ export default function reducer(state: any = initialState, action: any) {
       return { ...state, fetching: true, fetched: false };
     }
     case FETCH_MESSAGES_SUCCESS: {
-      console.log('this is the fetch message reducer', action.messages);
       return { ...state, fetching: false, fetched: true, messages: action.messages };
     }
     case FETCH_MESSAGES_FAILURE: {

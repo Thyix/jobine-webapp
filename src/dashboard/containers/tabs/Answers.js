@@ -76,7 +76,6 @@ export class Answers extends React.Component<Props, State> {
   
 
   render() {
-    console.log('answers scene', this.props.messages, 'offers', this.props.offers);
     return (
       <Container>
         <MainArea>

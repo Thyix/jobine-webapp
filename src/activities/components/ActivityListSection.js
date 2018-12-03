@@ -21,13 +21,11 @@ type Props = {
 }
 export class ActivityListSection extends React.Component<Props> {
   render() {
-    console.log('activity list section', this.props.messages);
     return (
       <React.Fragment>
         <Grid item xs={12} style={{  marginLeft:'15px', marginRight:'50px' }}>
           <StyledTitledDivider id="sectionTitle" title={this.props.tab === 'recents' ? "Fil d'actualité" : "Fil des messages"} />
         </Grid>
-        {console.log('test', this.props.activities)}
         {this.props.activities && this.props.activities.map(a =>
               <div key={a.idOffer}>
                 {this.props.tab === 'recents' ?
