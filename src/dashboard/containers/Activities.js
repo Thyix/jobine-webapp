@@ -8,14 +8,12 @@ import { withRouter } from 'react-router';
 import { Colors } from '../../main/themes';
 import Scenes from '../../main/navigation/Scenes'
 import { bindActionCreators } from 'redux';
-import { fetchOffers, changeTab } from '../../offers/actions/offersActions';
+import { changeTab } from '../../offers/actions/offersActions';
 import Recents from './tabs/Recents';
 import Answers from './tabs/Answers';
-import { fetchMessages } from '../../chat/actions/chatActions';
 import ViewContact from '../../offers/containers/ViewContact';
 import ViewOffer from '../../offers/containers/ViewOffer';
 import { getTab } from '../../offers/selectors/offerSelector';
-import { getMessages } from '../../chat/selector/chatSelector';
 
 type Props = {
   actions: {
@@ -86,25 +84,7 @@ class Activities extends React.Component<Props, State> {
     }
   };
 
-  componentDidMount() {
-    this.intervalID = setInterval(
-      () => this.tick(),
-      2000,
-    );
-  }
-  componentWillUnmount() {
-    clearInterval(this.intervalID);
-  }
-  tick() {
-    this.setState({
-      time: new Date().toLocaleString()
-    });
-    this.props.actions.fetchOffers();
-    this.props.actions.fetchMessages();
-  }
-
   render() {
-    console.log(this.props.messages);
     return (
       <RootContainer id="higher-activities">
         <StyledTabs indicatorColor="secondary" onChange={this.handleChange} value={this.props.tab}>
@@ -129,16 +109,13 @@ class Activities extends React.Component<Props, State> {
 const mapStateToProps = (state: any) => {
   return {
     tab: getTab(state),
-    messages: getMessages(state),
   };
 };
 
 function mapDispatchToProps(dispatch: Function) {
   return {
     actions: bindActionCreators({
-      fetchOffers,
       changeTab,
-      fetchMessages,
     }, dispatch),
   };
 }

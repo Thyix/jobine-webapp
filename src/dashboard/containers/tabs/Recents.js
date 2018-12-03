@@ -60,6 +60,22 @@ export class Recents extends React.Component<Props, State> {
     this.props.actions.fetchOffers();
     this.props.actions.fetchProfiles();
   }
+
+  componentDidMount() {
+    this.intervalID = setInterval(
+      () => this.tick(),
+      1000,
+    );
+  }
+  componentWillUnmount() {
+    clearInterval(this.intervalID);
+  }
+  tick() {
+    this.setState({
+      time: new Date().toLocaleString()
+    });
+    this.props.actions.fetchOffers();
+  }
   
   render() {
     return (

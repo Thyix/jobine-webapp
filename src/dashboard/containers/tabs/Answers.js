@@ -58,14 +58,32 @@ export class Answers extends React.Component<Props, State> {
     this.props.actions.fetchMessages();
   }
 
+  componentDidMount() {
+    this.intervalID = setInterval(
+      () => this.tick(),
+      1500,
+    );
+  }
+  componentWillUnmount() {
+    clearInterval(this.intervalID);
+  }
+  tick() {
+    this.setState({
+      time: new Date().toLocaleString()
+    });
+    this.props.actions.fetchMessages();
+  }
+  
+
   render() {
+    console.log('answers scene', this.props.messages, 'offers', this.props.offers);
     return (
       <Container>
         <MainArea>
 
           <CallHistoryContainer>
             <Grid container style={{ backgroundColor: 'white', height: '100%' }}>
-              <ActivityList dailyActivities={this.props.offer} tab={'answers'}/>
+              <ActivityList dailyActivities={this.props.messages} tab={'answers'}/>
             </Grid>
           </CallHistoryContainer>
 
