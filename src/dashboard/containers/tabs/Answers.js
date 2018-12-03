@@ -7,9 +7,11 @@ import { Medias } from '../../../main/themes';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { fetchMessages } from '../../../chat/actions/chatActions';
+import { getSession } from '../../../authentication/selectors/authenticationSelectors';
 import { getMessages } from '../../../chat/selector/chatSelector';
 import ActivityList from '../../../activities/components/ActivityList';
 import { getOffer } from '../../../offers/selectors/offerSelector';
+import SendMessage from '../../../offers/containers/SendMessage';
 
 const Container = styled(Grid)`
   display: flex !important;
@@ -45,7 +47,8 @@ type Props = {
     fetchMessages: () => Promise<void>,
   },
   messages:[],
-  offer: []
+  offer: [],
+  session: Profile,
 }
 
 type State = {}
@@ -55,7 +58,7 @@ export class Answers extends React.Component<Props, State> {
   state = {}
   
   componentWillMount() {
-    this.props.actions.fetchMessages();
+    this.props.actions.fetchMessages(this.props.session);
   }
 
   componentDidMount() {
@@ -71,7 +74,7 @@ export class Answers extends React.Component<Props, State> {
     this.setState({
       time: new Date().toLocaleString()
     });
-    this.props.actions.fetchMessages();
+    this.props.actions.fetchMessages(this.props.session);
   }
   
 
@@ -84,6 +87,9 @@ export class Answers extends React.Component<Props, State> {
             <Grid container style={{ backgroundColor: 'white', height: '100%' }}>
               <ActivityList dailyActivities={this.props.messages} tab={'answers'}/>
             </Grid>
+            <div>
+              <SendMessage/>
+            </div>
           </CallHistoryContainer>
 
         </MainArea>
@@ -97,6 +103,7 @@ function mapStateToProps(state) {
   return {
     messages: getMessages(state),
     offer: getOffer(state),
+    session: getSession(state),
   };
 }
 

@@ -2,10 +2,6 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { getSession } from '../../authentication/selectors/authenticationSelectors';
-import { getChatUser } from '../../offers/selectors/offerSelector';
 import TextField from '@material-ui/core/TextField';
 import AttachFileIcon from '@material-ui/icons/AttachFile';
 import SendIcon from '@material-ui/icons/Send';
@@ -48,14 +44,19 @@ export class SendMessage extends React.Component<Props, State> {
     sending: false,
   };
 
+  activitiesContainerEnd: any;
+
   reset = () => this.setState({ message: '' });
 
-  sendMessage() {
+  sendMessage = async () => {
+    try {
       this.setState({ message: '', sending: true });
+    } finally {
+      this.setState({ sending: false });
+    }
   }
 
   userPressedKey = (key: string) => {
-    console.log('user pressed key');
     if (key === 'Enter') {
       this.sendMessage();
     }
@@ -81,7 +82,7 @@ export class SendMessage extends React.Component<Props, State> {
         </AttachFileContainer>
 
         <AttachFileContainer>
-          <SendIcon id="sendButton" onClick={() => this.sendMessage()} type="submit" />
+          <SendIcon disabled={this.state.sending} id="sendButton" onClick={this.sendMessage} type="submit" />
         </AttachFileContainer>
 
       </ChatInputContainer>
@@ -90,20 +91,5 @@ export class SendMessage extends React.Component<Props, State> {
 
 }
 
-const mapStateToProps = (state: any) => {
-  return {
-    session: getSession(state),
-    chatUser: getChatUser(state),
-  };
-};
 
-function mapDispatchToProps(dispatch: Function) {
-  return {
-    actions: bindActionCreators({
-    }, dispatch),
-  };
-}
-
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(SendMessage);
+export default SendMessage;

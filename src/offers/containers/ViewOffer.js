@@ -9,7 +9,7 @@ import { bindActionCreators }  from 'redux';
 import Scenes from '../../main/navigation/Scenes';
 import { Medias, Metrics, Colors } from '../../main/themes';
 import Profile from '../../authentication/domain/Profile';
-import { changeTab, updateSelectedUser } from '../actions/offersActions';
+import { changeTab, updateSelectedUser, updateChatUser } from '../actions/offersActions';
 import { getAllUsers } from '../../authentication/selectors/authenticationSelectors';
 import Offer from '../domain/Offer';
 import { getSelectedOffer } from '../selectors/offerSelector';
@@ -94,7 +94,13 @@ export class ViewOffer extends React.Component<Props, State> {
   goToContact() {
     this.props.actions.updateSelectedUser(this.props.users.filter(u => u.idUser === this.props.selectedOffer.idUser)[0]);
     this.props.actions.changeTab(3);
-    this.props.history.push(Scenes.Contact)
+    this.props.history.push(Scenes.Contact);
+  }
+
+  goToConversation() {
+    this.props.actions.updateChatUser(this.props.users.filter(u => u.idUser === this.props.selectedOffer.idUser)[0]);
+    this.props.actions.changeTab(1);
+    this.props.history.push(Scenes.Messages);
   }
 
   render() {
@@ -173,7 +179,7 @@ export class ViewOffer extends React.Component<Props, State> {
               style={{ backgroundColor: Colors.green}}
               id="goToDomainButton"
               onClick={
-                () => {}
+                () => this.goToConversation()
               }
               variant="contained"
             >
@@ -215,6 +221,7 @@ function mapDispatchToProps(dispatch: Function) {
     actions: bindActionCreators({
       changeTab,
       updateSelectedUser,
+      updateChatUser,
     }, dispatch),
   };
 }

@@ -18,7 +18,6 @@ import { getTab } from '../../offers/selectors/offerSelector';
 type Props = {
   actions: {
     fetchOffers: () => Promise<void>,
-    fetchMessages: () => Promise<void>
   },
   tab: string,
   history: {
@@ -41,6 +40,7 @@ const RootContainer = styled.div`
 
 const TabContent = styled.div`
   height: 815px !important;
+  background-color: ${Colors.secondary} !important;
   overflow: auto;
 `;
 

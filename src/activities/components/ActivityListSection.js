@@ -9,6 +9,8 @@ import TitledDivider from '../../main/components/TitledDivider';
 import { Metrics } from '../../main/themes';
 import OfferListItem from '../../offers/components/OfferListItem';
 import { getMessages } from '../../chat/selector/chatSelector';
+import { getChatUser } from '../../offers/selectors/offerSelector';
+import Profile from '../../authentication/domain/Profile';
 
 const StyledTitledDivider = styled(TitledDivider)`
   margin-top: ${Metrics.spacing.medium}px;
@@ -18,6 +20,7 @@ const StyledTitledDivider = styled(TitledDivider)`
 type Props = {
   activities: any,
   tab: string;
+  chatUser: Profile,
 }
 export class ActivityListSection extends React.Component<Props> {
   render() {
@@ -33,7 +36,13 @@ export class ActivityListSection extends React.Component<Props> {
                     <OfferListItem offer={a}/>
                   </div>
                 :
-                  <Typography key={a.idMsg} style={{ marginLeft: '60px', alignSelf:'center', justifyContent:'space-between', color: 'blue' }}>{a.contentMsg}</Typography>
+                  <div>
+                  {this.props.chatUser ?
+                    <Typography key={a.idMsg} style={{ marginLeft: '60px', alignSelf:'center', justifyContent:'space-between', color: 'blue' }}>{a.contentMsg}</Typography>
+                  :
+                    <Typography key={a.idMsg} style={{ marginLeft: '60px', alignSelf:'center', justifyContent:'space-between', color: 'blue' }}>nani, choisis qqun sale cunt</Typography>
+                  }
+                  </div>
                 }
               </div>
         )}
@@ -45,6 +54,7 @@ export class ActivityListSection extends React.Component<Props> {
 function mapStateToProps(state) {
   return {
     messages: getMessages(state),
+    chatUser: getChatUser(state),
   };
 }
 
