@@ -5,7 +5,8 @@ const OfferRecord = Record({
   dateMsg: undefined,
   idMsg: undefined,
   idOffer: undefined,
-  idUser: undefined,
+  idUserFrom: undefined,
+  idUserTo: undefined,
 });
 
 class Message extends OfferRecord {
@@ -13,7 +14,8 @@ class Message extends OfferRecord {
   dateMsg: string;
   idMsg: number;
   idOffer: number;
-  idUser: number;
+  idUserFrom: number;
+  idUserTo: number;
 }
 
 Message.parse = (plain: any): Offer => {
@@ -22,17 +24,19 @@ Message.parse = (plain: any): Offer => {
     dateMsg: plain["dateMsg"],
     idMsg: plain["idMsg"],
     idOffer: plain["idOffer"],
-    idUser: plain["idUser"],
+    idUserFrom: plain["idUserFrom"],
+    idUserTo: plain["idUserTo"]
   });
 };
 
-Message.parseNew = (contentMsg: string, dateMsg: string, idMsg: number, idOffer: number, idUser: number): Message => {
+Message.parseNew = (contentMsg: string, dateMsg: string, idMsg: number, idOffer: number, idUserFrom: number, idUserTo: number): Message => {
   return new Message({
     contentMsg: contentMsg,
     dateMsg: dateMsg,
     idMsg: idMsg,
     idOffer: idOffer,
-    idUser: idUser,
+    idUserFrom: idUserFrom,
+    idUserTo: idUserTo,
   });
 };
 

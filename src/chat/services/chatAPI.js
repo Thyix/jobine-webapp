@@ -9,6 +9,7 @@ export async function FetchMessages(): Promise<any> {
     .then(function(data) {
       attempt = data;
   });
+  console.log('data', attempt);
   attempt.length > 0 ? attempt.map(d => Message.parse(d)) : attempt = null;
   return attempt;
 }
