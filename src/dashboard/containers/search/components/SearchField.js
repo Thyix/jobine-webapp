@@ -24,7 +24,6 @@ type Props = {
 }
 
 type State = {
-  query: string,
 }
 
 type TextChangedEvent = {

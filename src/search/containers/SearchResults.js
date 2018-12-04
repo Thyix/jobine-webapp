@@ -4,6 +4,10 @@ import React from 'react';
 import styled from 'styled-components';
 import Typography from '@material-ui/core/Typography/Typography';
 import SearchIcon from '@material-ui/icons/Search';
+import { connect } from 'react-redux';
+import { getQuery } from '../../chat/selector/chatSelector'; 
+import { getAllUsers } from '../../authentication/selectors/authenticationSelectors';
+import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router';
 import { Colors, Fonts, Metrics } from '../../main/themes';
 
@@ -56,6 +60,8 @@ type Props = {
   history: {
     push: Function,
   },
+  users: Profile,
+  query: string,
 };
 type State = {};
 
@@ -63,7 +69,8 @@ export class SearchResults extends React.PureComponent<Props, State> {
 
   render() {
     const { query } = this.props;
-    
+    const selectedUsers = query.length > 0 && this.props.users.filter(u => u.nameUser.toUpperCase().includes(query.toUpperCase()));
+    console.log('selectedUsers', selectedUsers);
     if (!query) {
       return (
         <Container>
@@ -111,8 +118,12 @@ export class SearchResults extends React.PureComponent<Props, State> {
             <Results id="results">
   
               <MessagesResult>
-                <Title>{'Tests'}</Title>
-                <Typography>{'Aucune entreprise a été trouvée'}</Typography>
+                <Title>{'Résultats'}</Title>
+                {selectedUsers.length > 0 ?
+                <div>{selectedUsers.map(s => <div>{s.nameUser}</div>)}</div>
+                : 
+                <Typography>{"Aucun utilisateur n'a été trouvé"}</Typography>
+                }
               </MessagesResult>
             </Results>
           </Scrollable>
@@ -122,4 +133,18 @@ export class SearchResults extends React.PureComponent<Props, State> {
 
 };
 
-export default withRouter(SearchResults);
+function mapStateToProps(state) {
+  return {
+    query: getQuery(state),
+    users: getAllUsers(state),
+  };
+}
+
+function mapDispatchToProps(dispatch: Function) {
+  return {
+    actions: bindActionCreators({
+    }, dispatch),
+  };
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SearchResults));
