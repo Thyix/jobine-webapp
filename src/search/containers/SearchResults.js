@@ -81,7 +81,7 @@ export class SearchResults extends React.PureComponent<Props, State> {
               </RecentItem>
               <RecentItem>
                 <SearchIcon color="secondary"/>
-                <Result>Pornographie</Result>
+                <Result>Comptabilité</Result>
               </RecentItem>
               
               <Spacer />

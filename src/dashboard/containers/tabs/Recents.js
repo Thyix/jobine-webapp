@@ -75,6 +75,7 @@ export class Recents extends React.Component<Props, State> {
       time: new Date().toLocaleString()
     });
     this.props.actions.fetchOffers();
+    this.props.actions.fetchProfiles();
   }
   
   render() {

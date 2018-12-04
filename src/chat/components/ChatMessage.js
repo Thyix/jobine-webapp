@@ -56,7 +56,7 @@ class ChatMessage extends React.Component<Props> {
       return (
         <div>
           {this.props.chatMessage !== null && 
-          <MessageContent style={{ marginLeft: this.props.received ? Metrics.spacing.small : 1100, marginRight: this.props.received ? 750 : Metrics.spacing.small, maxWidth: 300 }}>
+          <MessageContent style={{ marginLeft: this.props.received ? Metrics.spacing.small : 1100, marginRight: this.props.received ? 750 : Metrics.spacing.small, maxWidth: 200 }}>
             {this.props.received ?
               <React.Fragment>
                 <StyledMessage style={{ backgroundColor: this.props.received ? Colors.disabled : Colors.neutral }}>
