@@ -66,7 +66,7 @@ class ChatMessage extends React.Component<Props> {
             <React.Fragment>
               <StyledMessage style={{ backgroundColor: this.props.received ? Colors.primary : Colors.neutral}}>
               <TextReceived style={{ color: this.props.received ? Colors.secondary : Colors.secondary }}>{this.props.chatMessage.contentMsg}</TextReceived>
-              <TimeReceived>{moment(Date.parse(this.props.chatMessage.dateMsg.replace("[UTC]", ""))).format('DD/MM/YYYY')}</TimeReceived>
+              <TimeReceived style={{ color: Colors.secondary }}>{moment(Date.parse(this.props.chatMessage.dateMsg.replace("[UTC]", ""))).format('DD/MM/YYYY')}</TimeReceived>
               </StyledMessage>
             </React.Fragment>
             :

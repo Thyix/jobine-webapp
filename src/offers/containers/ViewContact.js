@@ -10,6 +10,7 @@ import Scenes from '../../main/navigation/Scenes';
 import { Medias, Metrics, Colors } from '../../main/themes';
 import Profile from '../../authentication/domain/Profile';
 import Offer from '../domain/Offer';
+import { changeTab, updateChatUser } from '../actions/offersActions';
 import { getSelectedUser } from '../selectors/offerSelector';
 import { getAllUsers } from '../../authentication/selectors/authenticationSelectors';
 
@@ -63,7 +64,8 @@ const UpdateButton = styled(Button)`
 type Props = {
   session: Profile,
   actions: {
-    updateSelectedUser: (user: Profile) => Promise<void>,
+    updateChatUser: (user: Profile) => Promise<void>,
+    changeTab: (id: number) => Promise<void>,
   },
   offer: Offer,
   users: Profile[],
@@ -77,8 +79,11 @@ type State = {
 }
 
 export class ViewContact extends React.Component<Props, State> {
-  state = {
 
+  goToMessages() {
+    this.props.actions.updateChatUser(this.props.selectedUser);
+    this.props.actions.changeTab(1);
+    this.props.history.push(Scenes.Messages);
   }
 
   render() {
@@ -155,7 +160,7 @@ export class ViewContact extends React.Component<Props, State> {
               color="primary"
               id="goToDomainButton"
               onClick={
-                () => this.props.history.push(Scenes.Messages)
+                () => this.goToMessages()
               }
               variant="contained"
             >
@@ -186,6 +191,8 @@ const mapStateToProps = (state: any) => {
 function mapDispatchToProps(dispatch: Function) {
   return {
     actions: bindActionCreators({
+      changeTab,
+      updateChatUser,
     }, dispatch),
   };
 }

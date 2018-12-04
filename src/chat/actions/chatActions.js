@@ -1,12 +1,13 @@
 // @flow
 
-import { FetchMessages } from '../services/chatAPI';
+import { FetchMessages, CreateMessage } from '../services/chatAPI';
 import Profile from '../../authentication/domain/Profile';
+import Message from '../domain/Message';
 
 export const FETCH_MESSAGES_REQUEST = 'offers/FETCH_OFFERS_REQUEST';
 export const FETCH_MESSAGES_SUCCESS = 'offers/FETCH_OFFERS_SUCCESS';
 export const FETCH_MESSAGES_FAILURE = 'offers/FETCH_OFFERS_FAILURE';
-
+export const CREATE_MESSAGE = 'offers/CREATE_MESSAGE';
 
 export function fetchMessages(session: Profile) {
   return async (dispatch: Function, getState: any) => {
@@ -19,5 +20,13 @@ export function fetchMessages(session: Profile) {
         dispatch({ type: FETCH_MESSAGES_FAILURE });
       }
   };
+}
+
+export function  createMessage(message: Message) {
+  return async (dispatch: Function, getState: any) => {
+    const newMessage = await CreateMessage(message);
+    console.log('new message', newMessage);
+    dispatch({ type: CREATE_MESSAGE, messages: newMessage });
+  }
 }
 

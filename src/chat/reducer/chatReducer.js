@@ -4,6 +4,7 @@ import {
   FETCH_MESSAGES_REQUEST,
   FETCH_MESSAGES_SUCCESS,
   FETCH_MESSAGES_FAILURE,
+  CREATE_MESSAGE,
 } from '../actions/chatActions';
 
 const initialState = {
@@ -22,6 +23,9 @@ export default function reducer(state: any = initialState, action: any) {
     }
     case FETCH_MESSAGES_FAILURE: {
       return { ...state, fetching: false, fetched: false };
+    }
+    case CREATE_MESSAGE: {
+      return { ...state, messages: [...state.messages, action.messages] };
     }
     default:
       return state;

@@ -100,7 +100,7 @@ class Activities extends React.Component<Props, State> {
           {this.props.tab === 2 && <ViewOffer/>}
           {this.props.tab === 3 && <ViewContact/>}
         </TabContent>
-        <SendMessage/>
+        {this.props.tab === 1 &&  <SendMessage/>}
       </RootContainer>
     );
   }

@@ -27,10 +27,12 @@ type Props = {
 }
 export class ActivityListSection extends React.Component<Props> {
   render() {
+    let chatTitle;
+    this.props.chatUser ? chatTitle = `Fil des messages avec ${this.props.chatUser.nameUser}` :  chatTitle = 'Fil des messages';
     return (
       <React.Fragment>
         <Grid item xs={12} style={{  marginLeft:'15px', marginRight:'50px' }}>
-          <StyledTitledDivider id="sectionTitle" title={this.props.tab === 'recents' ? "Fil d'actualité" : "Fil des messages"} />
+          <StyledTitledDivider id="sectionTitle" title={this.props.tab === 'recents' ? "Fil d'actualité" : chatTitle} />
         </Grid>
         {this.props.activities && this.props.activities.map(a =>
               <div key={a.idOffer}>
@@ -41,7 +43,7 @@ export class ActivityListSection extends React.Component<Props> {
                 :
                   <div>
                   {this.props.chatUser ?
-                    <ChatMessage chatMessage={a} received={this.props.session.idUser === a.idUserFrom ? false : true}/>
+                    <ChatMessage chatMessage={a} received={this.props.session.idUser === a.idUserFrom? false : true}/>
                   :
                   <div style={{display:'flex', marginLeft: 400, justifyContent:'center', alignContent:'center', marginTop: Metrics.spacing.huge }}>
                     <Typography style={{ color: Colors.primary, fontSize: 25, display:'flex', textAlign:'center'}}>

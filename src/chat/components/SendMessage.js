@@ -3,9 +3,16 @@
 import React from 'react';
 import styled from 'styled-components';
 import TextField from '@material-ui/core/TextField';
+import { connect } from 'react-redux';
+import moment from 'moment';
+import { bindActionCreators } from 'redux'; 
 import AttachFileIcon from '@material-ui/icons/AttachFile';
 import SendIcon from '@material-ui/icons/Send';
+import { getSession } from '../../authentication/selectors/authenticationSelectors'; 
+import { getChatUser } from '../../offers/selectors/offerSelector';
+import { createMessage } from '../actions/chatActions'; 
 import { Metrics, Colors } from '../../main/themes';
+import Message from '../domain/Message';
 
 const ChatInputContainer = styled.div`
   display: flex !important;
@@ -32,6 +39,11 @@ const AttachFileContainer = styled.div`
 `;
 
 type Props = {
+  session: Profile,
+  chatUser: Profile,
+  actions: {
+    createMessage: (message: Message) => Promise<void>,
+  }
 }
 type State = {
   message: string,
@@ -49,6 +61,7 @@ export class SendMessage extends React.Component<Props, State> {
   reset = () => this.setState({ message: '' });
 
   sendMessage = async () => {
+    const newMessage = Message.parseNew(this.state.message, moment())
     try {
       this.setState({ message: '', sending: true });
     } finally {
@@ -64,6 +77,13 @@ export class SendMessage extends React.Component<Props, State> {
 
   render() {
 
+    /*
+contentMsg: contentMsg,
+    dateMsg: dateMsg,
+    idMsg: idMsg,
+    idOffer: idOffer,
+    idUserFrom: idUserFrom,
+    idUserTo: idUserTo,*/
     return (
       <ChatInputContainer style={{ backgroundColor: Colors.highlightedBackground}} >
         <TextFieldContainer>
@@ -88,8 +108,22 @@ export class SendMessage extends React.Component<Props, State> {
       </ChatInputContainer>
     );
   }
+}
 
+function mapStateToProps(state) {
+  return {
+    session: getSession(state),
+    chatUser: getChatUser(state),
+  };
+}
+
+function mapDispatchToProps(dispatch: Function) {
+  return {
+    actions: bindActionCreators({
+      createMessage
+    }, dispatch),
+  };
 }
 
 
-export default SendMessage;
+export default connect(mapStateToProps, mapDispatchToProps)(SendMessage);
