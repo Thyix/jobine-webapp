@@ -10,6 +10,7 @@ import { getAllUsers } from '../../authentication/selectors/authenticationSelect
 import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router';
 import { Colors, Fonts, Metrics } from '../../main/themes';
+import SearchListitem from '../components/SearchListitem';
 
 const Container = styled.div`
   height: 750px;
@@ -32,7 +33,6 @@ const Result = styled(Typography)`
 
 const Results = styled.div`
   display: flex !important;
-  max-height: 100% !important;
   padding: ${Metrics.spacing.huge}px;
 `;
 const MessagesResult = styled.div`
@@ -48,7 +48,7 @@ const Title = styled(Typography)`
 `;
 
 const Scrollable = styled.div`
-  height: 100%;
+  height: 865px !important;
   overflow-y: auto;
 `;
 
@@ -120,7 +120,7 @@ export class SearchResults extends React.PureComponent<Props, State> {
               <MessagesResult>
                 <Title>{'Résultats'}</Title>
                 {selectedUsers.length > 0 ?
-                <div>{selectedUsers.map(s => <div>{s.nameUser}</div>)}</div>
+                <div>{selectedUsers.map(s => <SearchListitem contact={s}/>)}</div>
                 : 
                 <Typography>{"Aucun utilisateur n'a été trouvé"}</Typography>
                 }
