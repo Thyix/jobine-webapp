@@ -5,12 +5,14 @@ import {
   FETCH_MESSAGES_SUCCESS,
   FETCH_MESSAGES_FAILURE,
   CREATE_MESSAGE,
+  UPDATE_SEARCH_QUERY,
 } from '../actions/chatActions';
 
 const initialState = {
   fetching: false,
   fetched: false,
-  messages: []
+  messages: [],
+  searchQuery: '',
 };
 
 export default function reducer(state: any = initialState, action: any) {
@@ -23,6 +25,9 @@ export default function reducer(state: any = initialState, action: any) {
     }
     case FETCH_MESSAGES_FAILURE: {
       return { ...state, fetching: false, fetched: false };
+    }
+    case UPDATE_SEARCH_QUERY: {
+      return { ...state, searchQuery: action.searchQuery };
     }
     case CREATE_MESSAGE: {
       return { ...state, messages: [...state.messages, action.messages] };

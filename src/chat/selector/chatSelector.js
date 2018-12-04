@@ -11,9 +11,13 @@ const isFetched = createSelector(fetchedSelector, (fetched) => fetched);
 const fetchingSelector = state => state.messages.fetching;
 const isFetching = createSelector(fetchingSelector, (fetching) => fetching);
 
+const querySelector = state => state.messages.searchQuery;
+const getQuery = createSelector(querySelector, (searchQuery) => searchQuery);
+
 
 export { 
   getMessages, 
   isFetched,
   isFetching,
+  getQuery,
 };

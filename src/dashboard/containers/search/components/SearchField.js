@@ -3,6 +3,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import _ from 'lodash';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { updateSearchQuery } from '../../../../chat/actions/chatActions'; 
 import { InputAdornment, TextField } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 
@@ -18,13 +21,10 @@ const searchIcon  =
 
 type Props = {
   onFocus: Function,
-  onQueryChanged: (query: string) => Promise<void>,
-  onSearch: (query: string) => Promise<void>,
-  t: (key: string) => string,
-  query: string,
 }
 
 type State = {
+  query: string,
 }
 
 type TextChangedEvent = {
@@ -35,12 +35,9 @@ type TextChangedEvent = {
 
 class SearchField extends React.PureComponent<Props, State> {
 
-  state = {
-  };
-
   onTextChanged = async (event: TextChangedEvent) => {
     this.props.onQueryChanged(event.target.value);
-
+    this.props.actions.updateSearchQuery(event.target.value);
     this.search(event.target.value);
   };
 
@@ -72,4 +69,17 @@ class SearchField extends React.PureComponent<Props, State> {
 
 };
 
-export default SearchField;
+function mapStateToProps(state) {
+  return {
+  };
+}
+
+function mapDispatchToProps(dispatch: Function) {
+  return {
+    actions: bindActionCreators({
+      updateSearchQuery,
+    }, dispatch),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchField);

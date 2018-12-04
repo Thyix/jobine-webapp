@@ -8,6 +8,7 @@ export const FETCH_MESSAGES_REQUEST = 'offers/FETCH_OFFERS_REQUEST';
 export const FETCH_MESSAGES_SUCCESS = 'offers/FETCH_OFFERS_SUCCESS';
 export const FETCH_MESSAGES_FAILURE = 'offers/FETCH_OFFERS_FAILURE';
 export const CREATE_MESSAGE = 'offers/CREATE_MESSAGE';
+export const UPDATE_SEARCH_QUERY = 'offers/UPDATE_SEARCH_QUERY';
 
 export function fetchMessages(session: Profile) {
   return async (dispatch: Function, getState: any) => {
@@ -29,4 +30,11 @@ export function  createMessage(message: Message) {
     dispatch({ type: CREATE_MESSAGE, messages: newMessage });
   }
 }
+
+export function updateSearchQuery(query: string) {
+  return async (dispatch: Function, getState: any) => {
+    dispatch({ type: UPDATE_SEARCH_QUERY, searchQuery: query });
+  }
+}
+
 

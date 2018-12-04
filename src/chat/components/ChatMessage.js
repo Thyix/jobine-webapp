@@ -52,7 +52,6 @@ type Props = {
 
 class ChatMessage extends React.Component<Props> {
   render() {
-    console.log('chat mesasge', this.props.chatMessage);
       return (
         <div>
           {this.props.chatMessage !== null && 

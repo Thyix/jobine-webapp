@@ -14,7 +14,6 @@ export async function FetchMessages(): Promise<any> {
 }
 
 export async function CreateMessage(message: Message): Promise<any> {
-  console.log('working with api');
   let data = JSON.stringify({
     contentMsg: message.contentMsg,
     dateMsg: message.dateMsg,
