@@ -43,7 +43,7 @@ export class ActivityListSection extends React.Component<Props> {
                   {this.props.chatUser ?
                     <ChatMessage chatMessage={a} received={this.props.session.idUser === a.idUserFrom ? false : true}/>
                   :
-                  <div style={{display:'flex', marginLeft: 225, justifyContent:'center', alignContent:'center', marginTop: Metrics.spacing.huge }}>
+                  <div style={{display:'flex', marginLeft: 400, justifyContent:'center', alignContent:'center', marginTop: Metrics.spacing.huge }}>
                     <Typography style={{ color: Colors.primary, fontSize: 25, display:'flex', textAlign:'center'}}>
                       Vous devez postuler ou envoyer un message <br/> à un utilisateur pour voir le fil des messages
                     </Typography>

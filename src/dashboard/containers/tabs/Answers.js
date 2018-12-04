@@ -11,7 +11,6 @@ import { getSession } from '../../../authentication/selectors/authenticationSele
 import { getMessages } from '../../../chat/selector/chatSelector';
 import ActivityList from '../../../activities/components/ActivityList';
 import { getOffer, getChatUser } from '../../../offers/selectors/offerSelector';
-import SendMessage from '../../../offers/containers/SendMessage';
 
 const Container = styled(Grid)`
   display: flex !important;
@@ -88,11 +87,6 @@ export class Answers extends React.Component<Props, State> {
             <Grid container style={{ backgroundColor: 'white', height: '100%' }}>
               <ActivityList dailyActivities={this.props.messages} tab={'answers'}/>
             </Grid>
-            <div>
-              {this.props.selectedUser &&
-                <SendMessage/>
-              }
-            </div>
           </CallHistoryContainer>
 
         </MainArea>

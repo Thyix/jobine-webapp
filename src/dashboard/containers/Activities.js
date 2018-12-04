@@ -14,6 +14,7 @@ import Answers from './tabs/Answers';
 import ViewContact from '../../offers/containers/ViewContact';
 import ViewOffer from '../../offers/containers/ViewOffer';
 import { getTab } from '../../offers/selectors/offerSelector';
+import SendMessage from '../../chat/components/SendMessage';
 
 type Props = {
   actions: {
@@ -99,7 +100,7 @@ class Activities extends React.Component<Props, State> {
           {this.props.tab === 2 && <ViewOffer/>}
           {this.props.tab === 3 && <ViewContact/>}
         </TabContent>
-        <div />
+        <SendMessage/>
       </RootContainer>
     );
   }

@@ -257,7 +257,7 @@ export class Login extends React.Component<Props, State> {
             }
               <LoginButton
                 color="primary"
-                disabled={this.state.signIn ? ((this.state.newPassword !== this.state.confirmPassword) || this.state.newPassword.length === 0): false}
+                disabled={this.state.signIn ? ((this.state.newPassword !== this.state.confirmPassword) || this.state.newPassword.length === 0) : this.state.username.length === 0 || this.state.password.length === 0}
                 id="goToDomainButton"
                 onClick={this.performLogin}
                 variant="contained"

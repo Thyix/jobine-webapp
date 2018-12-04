@@ -20,7 +20,7 @@ const SentMessage = styled.div`
   color: ${Colors.contrastingText};
 `;
 
-const MissedOrReceivedMessage = styled(Message)`
+const MissedOrReceivedMessage = styled.div`
   background-color: ${Colors.backgroundLight};
   color: ${Colors.primaryText};
 `;

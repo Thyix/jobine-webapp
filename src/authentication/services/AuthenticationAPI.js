@@ -6,7 +6,7 @@ import moment from 'moment';
 
 export async function AuthenticationLogin(identifier: string, password: string): Promise<any> {
   let attempt;
-  await fetch("http://70.48.63.175:8080/JobineDB/webresources/entities.user")
+  await fetch("http://70.48.63.175:8080/Jobine/webresources/entities.user")
     .then((resp) => resp.json()) // Transform the data into json
     .then(function(data) {
       attempt = data.filter(d => d["emailUser"] === identifier && d["pwdUser"] === password);
@@ -17,7 +17,7 @@ export async function AuthenticationLogin(identifier: string, password: string):
 
 export async function FetchProfiles(): Promise<any> {
   let attempt;
-  await fetch("http://70.48.63.175:8080/JobineDB/webresources/entities.user")
+  await fetch("http://70.48.63.175:8080/Jobine/webresources/entities.user")
     .then((resp) => resp.json()) // Transform the data into json
     .then(function(data) {
       attempt = data;
@@ -28,7 +28,7 @@ export async function FetchProfiles(): Promise<any> {
 
 export async function CheckEmailAvailability(email: string): Promise<any> {
   let attempt;
-  await fetch("http://70.48.63.175:8080/JobineDB/webresources/entities.user")
+  await fetch("http://70.48.63.175:8080/Jobine/webresources/entities.user")
     .then((resp) => resp.json()) // Transform the data into json
     .then(function(data) {
       attempt = data.filter(d => d["emailUser"] === email);
@@ -54,7 +54,7 @@ export async function AuthenticationSignup(username: string, job: string, email:
       nameUser: username, 
       pwdUser: password });
   const newProfile = Profile.parseNew(moment(), '', email, '1', '1', '', job, username, password);
-  let request = new Request("http://70.48.63.175:8080/JobineDB/webresources/entities.user", {
+  let request = new Request("http://70.48.63.175:8080/Jobine/webresources/entities.user", {
     method: 'POST', 
     mode: 'cors', 
     headers: new Headers({
@@ -69,7 +69,7 @@ export async function AuthenticationSignup(username: string, job: string, email:
 }
 
 export async function DeleteProfile(profile: Profile) {
-  var request = new Request(`http://70.48.63.175:8080/JobineDB/webresources/entities.user/${profile.idUser}`, {
+  var request = new Request(`http://70.48.63.175:8080/Jobine/webresources/entities.user/${profile.idUser}`, {
     method: 'DELETE', 
     mode: 'cors', 
     headers: new Headers({

@@ -4,7 +4,7 @@ import Offer from '../domain/Offer';
 
 export async function FetchOffers(): Promise<any> {
   let attempt
-  await fetch("http://70.48.63.175:8080/JobineDB/webresources/entities.offer")
+  await fetch("http://70.48.63.175:8080/Jobine/webresources/entities.offer")
     .then((resp) => resp.json()) // Transform the data into json
     .then(function(data) {
       attempt = data;
@@ -24,7 +24,7 @@ export async function CreateOffer(newOffer: Offer): Promise<any> {
     idUser: newOffer.idUser,
     titleOffer: newOffer.titleOffer,
   });
-  let request = new Request("http://70.48.63.175:8080/JobineDB/webresources/entities.offer", {
+  let request = new Request("http://70.48.63.175:8080/Jobine/webresources/entities.offer", {
     method: 'POST', 
     mode: 'cors', 
     headers: new Headers({

@@ -3,7 +3,7 @@
 import Profile from '../../authentication/domain/Profile';
 
 export async function UpdateUsers(newProfile: Profile): Promise<any> {
-  var request = new Request(`http://70.48.63.175:8080/JobineDB/webresources/entities.user/${newProfile.idUser}`, {
+  var request = new Request(`http://70.48.63.175:8080/Jobine/webresources/entities.user/${newProfile.idUser}`, {
 	method: 'PUT', 
 	mode: 'cors', 
 	headers: new Headers({
