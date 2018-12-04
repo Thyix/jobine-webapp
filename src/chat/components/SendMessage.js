@@ -13,6 +13,8 @@ import { getChatUser } from '../../offers/selectors/offerSelector';
 import { createMessage } from '../actions/chatActions'; 
 import { Metrics, Colors } from '../../main/themes';
 import Message from '../domain/Message';
+import Profile from '../../authentication/domain/Profile';
+import { getMessages } from '../selector/chatSelector';
 
 const ChatInputContainer = styled.div`
   display: flex !important;
@@ -41,6 +43,7 @@ const AttachFileContainer = styled.div`
 type Props = {
   session: Profile,
   chatUser: Profile,
+  messages: Message[],
   actions: {
     createMessage: (message: Message) => Promise<void>,
   }
@@ -61,8 +64,9 @@ export class SendMessage extends React.Component<Props, State> {
   reset = () => this.setState({ message: '' });
 
   sendMessage = async () => {
-    const newMessage = Message.parseNew(this.state.message, moment())
+    const newMessage = Message.parseNew(this.state.message, moment(), this.props.messages.length + 2, 0, this.props.session.idUser, this.props.chatUser.idUser);
     try {
+      this.props.actions.createMessage(newMessage);
       this.setState({ message: '', sending: true });
     } finally {
       this.setState({ sending: false });
@@ -85,11 +89,12 @@ contentMsg: contentMsg,
     idUserFrom: idUserFrom,
     idUserTo: idUserTo,*/
     return (
-      <ChatInputContainer style={{ backgroundColor: Colors.highlightedBackground}} >
+      <ChatInputContainer style={{ backgroundColor: Colors.highlightedBackground}}>
         <TextFieldContainer>
           <TextField
             fullWidth
             id="messageTextField"
+            disabled={!this.props.chatUser}
             onChange={(event)=> this.setState({ message: event.target.value })}
             onKeyPress={(event) => this.userPressedKey(event.key)}
             placeholder={'Vous pouvez entrer un message'}
@@ -114,6 +119,7 @@ function mapStateToProps(state) {
   return {
     session: getSession(state),
     chatUser: getChatUser(state),
+    messages: getMessages(state),
   };
 }
 

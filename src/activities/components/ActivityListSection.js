@@ -28,28 +28,24 @@ type Props = {
 export class ActivityListSection extends React.Component<Props> {
   render() {
     let chatTitle;
-    this.props.chatUser ? chatTitle = `Fil des messages avec ${this.props.chatUser.nameUser}` :  chatTitle = 'Fil des messages';
+    this.props.chatUser ? chatTitle = `Fil des messages avec ${this.props.chatUser.nameUser}` :  chatTitle = 'Vous devez choisir un contact pour voir le fil de discussion';
+    console.log('activities', this.activities, 'session', this.props.session, 'chatUser', this.props.chatUser);
     return (
       <React.Fragment>
         <Grid item xs={12} style={{  marginLeft:'15px', marginRight:'50px' }}>
           <StyledTitledDivider id="sectionTitle" title={this.props.tab === 'recents' ? "Fil d'actualité" : chatTitle} />
         </Grid>
         {this.props.activities && this.props.activities.map(a =>
-              <div key={a.idOffer}>
+              <div key={this.props.tab === 'recents' ? a.idOffer : a.idMsg}>
                 {this.props.tab === 'recents' ?
                   <div style={{ marginLeft: '100px', alignSelf:'center', justifyContent:'space-between', color: 'blue' }}>
                     <OfferListItem offer={a}/>
                   </div>
                 :
                   <div>
-                  {this.props.chatUser ?
-                    <ChatMessage chatMessage={a} received={this.props.session.idUser === a.idUserFrom? false : true}/>
-                  :
-                  <div style={{display:'flex', marginLeft: 400, justifyContent:'center', alignContent:'center', marginTop: Metrics.spacing.huge }}>
-                    <Typography style={{ color: Colors.primary, fontSize: 25, display:'flex', textAlign:'center'}}>
-                      Vous devez postuler ou envoyer un message <br/> à un utilisateur pour voir le fil des messages
-                    </Typography>
-                  </div>
+                  {this.props.chatUser &&
+                    <ChatMessage chatMessage={(a.idUserFrom === this.props.session.idUser && a.idUserTo === this.props.chatUser.idUser) ||
+                    (a.idUserFrom === this.props.chatUser.idUser && a.idUserTo === this.props.session.idUser) ? a : null} received={this.props.session.idUser === a.idUserFrom ? false : true}/>
                   }
                   </div>
                 }
