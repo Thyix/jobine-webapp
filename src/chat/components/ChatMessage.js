@@ -52,10 +52,11 @@ type Props = {
 
 class ChatMessage extends React.Component<Props> {
   render() {
+    console.log('chat mesasge', this.props.chatMessage);
       return (
         <div>
           {this.props.chatMessage !== null && 
-          <MessageContent style={{ marginLeft: this.props.received ? Metrics.spacing.small : 1100, marginRight: this.props.received ? 750 : Metrics.spacing.small, }}>
+          <MessageContent style={{ marginLeft: this.props.received ? Metrics.spacing.small : 1100, marginRight: this.props.received ? 750 : Metrics.spacing.small, maxWidth: 300 }}>
             {this.props.received ?
               <React.Fragment>
                 <StyledMessage style={{ backgroundColor: this.props.received ? Colors.disabled : Colors.neutral }}>

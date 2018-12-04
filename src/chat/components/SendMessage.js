@@ -81,13 +81,6 @@ export class SendMessage extends React.Component<Props, State> {
 
   render() {
 
-    /*
-contentMsg: contentMsg,
-    dateMsg: dateMsg,
-    idMsg: idMsg,
-    idOffer: idOffer,
-    idUserFrom: idUserFrom,
-    idUserTo: idUserTo,*/
     return (
       <ChatInputContainer style={{ backgroundColor: Colors.highlightedBackground}}>
         <TextFieldContainer>
