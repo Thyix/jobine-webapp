@@ -15,6 +15,7 @@ import ViewContact from '../../offers/containers/ViewContact';
 import ViewOffer from '../../offers/containers/ViewOffer';
 import { getTab } from '../../offers/selectors/offerSelector';
 import SendMessage from '../../chat/components/SendMessage';
+import ManageTab from './tabs/ManagerTab';
 
 type Props = {
   actions: {
@@ -81,6 +82,10 @@ class Activities extends React.Component<Props, State> {
         this.props.history.push(Scenes.Contact);
         this.props.actions.changeTab(3);
         break;
+      case 4:
+        this.props.history.push(Scenes.Manage);
+        this.props.actions.changeTab(4);
+        break;
       default:
     }
   };
@@ -93,12 +98,14 @@ class Activities extends React.Component<Props, State> {
           <Tab label="Fil des messages" />
           <Tab label="Visualiser une offre" />
           <Tab label="Visualiser un profil"/>
+          <Tab label="Gérer mes offres"/>
         </StyledTabs>
         <TabContent>
           {this.props.tab === 0 && <Recents/>}
           {this.props.tab === 1 && <Answers/>}
           {this.props.tab === 2 && <ViewOffer/>}
           {this.props.tab === 3 && <ViewContact/>}
+          {this.props.tab === 4 && <ManageTab/>}
         </TabContent>
         {this.props.tab === 1 &&  <SendMessage/>}
       </RootContainer>

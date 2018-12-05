@@ -26,7 +26,6 @@ export function fetchMessages(session: Profile) {
 export function  createMessage(message: Message) {
   return async (dispatch: Function, getState: any) => {
     const newMessage = await CreateMessage(message);
-    console.log('new message', newMessage);
     dispatch({ type: CREATE_MESSAGE, messages: newMessage });
   }
 }

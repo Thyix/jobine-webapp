@@ -10,4 +10,5 @@ export default {
   Recents: 'recents',
   Messages: '/messages',
   Offer: '/offer',
+  Manage:'/manage',
 };
