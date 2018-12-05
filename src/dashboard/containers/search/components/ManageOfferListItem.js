@@ -8,7 +8,8 @@ import styled from 'styled-components';
 import { withRouter } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { IconButton, Avatar } from '@material-ui/core';
-import Book from '@material-ui/icons/Book';
+import Delete from '@material-ui/icons/Delete';
+import Edit from '@material-ui/icons/Edit';
 import { Metrics, Fonts, Colors } from '../../../../main/themes';
 
 const ContactContainer = styled.div`
@@ -58,7 +59,6 @@ const Actions = styled.div`
 `;
 
 const ActionIconButton = styled(IconButton)`
-  background-color: ${Colors.primary} !important;
   color: ${Colors.secondary} !important;
   width: ${Metrics.icons.medium}px !important;
   height: ${Metrics.icons.medium}px !important;
@@ -118,11 +118,11 @@ export class ManageOfferListItem extends React.Component<Props, State> {
 
         <PosedActions pose={this.state.hovered ? 'visible' : 'hidden'}>
           <Actions>
-            <ActionIconButton id="phoneButton" onClick={() => this.onContactClicked()}>
-              <Book fontSize="small" />
+            <ActionIconButton style={{ backgroundColor: Colors.green }} id="phoneButton" onClick={() => this.onContactClicked()}>
+              <Edit fontSize="small" />
             </ActionIconButton>
-            <ActionIconButton id="phoneButton" onClick={() => this.onContactClicked()}>
-              <Book fontSize="small" />
+            <ActionIconButton style={{ backgroundColor: Colors.error }} id="phoneButton" onClick={() => this.onContactClicked()}>
+              <Delete fontSize="small" />
             </ActionIconButton>
           </Actions>
         </PosedActions>
