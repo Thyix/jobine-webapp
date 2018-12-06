@@ -71,6 +71,7 @@ export function deleteOffer(offer: Offer) {
 
 export function updateOffer(newOffer: Offer) {
   return async (dispatch: Function, getState: any) => {
+    console.log('new offer', newOffer);
     const updated = await UpdateOffer(newOffer);
     dispatch({ type: UPDATE_OFFER, offers: updated });
 

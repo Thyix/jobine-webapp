@@ -69,6 +69,7 @@ fetch(request, {
     descriptionOffer: newOffer.descriptionOffer,
     domainOffer: newOffer.domainOffer,
     imgOffer: newOffer.imgOffer,
+    idOffer: newOffer.idOffer,
     idUser: newOffer.idUser,
     titleOffer: newOffer.titleOffer,
     })

@@ -39,7 +39,7 @@ Offer.parse = (plain: any): Offer => {
   });
 };
 
-Offer.parseNew = (address: string, date: string, days: number, description: string, domain: string, imgOffer: string, idUser: string, title:string): Offer => {
+Offer.parseNew = (address: string, date: string, days: number, description: string, domain: string, imgOffer: string, idOffer: string, idUser: string, title:string): Offer => {
   return new Offer({
     addressOffer: address,
     dateOffer: date,
@@ -47,6 +47,7 @@ Offer.parseNew = (address: string, date: string, days: number, description: stri
     descriptionOffer: description,
     domainOffer: domain,
     imgOffer: imgOffer,
+    idOffer: idOffer,
     idUser: idUser,
     titleOffer: title,
   });

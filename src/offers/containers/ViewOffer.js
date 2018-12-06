@@ -92,18 +92,6 @@ type Props = {
   }
 }
 
-/*
-addressOffer: plain["adressOffer"],
-    dateOffer: plain["dateOffer"],
-    daysOffer: plain["daysOffer"],
-    descriptionOffer: plain["descriptionOffer"],
-    domainOffer: plain["domainOffer"],
-    imgOffer: plain["imgOffer"],
-    idOffer: plain["idOffer"],
-    idUser: plain["idUser"],
-    titleOffer: plain["titleOffer"],
-*/
-
 type State = {
   titleOffer: string,
   descriptionOffer: string,
@@ -132,7 +120,10 @@ export class ViewOffer extends React.Component<Props, State> {
   }
 
   editOffer() {
-    console.log('editing offer');
+    const newOffer = Offer.parseNew(this.state.addressOffer, this.props.selectedOffer.dateOffer, this.props.selectedOffer.daysOffer,
+    this.state.descriptionOffer, this.state.domainOffer, this.props.selectedOffer.imgOffer, this.props.selectedOffer.idOffer, this.props.selectedOffer.idUser, this.state.titleOffer);
+    console.log(newOffer);
+    this.props.actions.updateOffer(newOffer);
   }
 
   render() {
@@ -148,6 +139,7 @@ export class ViewOffer extends React.Component<Props, State> {
                 id="titleField"
                 label={"Titre de l'offre"}
                 style={{color: Colors.primary}}
+                onChange={(event) => this.setState({ titleOffer: event.target.value })}
                 type="text"
                 value={this.state.titleOffer || 'Aucun titre'}
                 variant="outlined"
@@ -163,6 +155,7 @@ export class ViewOffer extends React.Component<Props, State> {
                 rowsMax="4"
                 type="text"
                 autoComplete="description"
+                onChange={(event) => this.setState({ descriptionOffer: event.target.value })}
                 value={this.state.descriptionOffer || 'Aucune description'}
                 variant="outlined"
                 InputProps={{
@@ -175,6 +168,7 @@ export class ViewOffer extends React.Component<Props, State> {
                 label={"Domaine associé"}
                 type="text"
                 autoComplete="domain"
+                onChange={(event) => this.setState({ domainOffer: event.target.value })}
                 value={this.state.domainOffer || 'Aucun domaine' }
                 variant="outlined"
                 InputProps={{
@@ -199,6 +193,7 @@ export class ViewOffer extends React.Component<Props, State> {
                 id="adressField"
                 label={"Adresse de l'entreprise"}
                 type="text"
+                onChange={(event) => this.setState({ addressOffer: event.target.value })}
                 value={this.state.addressOffer || 'Aucune adresse'}
                 variant="outlined"
                 InputProps={{
