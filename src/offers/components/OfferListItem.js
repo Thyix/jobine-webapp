@@ -10,7 +10,7 @@ import Scenes from '../../main/navigation/Scenes';
 import { bindActionCreators }  from 'redux';
 import { getSession, getAllUsers } from '../../authentication/selectors/authenticationSelectors';
 import { Medias, Metrics, Colors } from '../../main/themes';
-import { updateSelectedOffer, changeTab } from '../actions/offersActions'; 
+import { updateSelectedOffer, changeTab, updateChatUser } from '../actions/offersActions'; 
 import Profile from '../../authentication/domain/Profile';
 import Offer from '../domain/Offer';
 
@@ -43,6 +43,7 @@ type Props = {
   session: Profile,
   actions: {
     updateSelectedOffer: () => Promise<void>,
+    updateChatUser: (user: Profile) => Promise<void>,
     changeTab: (id: number) => Promise<void>,
   },
   offer: Offer,
@@ -86,7 +87,13 @@ export class OfferListItem extends React.Component<Props, State> {
     this.props.actions.updateSelectedOffer(this.props.offer);
     this.props.actions.changeTab(2);
     this.props.history.push(Scenes.Offer);
-  } 
+  }
+
+  sendMessage() {
+    this.props.actions.updateChatUser(this.props.users.filter(u => u.idUser === this.props.offer.idUser)[0]);
+    this.props.actions.changeTab(1);
+    this.props.history.push(Scenes.Messages);
+  }
   render() {
     let user = this.props.users.filter(u => u.idUser === this.props.offer.idUser) || this.props.session;
     return (
@@ -134,7 +141,7 @@ export class OfferListItem extends React.Component<Props, State> {
                 </CardContent>
               </CardActionArea>
               <CardActions style={{ backgroundColor: Colors.highlightedBackground }}>
-                <Button size="small" color="secondary">
+                <Button size="small" color="secondary" onClick={() => this.sendMessage()}>
                   Postuler
                 </Button>
                 <Button size="small" color="secondary" onClick={() => this.seeOffer()}>
@@ -161,6 +168,7 @@ function mapDispatchToProps(dispatch: Function) {
   return {
     actions: bindActionCreators({
       updateSelectedOffer,
+      updateChatUser,
       changeTab,
     }, dispatch),
   };
