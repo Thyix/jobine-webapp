@@ -2,8 +2,8 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import Grid from '@material-ui/core/Grid';
-import { Medias } from '../../../main/themes';
+import { Grid, Typography } from '@material-ui/core';
+import { Medias, Colors, Metrics } from '../../../main/themes';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { fetchOffers } from '../../../offers/actions/offersActions';
@@ -90,6 +90,13 @@ export class ManagerTab extends React.Component<Props, State> {
               {myOffers && myOffers.map(o =>
                 <ManageOfferListItem key={o.idOffer} offer={o}/>
               )}
+              {myOffers.length === 0 &&
+                <div style={{display:'flex', justifyContent:'center', alignContent:'center', marginLeft: 475,  marginTop: Metrics.spacing.huge}}>
+                  <Typography style={{ color: Colors.primary, fontSize: 25, display:'flex', textAlign:'center'}}>
+                    Vous devez sélectionner une offre <br/> pour voir ses informations
+                  </Typography>
+                </div>
+              }
             </Grid>
           </CallHistoryContainer>
 
