@@ -78,7 +78,6 @@ export class Recents extends React.Component<Props, State> {
   
   render() {
     const myOffers = this.props.offers && this.props.offers.filter(o => o.idUser === this.props.session.idUser);
-    console.log(myOffers);
     return (
       <Container>
         <MainArea>

@@ -122,7 +122,6 @@ export class ViewOffer extends React.Component<Props, State> {
   editOffer() {
     const newOffer = Offer.parseNew(this.state.addressOffer, this.props.selectedOffer.dateOffer, this.props.selectedOffer.daysOffer,
     this.state.descriptionOffer, this.state.domainOffer, this.props.selectedOffer.imgOffer, this.props.selectedOffer.idOffer, this.props.selectedOffer.idUser, this.state.titleOffer);
-    console.log(newOffer);
     this.props.actions.updateOffer(newOffer);
   }
 

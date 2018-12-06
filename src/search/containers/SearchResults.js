@@ -70,7 +70,6 @@ export class SearchResults extends React.PureComponent<Props, State> {
   render() {
     const { query } = this.props;
     const selectedUsers = query.length > 0 && this.props.users.filter(u => u.nameUser.toUpperCase().includes(query.toUpperCase()));
-    console.log('selectedUsers', selectedUsers);
     if (!query) {
       return (
         <Container>
