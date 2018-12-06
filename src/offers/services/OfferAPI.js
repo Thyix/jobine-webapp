@@ -37,3 +37,16 @@ export async function CreateOffer(newOffer: Offer): Promise<any> {
   })
   return newOffer;
 }
+
+export async function DeleteOffer(offer: Offer) {
+  var request = new Request(`http://70.48.63.175:8080/Jobine/webresources/entities.offer/${offer.idOffer}`, {
+    method: 'DELETE', 
+    mode: 'cors', 
+    headers: new Headers({
+      'Accept': 'application/json',
+      'Content-Type': 'application/json' 
+    })
+  });
+  fetch(request, {
+  })
+}

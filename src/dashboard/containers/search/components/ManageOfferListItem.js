@@ -1,5 +1,4 @@
 // @flow
-// @flow
 
 import React from 'react';
 import { connect } from 'react-redux';
@@ -7,8 +6,11 @@ import posed from 'react-pose';
 import styled from 'styled-components';
 import { withRouter } from 'react-router';
 import { bindActionCreators } from 'redux';
+import Scenes from '../../../../main/navigation/Scenes';
+import Offer from '../../../../offers/domain/Offer';
 import { IconButton, Avatar } from '@material-ui/core';
 import Delete from '@material-ui/icons/Delete';
+import { changeTab, updateSelectedOffer } from '../../../../offers/actions/offersActions';
 import Edit from '@material-ui/icons/Edit';
 import { Metrics, Fonts, Colors } from '../../../../main/themes';
 
@@ -78,7 +80,7 @@ type Props = {
   },
   actions: {
     changeTab: (id: number) => Promise<void>,
-    updateSelectedUser: (user: Profile) => Promise<void>,
+    updateSelectedOffer: (offer: Offer) => Promise<void>,
   }
 }
 
@@ -92,13 +94,17 @@ export class ManageOfferListItem extends React.Component<Props, State> {
     hovered: false,
   };
 
-  onContactClicked = () => {
+  onOfferClicked() {
+    this.props.actions.changeTab(2);
+    this.props.actions.updateSelectedOffer(this.props.offer);
+    this.props.history.push(Scenes.Offer);
   };
 
   render() {
 
     return (
       <ContactContainer
+        onClick={() => this.onOfferClicked()}
         onMouseEnter={() => this.setState({ hovered: true })}
         onMouseLeave={() => this.setState({ hovered: false })}
       >
@@ -140,6 +146,8 @@ function mapStateToProps(state: any, ownProps: Props) {
 function mapDispatchToProps(dispatch: Function) {
   return {
     actions: bindActionCreators({
+      changeTab,
+      updateSelectedOffer,
     }, dispatch),
   };
 }
