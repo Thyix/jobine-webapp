@@ -90,7 +90,7 @@ export class ManagerTab extends React.Component<Props, State> {
               {myOffers && myOffers.map(o =>
                 <ManageOfferListItem key={o.idOffer} offer={o}/>
               )}
-              {myOffers.length === 0 &&
+              {(myOffers && myOffers.length === 0) &&
                 <div style={{display:'flex', justifyContent:'center', alignContent:'center', marginLeft: 475,  marginTop: Metrics.spacing.huge}}>
                   <Typography style={{ color: Colors.primary, fontSize: 25, display:'flex', textAlign:'center'}}>
                     Vous devez sélectionner une offre <br/> pour voir ses informations
