@@ -32,6 +32,9 @@ const hasFailedUpdate = createSelector(updateFailed, (failedUpdate) => failedUpd
 const allUsersSelector = state => state.authentication.profiles;
 const getAllUsers = createSelector(allUsersSelector, (profiles) => profiles);
 
+const adminSelector = state => state.authentication.admin;
+const isAdmin = createSelector(adminSelector, (admin) => admin);
+
 export { 
   getSession, 
   isAuthenticated,
@@ -43,4 +46,5 @@ export {
   isUpdating,
   hasFailedUpdate,
   getAllUsers,
+  isAdmin,
 };

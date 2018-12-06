@@ -13,6 +13,7 @@ export const UPDATE_REQUEST = 'authentication/UPDATE_REQUEST';
 export const UPDATE_SUCCESS = 'authentication/UPDATE_SUCCESS';
 export const UPDATE_FAILURE = 'authentication/UPDATE_FAILURE';
 export const FETCH_PROFILES = 'authentication/FETCH_PROFILES';
+export const IS_ADMIN = 'authentication/IS_ADMIN';
 
 export const DELETE = 'authentication/DELETE';
 export const LOGOUT = 'authentication/LOGOUT';
@@ -24,6 +25,10 @@ export function login(identifier: string, password: string) {
       const loggedUser = await AuthenticationLogin(identifier, password);
       if (loggedUser) {
         dispatch({ type: LOGIN_SUCCESS, session: loggedUser });
+        if (loggedUser.idUserType === 2) {
+          console.log('that man is an admin');
+          dispatch({ type: IS_ADMIN });
+        }
       } else {
         dispatch({ type: LOGIN_FAILURE });
       }

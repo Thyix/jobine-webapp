@@ -70,6 +70,7 @@ export class Recents extends React.Component<Props, State> {
   componentWillUnmount() {
     clearInterval(this.intervalID);
   }
+  
   tick() {
     this.setState({
       time: new Date().toLocaleString()

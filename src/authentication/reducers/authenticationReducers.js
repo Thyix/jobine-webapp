@@ -15,6 +15,8 @@ import {
 
   DELETE,
 
+  IS_ADMIN,
+
   FETCH_PROFILES,
 
   LOGOUT,
@@ -32,6 +34,8 @@ const initialState = {
   failedUpdate: false,
 
   profiles: [],
+
+  admin: false,
 
   session: undefined,
   failed: false,
@@ -77,8 +81,12 @@ export default function reducer(state: any = initialState, action: any) {
       return { ...state, authenticated: false, authenticating: false, session: null};
     }
 
+    case IS_ADMIN: {
+      return { ...state, admin: true };
+    }
+
     case LOGOUT: {
-      return { ...state, authenticated: false, authenticating: false};
+      return { ...state, authenticated: false, authenticating: false, admin: false };
     }
 
     default:
