@@ -9,8 +9,8 @@ import { bindActionCreators }  from 'redux';
 import Scenes from '../../main/navigation/Scenes';
 import { Medias, Metrics, Colors } from '../../main/themes';
 import Profile from '../../authentication/domain/Profile';
-import { changeTab, updateSelectedUser, updateChatUser } from '../actions/offersActions';
-import { getAllUsers } from '../../authentication/selectors/authenticationSelectors';
+import { changeTab, updateSelectedUser, updateChatUser, updateOffer } from '../actions/offersActions';
+import { getAllUsers, getSession } from '../../authentication/selectors/authenticationSelectors';
 import Offer from '../domain/Offer';
 import { getSelectedOffer } from '../selectors/offerSelector';
 
@@ -70,6 +70,15 @@ const ProfileButton = styled(Button)`
   padding-vertical: ${Metrics.spacing.small}px !important;
 `;
 
+const EditButton = styled(Button)`
+  margin-top: ${Metrics.spacing.large}px !important;
+  width: 225px !important;
+  height: 40px !important;
+  font-size: 11px !important;
+  border-radius: 20px !important; 
+  padding-vertical: ${Metrics.spacing.small}px !important;
+`;
+
 
 type Props = {
   session: Profile,
@@ -83,12 +92,31 @@ type Props = {
   }
 }
 
+/*
+addressOffer: plain["adressOffer"],
+    dateOffer: plain["dateOffer"],
+    daysOffer: plain["daysOffer"],
+    descriptionOffer: plain["descriptionOffer"],
+    domainOffer: plain["domainOffer"],
+    imgOffer: plain["imgOffer"],
+    idOffer: plain["idOffer"],
+    idUser: plain["idUser"],
+    titleOffer: plain["titleOffer"],
+*/
+
 type State = {
+  titleOffer: string,
+  descriptionOffer: string,
+  domainOffer: string,
+  addressOffer: string,
 }
 
 export class ViewOffer extends React.Component<Props, State> {
   state = {
-
+    titleOffer: this.props.selectedOffer && this.props.selectedOffer.titleOffer,
+    descriptionOffer: this.props.selectedOffer && this.props.selectedOffer.descriptionOffer,
+    domainOffer: this.props.selectedOffer && this.props.selectedOffer.domainOffer,
+    addressOffer: this.props.selectedOffer && this.props.selectedOffer.addressOffer,
   }
 
   goToContact() {
@@ -101,6 +129,10 @@ export class ViewOffer extends React.Component<Props, State> {
     this.props.actions.updateChatUser(this.props.users.filter(u => u.idUser === this.props.selectedOffer.idUser)[0]);
     this.props.actions.changeTab(1);
     this.props.history.push(Scenes.Messages);
+  }
+
+  editOffer() {
+    console.log('editing offer');
   }
 
   render() {
@@ -117,10 +149,10 @@ export class ViewOffer extends React.Component<Props, State> {
                 label={"Titre de l'offre"}
                 style={{color: Colors.primary}}
                 type="text"
-                value={this.props.selectedOffer.titleOffer || 'Aucun titre'}
+                value={this.state.titleOffer || 'Aucun titre'}
                 variant="outlined"
                 InputProps={{
-                  readOnly: true,
+                  readOnly: this.props.session.idUser === this.props.selectedOffer.idUser ? false : true,
                 }}
               />
 
@@ -131,10 +163,10 @@ export class ViewOffer extends React.Component<Props, State> {
                 rowsMax="4"
                 type="text"
                 autoComplete="description"
-                value={this.props.selectedOffer.descriptionOffer || 'Aucune description'}
+                value={this.state.descriptionOffer || 'Aucune description'}
                 variant="outlined"
                 InputProps={{
-                  readOnly: true,
+                  readOnly: this.props.session.idUser === this.props.selectedOffer.idUser ? false : true,
                 }}
               />
 
@@ -143,10 +175,10 @@ export class ViewOffer extends React.Component<Props, State> {
                 label={"Domaine associé"}
                 type="text"
                 autoComplete="domain"
-                value={this.props.selectedOffer.domainOffer || 'Aucun domaine' }
+                value={this.state.domainOffer || 'Aucun domaine' }
                 variant="outlined"
                 InputProps={{
-                  readOnly: true,
+                  readOnly: this.props.session.idUser === this.props.selectedOffer.idUser ? false : true,
                 }}
               />
 
@@ -158,7 +190,7 @@ export class ViewOffer extends React.Component<Props, State> {
                 value={this.props.selectedOffer.daysOffer + ' jours' || 'Aucune durée'}
                 variant="outlined"
                 InputProps={{
-                  readOnly: true,
+                  readOnly: this.props.session.idUser === this.props.selectedOffer.idUser ? false : true,
                 }}
               />
 
@@ -167,10 +199,10 @@ export class ViewOffer extends React.Component<Props, State> {
                 id="adressField"
                 label={"Adresse de l'entreprise"}
                 type="text"
-                value={this.props.selectedOffer.addressOffer || 'Aucune adresse'}
+                value={this.state.addressOffer || 'Aucune adresse'}
                 variant="outlined"
                 InputProps={{
-                  readOnly: true,
+                  readOnly: this.props.session.idUser === this.props.selectedOffer.idUser ? false : true,
                 }}
               />
             </React.Fragment>
@@ -195,6 +227,19 @@ export class ViewOffer extends React.Component<Props, State> {
             >
               Profil de l'annonceur
             </ProfileButton>
+
+            {this.props.session.idUser === this.props.selectedOffer.idUser &&
+              <EditButton
+                color="primary"
+                id="editOffer"
+                onClick={
+                  () => this.editOffer()
+                }
+                variant="contained"
+              >
+                Modifier l'offre
+              </EditButton>
+            }
           </Grid>
           :
           <div style={{display:'flex', justifyContent:'center', alignContent:'center', marginTop: Metrics.spacing.huge}}>
@@ -213,6 +258,7 @@ const mapStateToProps = (state: any) => {
   return {
     selectedOffer: getSelectedOffer(state),
     users: getAllUsers(state),
+    session: getSession(state),
   };
 };
 
@@ -222,6 +268,7 @@ function mapDispatchToProps(dispatch: Function) {
       changeTab,
       updateSelectedUser,
       updateChatUser,
+      updateOffer,
     }, dispatch),
   };
 }

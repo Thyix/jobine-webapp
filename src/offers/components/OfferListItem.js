@@ -134,7 +134,7 @@ export class OfferListItem extends React.Component<Props, State> {
                   <Typography component="b" style={{color:'black'}}>Publié par: </Typography>
                     <div style={{display:'flex', justifyContent:'space-between'}}>
                     <Avatar src={user[0] ? this.getImage(user[0]) : 'https://krourke.org/img/md_avatar_stormtrooper.svg'}/>
-                    <Typography component="p"  style={{ marginTop:10, marginLeft: 20, fontSize: 15}}>{user[0] ? user[0].nameUser : ''}</Typography>
+                    <Typography component="p"  style={{ marginTop:10, marginLeft: 20, fontSize: 15}}>{user[0] ? user[0].nameUser : 'Aucun nom associé'}</Typography>
                     </div>
 
 

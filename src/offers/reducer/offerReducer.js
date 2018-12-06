@@ -10,6 +10,7 @@ import {
   UPDATE_CHAT_USER,
   CREATE_OFFER,
   DELETE_OFFER,
+  UPDATE_OFFER,
 } from '../actions/offersActions';
 
 const initialState = {
@@ -46,10 +47,13 @@ export default function reducer(state: any = initialState, action: any) {
       return { ...state, chatUser: action.chatUser };
     }
     case CREATE_OFFER: {
-      return { ...state, offers: [...state.offers, action.offers]}
+      return { ...state, offers: [...state.offers, action.offers]};
     }
     case DELETE_OFFER: {
       return { ...state, fetching: false }; 
+    }
+    case UPDATE_OFFER: {
+      return { ...state, offer: [...state.offers, action.offers]};
     }
     default:
       return state;

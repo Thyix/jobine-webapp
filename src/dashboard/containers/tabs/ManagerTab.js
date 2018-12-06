@@ -86,7 +86,7 @@ export class Recents extends React.Component<Props, State> {
           <CallHistoryContainer>
             <Grid container style={{ backgroundColor: 'white', height: '100%', paddingBottom:'50px' }}>
               {myOffers && myOffers.map(o =>
-                <ManageOfferListItem key={myOffers.idOffer} offer={o}/>
+                <ManageOfferListItem key={o.idOffer} offer={o}/>
               )}
             </Grid>
           </CallHistoryContainer>

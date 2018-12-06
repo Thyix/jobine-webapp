@@ -50,3 +50,28 @@ export async function DeleteOffer(offer: Offer) {
   fetch(request, {
   })
 }
+
+export async function UpdateOffer(newOffer: Offer): Promise<any> {
+  var request = new Request(`http://70.48.63.175:8080/Jobine/webresources/entities.offer/${newOffer.idOffer}`, {
+	method: 'PUT', 
+	mode: 'cors', 
+	headers: new Headers({
+		'Accept': 'application/json',
+    'Content-Type': 'application/json' 
+	})
+});
+
+fetch(request, {
+  body: JSON.stringify({
+    addressOffer: newOffer.addressOffer,
+    dateOffer: newOffer.dateOffer,
+    daysOffer: newOffer.daysOffer,
+    descriptionOffer: newOffer.descriptionOffer,
+    domainOffer: newOffer.domainOffer,
+    imgOffer: newOffer.imgOffer,
+    idUser: newOffer.idUser,
+    titleOffer: newOffer.titleOffer,
+    })
+  });
+  return newOffer;
+}
