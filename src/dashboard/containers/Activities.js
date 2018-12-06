@@ -11,11 +11,13 @@ import { bindActionCreators } from 'redux';
 import { changeTab } from '../../offers/actions/offersActions';
 import Recents from './tabs/Recents';
 import Answers from './tabs/Answers';
+import { isAdmin } from '../../authentication/selectors/authenticationSelectors';
 import ViewContact from '../../offers/containers/ViewContact';
 import ViewOffer from '../../offers/containers/ViewOffer';
 import { getTab } from '../../offers/selectors/offerSelector';
 import SendMessage from '../../chat/components/SendMessage';
 import ManageTab from './tabs/ManagerTab';
+import ManageAccounts from './tabs/ManageAccounts';
 
 type Props = {
   actions: {
@@ -26,6 +28,7 @@ type Props = {
     push: Function,
   },
   messages: any,
+  admin: boolean,
 };
 
 type State = {
@@ -86,6 +89,10 @@ class Activities extends React.Component<Props, State> {
         this.props.history.push(Scenes.Manage);
         this.props.actions.changeTab(4);
         break;
+      case 5:
+        this.props.history.push(Scenes.ManageAccounts);
+        this.props.actions.changeTab(5);
+        break;
       default:
     }
   };
@@ -99,6 +106,9 @@ class Activities extends React.Component<Props, State> {
           <Tab label="Visualiser une offre" />
           <Tab label="Visualiser un profil"/>
           <Tab label="Gérer mes offres"/>
+          {this.props.admin &&
+            <Tab label="Gérer les comptes"/>
+          }
         </StyledTabs>
         <TabContent>
           {this.props.tab === 0 && <Recents/>}
@@ -106,6 +116,7 @@ class Activities extends React.Component<Props, State> {
           {this.props.tab === 2 && <ViewOffer/>}
           {this.props.tab === 3 && <ViewContact/>}
           {this.props.tab === 4 && <ManageTab/>}
+          {this.props.tab === 5 && <ManageAccounts/>} 
         </TabContent>
         {this.props.tab === 1 &&  <SendMessage/>}
       </RootContainer>
@@ -117,6 +128,7 @@ class Activities extends React.Component<Props, State> {
 const mapStateToProps = (state: any) => {
   return {
     tab: getTab(state),
+    admin: isAdmin(state),
   };
 };
 

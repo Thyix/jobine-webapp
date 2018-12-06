@@ -10,7 +10,7 @@ import Scenes from '../../main/navigation/Scenes';
 import { Medias, Metrics, Colors } from '../../main/themes';
 import Profile from '../../authentication/domain/Profile';
 import { changeTab, updateSelectedUser, updateChatUser, updateOffer, fetchOffers } from '../actions/offersActions';
-import { getAllUsers, getSession } from '../../authentication/selectors/authenticationSelectors';
+import { getAllUsers, getSession, isAdmin } from '../../authentication/selectors/authenticationSelectors';
 import Offer from '../domain/Offer';
 import { getSelectedOffer } from '../selectors/offerSelector';
 
@@ -89,7 +89,8 @@ type Props = {
   selectedOffer: Offer,
   history: {
     push: Function,
-  }
+  },
+  admin: boolean,
 }
 
 type State = {
@@ -108,6 +109,10 @@ export class ViewOffer extends React.Component<Props, State> {
   }
 
   componentWillMount() {
+    this.props.actions.fetchOffers();
+  }
+
+  componentWillUnmount() {
     this.props.actions.fetchOffers();
   }
 
@@ -148,7 +153,7 @@ export class ViewOffer extends React.Component<Props, State> {
                 value={this.state.titleOffer || 'Aucun titre'}
                 variant="outlined"
                 InputProps={{
-                  readOnly: this.props.session.idUser === this.props.selectedOffer.idUser ? false : true,
+                  readOnly: ((this.props.session.idUser === this.props.selectedOffer.idUser) || (this.props.admin)) ? false : true,
                 }}
               />
 
@@ -163,7 +168,7 @@ export class ViewOffer extends React.Component<Props, State> {
                 value={this.state.descriptionOffer || 'Aucune description'}
                 variant="outlined"
                 InputProps={{
-                  readOnly: this.props.session.idUser === this.props.selectedOffer.idUser ? false : true,
+                  readOnly:((this.props.session.idUser === this.props.selectedOffer.idUser) || (this.props.admin)) ? false : true,
                 }}
               />
 
@@ -176,7 +181,7 @@ export class ViewOffer extends React.Component<Props, State> {
                 value={this.state.domainOffer || 'Aucun domaine' }
                 variant="outlined"
                 InputProps={{
-                  readOnly: this.props.session.idUser === this.props.selectedOffer.idUser ? false : true,
+                  readOnly: ((this.props.session.idUser === this.props.selectedOffer.idUser) || (this.props.admin)) ? false : true,
                 }}
               />
 
@@ -188,7 +193,7 @@ export class ViewOffer extends React.Component<Props, State> {
                 value={this.props.selectedOffer.daysOffer + ' jours' || 'Aucune durée'}
                 variant="outlined"
                 InputProps={{
-                  readOnly: this.props.session.idUser === this.props.selectedOffer.idUser ? false : true,
+                  readOnly: ((this.props.session.idUser === this.props.selectedOffer.idUser) || (this.props.admin)) ? false : true,
                 }}
               />
 
@@ -201,7 +206,7 @@ export class ViewOffer extends React.Component<Props, State> {
                 value={this.state.addressOffer || 'Aucune adresse'}
                 variant="outlined"
                 InputProps={{
-                  readOnly: this.props.session.idUser === this.props.selectedOffer.idUser ? false : true,
+                  readOnly: ((this.props.session.idUser === this.props.selectedOffer.idUser) || (this.props.admin)) ? false : true,
                 }}
               />
             </React.Fragment>
@@ -227,7 +232,7 @@ export class ViewOffer extends React.Component<Props, State> {
               Profil de l'annonceur
             </ProfileButton>
 
-            {this.props.session.idUser === this.props.selectedOffer.idUser &&
+            {((this.props.session.idUser === this.props.selectedOffer.idUser) || (this.props.admin)) &&
               <EditButton
                 color="primary"
                 id="editOffer"
@@ -258,6 +263,7 @@ const mapStateToProps = (state: any) => {
     selectedOffer: getSelectedOffer(state),
     users: getAllUsers(state),
     session: getSession(state),
+    admin: isAdmin(state),
   };
 };
 

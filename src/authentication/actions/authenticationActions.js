@@ -26,7 +26,6 @@ export function login(identifier: string, password: string) {
       if (loggedUser) {
         dispatch({ type: LOGIN_SUCCESS, session: loggedUser });
         if (loggedUser.idUserType === 2) {
-          console.log('that man is an admin');
           dispatch({ type: IS_ADMIN });
         }
       } else {
@@ -72,6 +71,12 @@ export function deleteProfile(user:Profile) {
   return async (dispatch: Function, getState: any) => {
     await DeleteProfile(user);
     dispatch({ type: DELETE });
+  }
+}
+
+export function deleteContact(user:Profile) {
+  return async (dispatch: Function, getState: any) => {
+    await DeleteProfile(user);
   }
 }
 

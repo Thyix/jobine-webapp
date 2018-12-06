@@ -11,4 +11,5 @@ export default {
   Messages: '/messages',
   Offer: '/offer',
   Manage:'/manage',
+  ManageAccounts:'/manageAccounts',
 };

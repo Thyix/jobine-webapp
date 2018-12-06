@@ -6,11 +6,10 @@ import Grid from '@material-ui/core/Grid';
 import { Medias } from '../../../main/themes';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { fetchOffers } from '../../../offers/actions/offersActions';
-import ManageOfferListItem from '../search/components/ManageOfferListItem';
-import { getOffer } from '../../../offers/selectors/offerSelector';
-import Offer from '../../../offers/domain/Offer';
-import { getSession, isAdmin } from '../../../authentication/selectors/authenticationSelectors';
+import { fetchProfiles } from '../../../authentication/actions/authenticationActions';
+import { getAllUsers } from '../../../authentication/selectors/authenticationSelectors';  
+import { getSession } from '../../../authentication/selectors/authenticationSelectors';
+import ManageAccountListItem from '../search/components/ManageAccountListItem';
 
 const Container = styled(Grid)`
   display: flex !important;
@@ -44,21 +43,20 @@ const CallHistoryContainer = styled.div`
 
 type Props = {
   actions: {
-    fetchOffers: () => Promise<void>,
     fetchProfiles: () => Promise<void>,
   },
-  offers: Offer[],
+  users: Profile[],
   admin: boolean,
 }
 
 type State = {}
 
-export class ManagerTab extends React.Component<Props, State> {
+export class ManagerAccounts extends React.Component<Props, State> {
 
   state = {}
   
   componentWillMount() {
-    this.props.actions.fetchOffers();
+    this.props.actions.fetchProfiles();
   }
 
   componentDidMount() {
@@ -74,21 +72,18 @@ export class ManagerTab extends React.Component<Props, State> {
     this.setState({
       time: new Date().toLocaleString()
     });
-    this.props.actions.fetchOffers();
+    this.props.actions.fetchProfiles();
   }
   
   render() {
-    let myOffers;
-    myOffers = this.props.offers && this.props.offers;
-    myOffers = (this.props.admin && this.props.offers) ? this.props.offers : (this.props.offers && this.props.offers.filter(o => o.idUser === this.props.session.idUser));
     return (
       <Container>
         <MainArea>
 
           <CallHistoryContainer>
             <Grid container style={{ backgroundColor: 'white', height: '100%', paddingBottom:'50px' }}>
-              {myOffers && myOffers.map(o =>
-                <ManageOfferListItem key={o.idOffer} offer={o}/>
+              {this.props.users && this.props.users.map(u =>
+                <ManageAccountListItem key={u.idUser} contact={u}/>
               )}
             </Grid>
           </CallHistoryContainer>
@@ -102,17 +97,16 @@ export class ManagerTab extends React.Component<Props, State> {
 
 function mapStateToProps(state) {
   return {
-    offers: getOffer(state),
     session: getSession(state),
-    admin: isAdmin(state),
+    users: getAllUsers(state),
   };
 }
 
 function mapDispatchToProps(dispatch: Function) {
   return {
     actions: bindActionCreators({
-      fetchOffers,
+      fetchProfiles,
     }, dispatch),
   };
 }
-export default connect(mapStateToProps, mapDispatchToProps)(ManagerTab);
+export default connect(mapStateToProps, mapDispatchToProps)(ManagerAccounts);
