@@ -10,7 +10,7 @@ import { fetchOffers } from '../../../offers/actions/offersActions';
 import ManageOfferListItem from '../search/components/ManageOfferListItem';
 import { getOffer } from '../../../offers/selectors/offerSelector';
 import Offer from '../../../offers/domain/Offer';
-import { getSession } from '../../../authentication/selectors/authenticationSelectors';
+import { getSession, isAdmin } from '../../../authentication/selectors/authenticationSelectors';
 
 const Container = styled(Grid)`
   display: flex !important;
@@ -48,6 +48,7 @@ type Props = {
     fetchProfiles: () => Promise<void>,
   },
   offers: Offer[],
+  admin: boolean,
 }
 
 type State = {}
@@ -77,7 +78,9 @@ export class Recents extends React.Component<Props, State> {
   }
   
   render() {
-    const myOffers = this.props.offers && this.props.offers.filter(o => o.idUser === this.props.session.idUser);
+    let myOffers;
+    myOffers = this.props.offers && this.props.offers;
+    myOffers = this.props.admin ? this.props.offers : this.props.offers.filter(o => o.idUser === this.props.session.idUser)
     return (
       <Container>
         <MainArea>
@@ -101,6 +104,7 @@ function mapStateToProps(state) {
   return {
     offers: getOffer(state),
     session: getSession(state),
+    admin: isAdmin(state),
   };
 }
 
