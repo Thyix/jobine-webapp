@@ -98,7 +98,7 @@ export class OfferListItem extends React.Component<Props, State> {
                 <CardMedia
                   component="img"
                   alt="Offer image card"
-                  style={{ height: 125, width: 150, marginLeft: 75, marginTop: Metrics.spacing.small }}
+                  style={{ height: 125, width: 150, marginLeft: 75, marginTop: Metrics.spacing.small, borderRadius: 20 }}
                   src={this.state.imgOffer || 'http://polishlinux.org/wp-content/uploads/2017/11/Preview-2-icon.png'}
                   title="Offer image"
                 />

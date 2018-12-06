@@ -9,6 +9,7 @@ import {
   UPDATE_SELECTED_OFFER,
   UPDATE_CHAT_USER,
   CREATE_OFFER,
+  DELETE_OFFER,
 } from '../actions/offersActions';
 
 const initialState = {
@@ -46,6 +47,9 @@ export default function reducer(state: any = initialState, action: any) {
     }
     case CREATE_OFFER: {
       return { ...state, offers: [...state.offers, action.offers]}
+    }
+    case DELETE_OFFER: {
+      return { ...state, fetching: false }; 
     }
     default:
       return state;

@@ -10,7 +10,7 @@ import Scenes from '../../../../main/navigation/Scenes';
 import Offer from '../../../../offers/domain/Offer';
 import { IconButton, Avatar } from '@material-ui/core';
 import Delete from '@material-ui/icons/Delete';
-import { changeTab, updateSelectedOffer } from '../../../../offers/actions/offersActions';
+import { changeTab, updateSelectedOffer, deleteOffer } from '../../../../offers/actions/offersActions';
 import Edit from '@material-ui/icons/Edit';
 import { Metrics, Fonts, Colors } from '../../../../main/themes';
 
@@ -81,6 +81,7 @@ type Props = {
   actions: {
     changeTab: (id: number) => Promise<void>,
     updateSelectedOffer: (offer: Offer) => Promise<void>,
+    deleteOffer: (offer: Offer) => Promise<void>,
   }
 }
 
@@ -100,16 +101,19 @@ export class ManageOfferListItem extends React.Component<Props, State> {
     this.props.history.push(Scenes.Offer);
   };
 
+  onDeleteOfferClicked() {
+    this.props.actions.deleteOffer(this.props.offer);
+  }
+
   render() {
 
     return (
       <ContactContainer
-        onClick={() => this.onOfferClicked()}
         onMouseEnter={() => this.setState({ hovered: true })}
         onMouseLeave={() => this.setState({ hovered: false })}
       >
-        <Identification onClick={this.onContactClicked}>
-          <div>
+        <Identification onClick={() => this.onOfferClicked()}>
+          <div style={{ marginLeft: Metrics.spacing.medium }}>
             <Avatar src={this.props.offer.imgOffer || 'https://krourke.org/img/md_avatar_stormtrooper.svg'} />
           </div>
           <TextContainer>
@@ -124,10 +128,10 @@ export class ManageOfferListItem extends React.Component<Props, State> {
 
         <PosedActions pose={this.state.hovered ? 'visible' : 'hidden'}>
           <Actions>
-            <ActionIconButton style={{ backgroundColor: Colors.green }} id="phoneButton" onClick={() => this.onContactClicked()}>
+            <ActionIconButton style={{ backgroundColor: Colors.green }} id="phoneButton" onClick={() => this.onOfferClicked()}>
               <Edit fontSize="small" />
             </ActionIconButton>
-            <ActionIconButton style={{ backgroundColor: Colors.error }} id="phoneButton" onClick={() => this.onContactClicked()}>
+            <ActionIconButton style={{ backgroundColor: Colors.error }} id="phoneButton" onClick={() => this.onDeleteOfferClicked()}>
               <Delete fontSize="small" />
             </ActionIconButton>
           </Actions>
@@ -135,7 +139,6 @@ export class ManageOfferListItem extends React.Component<Props, State> {
       </ContactContainer>
     );
   }
-
 }
 
 function mapStateToProps(state: any, ownProps: Props) {
@@ -148,6 +151,7 @@ function mapDispatchToProps(dispatch: Function) {
     actions: bindActionCreators({
       changeTab,
       updateSelectedOffer,
+      deleteOffer,
     }, dispatch),
   };
 }
