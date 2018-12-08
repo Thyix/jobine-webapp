@@ -96,6 +96,7 @@ export class ProfileItem extends React.Component<Props, State> {
       this.state.descriptionOffer,
       this.state.domainOffer,
       this.state.imgOffer,
+      null,
       this.props.session.idUser,
       this.state.titleOffer),
       );

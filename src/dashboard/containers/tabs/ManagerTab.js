@@ -92,8 +92,8 @@ export class ManagerTab extends React.Component<Props, State> {
               )}
               {(myOffers && myOffers.length === 0) &&
                 <div style={{display:'flex', justifyContent:'center', alignContent:'center', marginLeft: 475,  marginTop: Metrics.spacing.huge}}>
-                  <Typography style={{ color: Colors.primary, fontSize: 25, display:'flex', textAlign:'center'}}>
-                    Vous devez sélectionner une offre <br/> pour voir ses informations
+                  <Typography style={{ color: Colors.neutral, fontSize: 25, display:'flex', textAlign:'center'}}>
+                    Vous n'avez aucune offre en cours. <br/> Créez-en une pour voir ses informations !
                   </Typography>
                 </div>
               }

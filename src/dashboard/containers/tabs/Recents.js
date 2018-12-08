@@ -55,13 +55,10 @@ type State = {}
 export class Recents extends React.Component<Props, State> {
 
   state = {}
-  
-  componentWillMount() {
-    this.props.actions.fetchOffers();
-    this.props.actions.fetchProfiles();
-  }
 
   componentDidMount() {
+    this.props.actions.fetchOffers();
+    this.props.actions.fetchProfiles();
     this.intervalID = setInterval(
       () => this.tick(),
       1000,
@@ -70,13 +67,13 @@ export class Recents extends React.Component<Props, State> {
   componentWillUnmount() {
     clearInterval(this.intervalID);
   }
-  
+
   tick() {
+    this.props.actions.fetchOffers();
+    this.props.actions.fetchProfiles();
     this.setState({
       time: new Date().toLocaleString()
     });
-    this.props.actions.fetchOffers();
-    this.props.actions.fetchProfiles();
   }
   
   render() {

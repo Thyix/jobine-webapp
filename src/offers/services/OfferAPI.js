@@ -14,6 +14,7 @@ export async function FetchOffers(): Promise<any> {
 }
 
 export async function CreateOffer(newOffer: Offer): Promise<any> {
+  console.log('new offer', newOffer);
   let data = JSON.stringify({
     addressOffer: newOffer.addressOffer,
     dateOffer: newOffer.dateOffer,

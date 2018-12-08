@@ -2,7 +2,7 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import { Grid, CircularProgress } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import { Medias } from '../../../main/themes';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -61,7 +61,7 @@ export class Answers extends React.Component<Props, State> {
     this.props.actions.fetchMessages(this.props.session);
     this.intervalID = setInterval(
       () => this.tick(),
-      1500,
+      1000,
     );
   }
   componentWillUnmount() {
@@ -82,11 +82,7 @@ export class Answers extends React.Component<Props, State> {
 
           <CallHistoryContainer>
             <Grid container style={{ backgroundColor: 'white', height: '100%' }}>
-              {this.props.messages ?
                 <ActivityList dailyActivities={this.props.messages} tab={'answers'}/>
-              :
-                <CircularProgress/>
-              }
             </Grid>
           </CallHistoryContainer>
 
