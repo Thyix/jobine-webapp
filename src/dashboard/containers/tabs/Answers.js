@@ -58,11 +58,11 @@ export class Answers extends React.Component<Props, State> {
   state = {}
 
   componentDidMount() {
-    this.props.actions.fetchMessages(this.props.session);
     this.intervalID = setInterval(
       () => this.tick(),
       1000,
-    );
+      );
+      this.props.actions.fetchMessages(this.props.session);
   }
   componentWillUnmount() {
     clearInterval(this.intervalID);
