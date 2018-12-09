@@ -10,7 +10,7 @@ import AttachFileIcon from '@material-ui/icons/AttachFile';
 import SendIcon from '@material-ui/icons/Send';
 import { getSession } from '../../authentication/selectors/authenticationSelectors'; 
 import { getChatUser } from '../../offers/selectors/offerSelector';
-import { createMessage, fetchMessages } from '../actions/chatActions'; 
+import { createMessage } from '../actions/chatActions'; 
 import { Metrics, Colors } from '../../main/themes';
 import Message from '../domain/Message';
 import Profile from '../../authentication/domain/Profile';
@@ -120,7 +120,6 @@ function mapDispatchToProps(dispatch: Function) {
   return {
     actions: bindActionCreators({
       createMessage,
-      fetchMessages,
     }, dispatch),
   };
 }

@@ -21,7 +21,10 @@ export default function reducer(state: any = initialState, action: any) {
       return { ...state, fetching: true, fetched: false };
     }
     case FETCH_MESSAGES_SUCCESS: {
-      return { ...state, fetching: false, fetched: true, messages: action.messages };
+      if (action.messages !== undefined) {
+        return { ...state, fetching: false, fetched: true, messages: action.messages };
+      }
+      return { ...state };
     }
     case FETCH_MESSAGES_FAILURE: {
       return { ...state, fetching: false, fetched: false };
