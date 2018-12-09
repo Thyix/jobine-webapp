@@ -43,7 +43,9 @@ export async function CheckEmailAvailability(email: string): Promise<any> {
 export async function AuthenticationSignup(username: string, job: string, email: string, password: string): Promise<any> {
   const available = await CheckEmailAvailability(email);
   if (!available) return null;
-  const newProfile = Profile.parseNew(moment(), '', email, '1', '1', '', job, username, password);
+  const allUsers = await FetchProfiles();
+  const biggestId =  Math.max.apply(Math, allUsers.map(function(o) { return o.idUser; }));
+  const newProfile = Profile.parseNew(moment(), '', email, biggestId + 1, '1', '', job, username, password);
   let data = JSON.stringify({
       dateUser: moment(),
       descriptionUser: '', 
