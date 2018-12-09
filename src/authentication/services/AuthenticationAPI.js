@@ -40,21 +40,20 @@ export async function CheckEmailAvailability(email: string): Promise<any> {
   }  
 }
 
-
 export async function AuthenticationSignup(username: string, job: string, email: string, password: string): Promise<any> {
   const available = await CheckEmailAvailability(email);
   if (!available) return null;
+  const newProfile = Profile.parseNew(moment(), '', email, '1', '1', '', job, username, password);
   let data = JSON.stringify({
       dateUser: moment(),
       descriptionUser: '', 
-      emailUser: email, 
+      emailUser: email,
       idUserType: '1',
       imgUser:'', 
       jobUser: job, 
       nameUser: username, 
       pwdUser: password });
-  const newProfile = Profile.parseNew(moment(), '', email, '1', '1', '', job, username, password);
-  let request = new Request("https://70.48.63.175:8080/Jobine/webresources/entities.user", {
+  let request = new Request("http://70.48.63.175:8080/Jobine/webresources/entities.user", {
     method: 'POST', 
     mode: 'cors', 
     headers: new Headers({

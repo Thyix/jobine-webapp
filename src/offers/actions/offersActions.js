@@ -55,6 +55,7 @@ export function updateChatUser(id: Profile) {
 }
 
 export function createOffer(newOffer: Offer) {
+  console.log('nouvelle offre', newOffer);
   return async (dispatch: Function, getState: any) => {
     const offer = await CreateOffer(newOffer);
     dispatch({ type: CREATE_OFFER, offers: offer })

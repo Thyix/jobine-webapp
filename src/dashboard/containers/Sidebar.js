@@ -53,6 +53,7 @@ class Sidebar extends React.Component<Props> {
   }
 
   render() {
+    console.log(this.props.users);
     return (
       <SidebarContainer style={{ height: window.screen.height - 350}}>
         <PaddedContainer>
