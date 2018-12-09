@@ -9,7 +9,7 @@ import { bindActionCreators }  from 'redux';
 import Scenes from '../../main/navigation/Scenes';
 import { Medias, Metrics, Colors } from '../../main/themes';
 import Profile from '../../authentication/domain/Profile';
-import { changeTab, updateSelectedUser, updateChatUser, updateOffer, fetchOffers } from '../actions/offersActions';
+import { changeTab, updateSelectedUser, updateChatUser, updateOffer, fetchOffers, updateSelectedOffer } from '../actions/offersActions';
 import { getAllUsers, getSession, isAdmin } from '../../authentication/selectors/authenticationSelectors';
 import Offer from '../domain/Offer';
 import { getSelectedOffer } from '../selectors/offerSelector';
@@ -108,7 +108,7 @@ export class ViewOffer extends React.Component<Props, State> {
     addressOffer: this.props.selectedOffer && this.props.selectedOffer.addressOffer,
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.actions.fetchOffers();
   }
 
@@ -133,6 +133,7 @@ export class ViewOffer extends React.Component<Props, State> {
     this.state.descriptionOffer, this.state.domainOffer, this.props.selectedOffer.imgOffer, this.props.selectedOffer.idOffer, this.props.selectedOffer.idUser, this.state.titleOffer);
     this.props.actions.updateOffer(newOffer);
     this.props.actions.fetchOffers();
+    this.props.actions.updateSelectedOffer(newOffer);
   }
 
   render() {
@@ -274,6 +275,7 @@ function mapDispatchToProps(dispatch: Function) {
       updateSelectedUser,
       updateChatUser,
       updateOffer,
+      updateSelectedOffer,
       fetchOffers,
     }, dispatch),
   };
