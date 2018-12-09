@@ -57,6 +57,7 @@ export class Recents extends React.Component<Props, State> {
   state = {}
 
   componentDidMount() {
+    console.log('componentdidmount');
     this.props.actions.fetchOffers();
     this.intervalID = setInterval(
       () => this.tick(),

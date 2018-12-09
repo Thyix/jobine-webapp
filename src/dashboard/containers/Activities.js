@@ -68,10 +68,9 @@ class Activities extends React.Component<Props, State> {
   
   componentDidMount() {
     this.props.actions.fetchProfiles();
-    this.props.actions.fetchOffers();
     this.intervalID = setInterval(
       () => this.tick(),
-      2000,
+      1000,
     );
   }
   componentWillUnmount() {
@@ -80,7 +79,6 @@ class Activities extends React.Component<Props, State> {
 
   tick() {
     this.props.actions.fetchProfiles();
-    this.props.actions.fetchOffers();
     this.setState({
       time: new Date().toLocaleString()
     });
