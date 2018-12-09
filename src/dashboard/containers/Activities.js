@@ -8,10 +8,11 @@ import { withRouter } from 'react-router';
 import { Colors } from '../../main/themes';
 import Scenes from '../../main/navigation/Scenes'
 import { bindActionCreators } from 'redux';
-import { changeTab } from '../../offers/actions/offersActions';
+import { changeTab, fetchOffers } from '../../offers/actions/offersActions';
 import Recents from './tabs/Recents';
 import Answers from './tabs/Answers';
 import { isAdmin } from '../../authentication/selectors/authenticationSelectors';
+import { fetchProfiles } from '../../authentication/actions/authenticationActions';
 import ViewContact from '../../offers/containers/ViewContact';
 import ViewOffer from '../../offers/containers/ViewOffer';
 import { getTab } from '../../offers/selectors/offerSelector';
@@ -21,7 +22,8 @@ import ManageAccounts from './tabs/ManageAccounts';
 
 type Props = {
   actions: {
-    fetchOffers: () => Promise<void>,
+  fetchProfiles: () => Promise<void>,
+  fetchOffers: () => Promise<void>,
   },
   tab: string,
   history: {
@@ -61,10 +63,29 @@ class Activities extends React.Component<Props, State> {
 
     this.state = {
       value: 0,
-      time: null
     }
-    this.intervalID = null;
   }
+  
+  componentDidMount() {
+    this.props.actions.fetchProfiles();
+    this.props.actions.fetchOffers();
+    this.intervalID = setInterval(
+      () => this.tick(),
+      2000,
+    );
+  }
+  componentWillUnmount() {
+    clearInterval(this.intervalID);
+  }
+
+  tick() {
+    this.props.actions.fetchProfiles();
+    this.props.actions.fetchOffers();
+    this.setState({
+      time: new Date().toLocaleString()
+    });
+  }
+  
 
   handleChange = (event: any, value: number) => {
     this.setState({ value });
@@ -136,6 +157,8 @@ function mapDispatchToProps(dispatch: Function) {
   return {
     actions: bindActionCreators({
       changeTab,
+      fetchProfiles,
+      fetchOffers,
     }, dispatch),
   };
 }

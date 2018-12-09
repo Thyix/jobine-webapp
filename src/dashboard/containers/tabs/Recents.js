@@ -58,7 +58,6 @@ export class Recents extends React.Component<Props, State> {
 
   componentDidMount() {
     this.props.actions.fetchOffers();
-    this.props.actions.fetchProfiles();
     this.intervalID = setInterval(
       () => this.tick(),
       1000,
@@ -70,7 +69,6 @@ export class Recents extends React.Component<Props, State> {
 
   tick() {
     this.props.actions.fetchOffers();
-    this.props.actions.fetchProfiles();
     this.setState({
       time: new Date().toLocaleString()
     });

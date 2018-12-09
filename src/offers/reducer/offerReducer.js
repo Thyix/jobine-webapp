@@ -53,7 +53,7 @@ export default function reducer(state: any = initialState, action: any) {
       return { ...state, fetching: false }; 
     }
     case UPDATE_OFFER: {
-      return { ...state, offer: [...state.offers, action.offers]};
+      return { ...state, offers: [...state.offers, action.offers]};
     }
     default:
       return state;
