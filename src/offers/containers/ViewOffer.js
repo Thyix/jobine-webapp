@@ -248,7 +248,7 @@ export class ViewOffer extends React.Component<Props, State> {
           </Grid>
           :
           <div style={{display:'flex', justifyContent:'center', alignContent:'center', marginTop: Metrics.spacing.huge}}>
-            <Typography style={{ color: Colors.primary, fontSize: 25, display:'flex', textAlign:'center'}}>
+            <Typography style={{ color: Colors.neutral, fontSize: 25, display:'flex', textAlign:'center'}}>
               Vous devez sélectionner une offre <br/> pour voir ses informations
             </Typography>
           </div>
