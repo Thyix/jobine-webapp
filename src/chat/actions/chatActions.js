@@ -16,7 +16,6 @@ export function fetchMessages(session: Profile) {
     const newMessages = await FetchMessages();
     if (newMessages) {
         newMessages.filter(m => (m.idUserFrom === session.idUser || m.idUserTo === session.idUser));
-        console.log('messages', newMessages);
         dispatch({ type: FETCH_MESSAGES_SUCCESS, messages: newMessages });
       } else {
         dispatch({ type: FETCH_MESSAGES_FAILURE });
