@@ -134,6 +134,7 @@ export class ViewOffer extends React.Component<Props, State> {
     this.props.actions.updateOffer(newOffer);
     this.props.actions.fetchOffers();
     this.props.actions.updateSelectedOffer(newOffer);
+    this.props.actions.fetchOffers();
   }
 
   render() {
