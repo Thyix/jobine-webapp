@@ -21,6 +21,17 @@ So here is the result of what we made. I hope you will have fun with it !
 
 ---
 
+## Run project
+
+You can use NPM or Yarn, depending of your favorite. None of them works better than the other.
+
+```text
+git clone jobine-webapp
+cd jobine-webapp-master
+yarn
+yarn start
+```
+
 ## My build environment
 
 In case you face difficulty building on your own machine, 
