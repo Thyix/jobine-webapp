@@ -7,7 +7,7 @@
 
 ## Project Demo
 
-<b>Website Link : </b> http://jobineapp.s3-website-us-east-1.amazonaws.com
+<b>Website Link : </b> http://jobineapp.s3-website-us-east-1.amazonaws.com <br/>
 <b>API Documentation</b> https://github.com/pascal-canuel/Jobine-api
 
 #### Since there might still be some problems in my webapp, feel free to give me any advice!
