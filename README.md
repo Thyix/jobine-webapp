@@ -1,6 +1,6 @@
  <h1 align="center">Jobine Web Application</h1> 
   <p align="center">
-  <img src="https://img.shields.io/badge/License-MIT-blue.svg"/>
+  <img src="https://img.shields.io/badge/License-MIT-blue.svg"/><br>
   <img src="https://github.com/Thyix/jobine-api/blob/master/assets/upTime.svg"/>
   <img src="https://api.codacy.com/project/badge/Grade/e28ff30817f945c4b782a383e2711f8d"/><br>
   Made with React, Redux, Material UI + few additional dependencies
