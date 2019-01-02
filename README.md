@@ -1,3 +1,7 @@
+ <p align="center">
+ <img width="250" src="https://github.com/Thyix/jobine-api/blob/master/assets/logo.svg"><br>
+</p>
+ 
  <h1 align="center">Jobine Web Application</h1> 
   <p align="center">
   <img src="https://img.shields.io/badge/License-MIT-blue.svg"/><br>
